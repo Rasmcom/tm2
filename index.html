@@ -106,7 +106,7 @@
             background-color: #ffffff;
             z-index: 1000;
             transition: all 0.3s ease-in-out;
-            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
             overflow-y: auto;
             padding-top: 70px;
         }
@@ -116,7 +116,7 @@
         .sidebar-header {
             padding: 20px;
             text-align: center;
-            border-bottom: 1px solid rgba(0,0,0,0.1);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
         }
         .sidebar-header h3 {
@@ -170,7 +170,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0, 0, 0, 0.5);
             z-index: 999;
             display: none;
             transition: all 0.3s ease;
@@ -636,54 +636,6 @@
             color: white;
             text-decoration: none;
         }
-        .footer-text a:hover {
-            text-decoration: underline;
-        }
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 15px;
-            }
-            .teacher-info {
-                text-align: center;
-                margin-top: 10px;
-            }
-            .leaders-container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .leader-card {
-                width: 100%;
-            }
-            .menu-toggle {
-                position: absolute;
-                top: 15px;
-                left: 15px;
-            }
-            .sidebar {
-                width: 260px;
-            }
-            .header-buttons {
-                display: flex;
-                gap: 10px;
-                margin-top: 10px;
-            }
-        }
-        .main-content {
-            transition: margin-right 0.3s ease-in-out;
-        }
-        .main-content.shifted {
-            margin-right: 280px;
-        }
-        .header-left-section {
-            display: flex;
-            align-items: center;
-        }
-        .header-right-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
         .toast {
             position: fixed;
             bottom: 20px;
@@ -726,23 +678,23 @@
       const app = initializeApp(firebaseConfig);
       const db = getFirestore(app);
 
-      // معرف المستخدم
+      // معرف المستخدم (يُحفظ مرة واحدة محليًا)
       window.userId = localStorage.getItem('userId') || 'user_' + Date.now();
       if (!localStorage.getItem('userId')) {
         localStorage.setItem('userId', window.userId);
       }
 
-      // دالة لحفظ البيانات في Firestore
+      // حفظ البيانات في Firestore
       window.saveToFirestore = async function(collection, data) {
         try {
           await setDoc(doc(db, collection, window.userId), data);
-          console.log(`${collection} تم حفظها في Firestore`);
+          console.log(`[Firestore] ${collection} تم الحفظ بنجاح`);
         } catch (e) {
           console.error("خطأ في الحفظ:", e);
         }
       };
 
-      // دالة لتحميل البيانات من Firestore
+      // تحميل البيانات من Firestore
       window.loadFromFirestore = async function(collection, defaultValue = null) {
         try {
           const docRef = doc(db, collection, window.userId);
@@ -1174,12 +1126,16 @@
     </div>
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
+
     <script>
         document.addEventListener('DOMContentLoaded', async function() {
             const menuToggle = document.getElementById('menuToggle');
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
             const mainContent = document.getElementById('mainContent');
+            const tabLinks = document.querySelectorAll('.tab-link');
+            const tabContents = document.querySelectorAll('.tab-content');
+
             menuToggle.addEventListener('click', function() {
                 sidebar.classList.toggle('active');
                 overlay.classList.toggle('active');
@@ -1195,6 +1151,7 @@
                     icon.classList.add('fa-bars');
                 }
             });
+
             overlay.addEventListener('click', function() {
                 sidebar.classList.remove('active');
                 overlay.classList.remove('active');
@@ -1203,16 +1160,14 @@
                 icon.classList.remove('fa-times');
                 icon.classList.add('fa-bars');
             });
-            const tabLinks = document.querySelectorAll('.tab-link');
-            const tabContents = document.querySelectorAll('.tab-content');
+
             tabLinks.forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const tabId = this.dataset.tab;
-                    tabLinks.forEach(link => link.classList.remove('active'));
-                    this.classList.add('active');
-                    tabContents.forEach(content => content.classList.remove('active'));
-                    document.getElementById(tabId).classList.add('active');
+                    tabLinks.forEach(l => l.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    link.classList.add('active');
+                    document.getElementById(link.dataset.tab).classList.add('active');
                     if (window.innerWidth <= 768) {
                         sidebar.classList.remove('active');
                         overlay.classList.remove('active');
@@ -1222,6 +1177,8 @@
                     }
                 });
             });
+
+            // --- التقييم الذاتي ---
             const performanceData = [
                 { id: 1, title: 'أداء الواجبات الوظيفية', description: 'تنفيذ المهام والواجبات الوظيفية بكفاءة وفعالية', weight: '10%' },
                 { id: 2, title: 'التفاعل مع المجتمع المهني', description: 'المشاركة الفعالة في المجتمع المهني والتعاون مع الزملاء', weight: '10%' },
@@ -1235,6 +1192,7 @@
                 { id: 10, title: 'تحليل نتائج المتعلمين', description: 'تحليل نتائج المتعلمين واستخدامها في تحسين العملية التعليمية', weight: '10%' },
                 { id: 11, title: 'تنوع أساليب التقويم', description: 'استخدام أساليب تقويم متنوعة لقياس تقدم المتعلمين', weight: '10%' }
             ];
+
             const performanceItemsContainer = document.getElementById('performanceItems');
             performanceData.forEach(item => {
                 const performanceItem = document.createElement('div');
@@ -1292,6 +1250,8 @@
                 `;
                 performanceItemsContainer.appendChild(performanceItem);
             });
+
+            // --- الشهادات ---
             const certificatesContainer = document.getElementById('certificatesContainer');
             for (let i = 0; i < 8; i++) {
                 const certificateItem = document.createElement('div');
@@ -1306,10 +1266,13 @@
                 `;
                 certificatesContainer.appendChild(certificateItem);
             }
+
+            // --- تحديث البيانات ---
             const updateDataBtn = document.getElementById('updateDataBtn');
             const updateDataModal = document.getElementById('updateDataModal');
             const closeUpdateModal = document.getElementById('closeUpdateModal');
             const saveModalData = document.getElementById('saveModalData');
+
             updateDataBtn.addEventListener('click', async function() {
                 const teacherData = await loadFromFirestore('teacherData', {});
                 document.getElementById('modalTeacherName').value = teacherData.name || '';
@@ -1318,9 +1281,11 @@
                 document.getElementById('modalAcademicYear').value = teacherData.year || '';
                 updateDataModal.style.display = 'flex';
             });
+
             closeUpdateModal.addEventListener('click', function() {
                 updateDataModal.style.display = 'none';
             });
+
             saveModalData.addEventListener('click', async function() {
                 const teacherData = {
                     name: document.getElementById('modalTeacherName').value,
@@ -1337,6 +1302,7 @@
                 document.getElementById('academicYear').value = teacherData.year;
                 showToast('تم تحديث البيانات بنجاح!');
             });
+
             const saveBasicInfo = document.getElementById('saveBasicInfo');
             saveBasicInfo.addEventListener('click', async function() {
                 const teacherData = {
@@ -1349,6 +1315,7 @@
                 updateTeacherInfo(teacherData);
                 showToast('تم حفظ البيانات بنجاح!');
             });
+
             function updateTeacherInfo(data) {
                 const teacherInfoHeader = document.getElementById('teacherInfoHeader');
                 const headerTeacherName = document.getElementById('headerTeacherName');
@@ -1368,6 +1335,8 @@
                     teacherInfoHeader.innerHTML = '<p>لم يتم إدخال البيانات بعد</p>';
                 }
             }
+
+            // تحميل البيانات الأساسية
             const teacherData = await loadFromFirestore('teacherData', {});
             updateTeacherInfo(teacherData);
             document.getElementById('teacherName').value = teacherData.name || '';
@@ -1375,20 +1344,24 @@
             document.getElementById('schoolName').value = teacherData.school || '';
             document.getElementById('academicYear').value = teacherData.year || '';
 
+            // --- مقدمة الملف ---
             window.editContent = async function(contentId) {
                 const introData = await loadFromFirestore('introductionData', {});
                 document.getElementById(contentId + 'Form').style.display = 'block';
                 document.getElementById(contentId + 'Form').previousElementSibling.style.display = 'none';
                 document.getElementById(contentId).value = introData[contentId] || '';
             };
+
             window.saveContent = async function(contentId) {
                 const textarea = document.getElementById(contentId);
                 const content = textarea.value;
                 const form = document.getElementById(contentId + 'Form');
                 const contentElement = form.previousElementSibling;
+
                 const introData = await loadFromFirestore('introductionData', {});
                 introData[contentId] = content;
                 await saveToFirestore('introductionData', introData);
+
                 if (contentId === 'values') {
                     const valuesList = document.querySelector('.values-list');
                     valuesList.innerHTML = '';
@@ -1426,16 +1399,19 @@
                 contentElement.style.display = 'block';
                 showToast('تم حفظ المحتوى بنجاح!');
             };
+
             window.cancelEdit = function(contentId) {
                 document.getElementById(contentId + 'Form').style.display = 'none';
                 document.getElementById(contentId + 'Form').previousElementSibling.style.display = 'block';
             };
+
             const introData = await loadFromFirestore('introductionData', {});
             if (introData.generalIntro) document.getElementById('generalIntro').value = introData.generalIntro;
             if (introData.vision) document.getElementById('vision').value = introData.vision;
             if (introData.mission) document.getElementById('mission').value = introData.mission;
             if (introData.values) document.getElementById('values').value = introData.values;
 
+            // --- كلمات القادة ---
             ['kingImage', 'princeImage', 'ministerImage'].forEach(id => {
                 document.getElementById(id).addEventListener('click', async function() {
                     const input = document.createElement('input');
@@ -1455,11 +1431,13 @@
                     input.click();
                 });
             });
+
             for (const id of ['kingImage', 'princeImage', 'ministerImage']) {
                 const data = await loadFromFirestore(id, {});
                 if (data.data) document.getElementById(id).src = data.data;
             }
 
+            // --- السيرة الذاتية ---
             const saveCV = document.getElementById('saveCV');
             saveCV.addEventListener('click', async function() {
                 const cvData = {
@@ -1472,6 +1450,7 @@
                 await saveToFirestore('cvData', cvData);
                 showToast('تم حفظ المعلومات بنجاح!');
             });
+
             const cvData = await loadFromFirestore('cvData', {});
             document.getElementById('fullName').value = cvData.fullName || '';
             document.getElementById('specialization').value = cvData.specialization || '';
@@ -1479,6 +1458,7 @@
             document.getElementById('graduationYear').value = cvData.graduationYear || '';
             document.getElementById('yearsOfExperience').value = cvData.yearsOfExperience || '';
 
+            // --- الرخصة المهنية ---
             document.getElementById('licenseUpload').addEventListener('change', async function(e) {
                 const file = e.target.files[0];
                 if (file) {
@@ -1492,6 +1472,7 @@
                     reader.readAsDataURL(file);
                 }
             });
+
             const licenseData = await loadFromFirestore('licenseImage', {});
             if (licenseData.data) {
                 document.getElementById('licensePreview').src = licenseData.data;
@@ -1499,6 +1480,7 @@
                 document.getElementById('licenseUploadIcon').style.display = 'none';
             }
 
+            // --- الشهادات ---
             document.querySelectorAll('.certificate-upload').forEach((upload, index) => {
                 upload.addEventListener('change', async function(e) {
                     const file = e.target.files[0];
@@ -1518,6 +1500,7 @@
                     }
                 });
             });
+
             const certificates = await loadFromFirestore('certificates', []);
             certificates.forEach((cert, index) => {
                 if (!cert) return;
@@ -1532,6 +1515,7 @@
                 }
             });
 
+            // --- الدورات التدريبية ---
             const addCourseBtn = document.getElementById('addCourseBtn');
             const trainingCourses = document.getElementById('trainingCourses');
             addCourseBtn.addEventListener('click', function() {
@@ -1555,6 +1539,7 @@
                 });
                 saveCourses();
             });
+
             async function saveCourses() {
                 const courses = [];
                 document.querySelectorAll('.course-item').forEach(item => {
@@ -1566,6 +1551,7 @@
                 });
                 await saveToFirestore('courses', courses);
             }
+
             const courses = await loadFromFirestore('courses', []);
             courses.forEach(course => {
                 const courseItem = document.createElement('div');
@@ -1588,6 +1574,7 @@
                 });
             });
 
+            // --- شواهد الأداء ---
             document.querySelectorAll('.evidence-upload').forEach((upload, index) => {
                 upload.addEventListener('change', async function(e) {
                     const file = e.target.files[0];
@@ -1609,6 +1596,7 @@
                     }
                 });
             });
+
             for (let i = 1; i <= 11; i++) {
                 for (let j = 0; j < 4; j++) {
                     const data = await loadFromFirestore(`evidence_${i}_${j}`, {});
@@ -1633,6 +1621,7 @@
                     await saveToFirestore('performanceNotes', notes);
                 });
             });
+
             const notes = await loadFromFirestore('performanceNotes', {});
             Object.keys(notes).forEach(id => {
                 const noteTextarea = document.querySelector(`.performance-note[data-id="${id}"]`);
@@ -1649,6 +1638,7 @@
                     updateTotalScore();
                 });
             });
+
             const ratings = await loadFromFirestore('performanceRatings', {});
             Object.keys(ratings).forEach(id => {
                 const slider = document.querySelector(`.rating-slider[data-id="${id}"]`);
@@ -1696,6 +1686,7 @@
                 await saveToFirestore('totalPerformanceScore', percentage);
             }
 
+            // --- المتابعة ---
             const saveFollowup = document.getElementById('saveFollowup');
             saveFollowup.addEventListener('click', async function() {
                 const followupData = {
@@ -1710,6 +1701,7 @@
                 await saveToFirestore('followupData', followupData);
                 showToast('تم حفظ المعلومات بنجاح!');
             });
+
             const followupData = await loadFromFirestore('followupData', {});
             document.getElementById('firstFollowupDate').value = followupData.firstDate || '';
             document.getElementById('firstFollowupNotes').value = followupData.firstNotes || '';
@@ -1719,6 +1711,7 @@
             document.getElementById('secondFollowupName').value = followupData.secondName || '';
             document.getElementById('recommendations').value = followupData.recommendations || '';
 
+            // --- خطة التحسين ---
             const addImprovementBtn = document.getElementById('addImprovementBtn');
             const improvementItems = document.getElementById('improvementItems');
             addImprovementBtn.addEventListener('click', async function() {
@@ -1765,10 +1758,12 @@
                 document.getElementById('improvementEndDate').value = '';
                 showToast('تمت إضافة خطة التحسين بنجاح!');
             });
+
             function formatDate(dateString) {
                 const date = new Date(dateString);
                 return date.toLocaleDateString('ar-SA');
             }
+
             async function saveImprovements() {
                 const improvements = [];
                 document.querySelectorAll('.improvement-item').forEach(item => {
@@ -1781,6 +1776,7 @@
                 });
                 await saveToFirestore('improvements', improvements);
             }
+
             const improvements = await loadFromFirestore('improvements', []);
             improvements.forEach(imp => {
                 const improvementItem = document.createElement('div');
@@ -1809,11 +1805,13 @@
                 });
             });
 
+            // --- إغلاق النافذة ---
             const closePreview = document.getElementById('closePreview');
             closePreview.addEventListener('click', function() {
                 previewModal.style.display = 'none';
             });
 
+            // --- إشعار ---
             function showToast(message, type = 'success') {
                 const toast = document.getElementById('toast');
                 toast.textContent = message;
