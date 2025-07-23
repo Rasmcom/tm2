@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ... نفس كود CSS الذي أرفقته ... */
         * {
             margin: 0;
             padding: 0;
@@ -25,8 +24,39 @@
             margin: 0 auto;
             padding: 0 15px;
         }
+
+        /* Notification Styles */
+        .notification {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 12px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s, visibility 0.5s, top 0.5s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .notification.show {
+            opacity: 1;
+            visibility: visible;
+            top: 30px;
+        }
+
+        .notification.success {
+            background-color: #4CAF50;
+        }
+
+        .notification.error {
+            background-color: #f44336;
+        }
         
-        /* Header Styles - UPDATED */
+        /* Header Styles */
         header {
             background-color: #333;
             padding: 15px 0;
@@ -1116,6 +1146,8 @@
     </style>
 </head>
 <body>
+    <div id="notification" class="notification"></div>
+    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
@@ -1136,88 +1168,293 @@
         <div class="header-gradient"></div>
     </header>
     
+    <!-- Main Layout -->
     <div class="main-layout">
+        <!-- Sidebar Navigation -->
         <div class="sidebar">
             <ul class="nav-list">
-                <li class="nav-item"><a href="#" class="nav-link active" data-tab="home"><i class="fas fa-home nav-icon"></i> <span class="nav-text">الرئيسية</span></a></li>
-                <li class="nav-item"><a href="#" class="nav-link" data-tab="intro"><i class="fas fa-info-circle nav-icon"></i> <span class="nav-text">مقدمة الملف</span></a></li>
-                <li class="nav-item"><a href="#" class="nav-link" data-tab="leaders"><i class="fas fa-quote-right nav-icon"></i> <span class="nav-text">كلمات القادة</span></a></li>
-                <li class="nav-item"><a href="#" class="nav-link" data-tab="cv"><i class="fas fa-user-tie nav-icon"></i> <span class="nav-text">السيرة الذاتية</span></a></li>
-                <li class="nav-item"><a href="#" class="nav-link" data-tab="performance"><i class="fas fa-chart-line nav-icon"></i> <span class="nav-text">شواهد الأداء</span></a></li>
-                <li class="nav-item"><a href="#" class="nav-link" data-tab="documentation"><i class="fas fa-clipboard-check nav-icon"></i> <span class="nav-text">التوثيق والمتابعة</span></a></li>
-                <li class="nav-item"><a href="#" class="nav-link" data-tab="improvement"><i class="fas fa-tasks nav-icon"></i> <span class="nav-text">خطة التحسين</span></a></li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" data-tab="home">
+                        <i class="fas fa-home nav-icon"></i>
+                        <span class="nav-text">الرئيسية</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-tab="intro">
+                        <i class="fas fa-info-circle nav-icon"></i>
+                        <span class="nav-text">مقدمة الملف</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-tab="leaders">
+                        <i class="fas fa-quote-right nav-icon"></i>
+                        <span class="nav-text">كلمات القادة</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-tab="cv">
+                        <i class="fas fa-user-tie nav-icon"></i>
+                        <span class="nav-text">السيرة الذاتية</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-tab="performance">
+                        <i class="fas fa-chart-line nav-icon"></i>
+                        <span class="nav-text">شواهد الأداء</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-tab="documentation">
+                        <i class="fas fa-clipboard-check nav-icon"></i>
+                        <span class="nav-text">التوثيق والمتابعة</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" data-tab="improvement">
+                        <i class="fas fa-tasks nav-icon"></i>
+                        <span class="nav-text">خطة التحسين</span>
+                    </a>
+                </li>
             </ul>
         </div>
         
+        <!-- Content Area -->
         <div class="content-area">
+            <!-- Home Tab -->
             <div class="tab-content active" id="home-content">
                 <h2>البيانات الأساسية</h2>
-                <div class="form-group"><label for="teacherNameInput">اسم المعلم</label><input type="text" id="teacherNameInput" class="form-control" placeholder="أدخل اسم المعلم"></div>
-                <div class="form-group"><label for="educationDeptInput">الإدارة التعليمية</label><input type="text" id="educationDeptInput" class="form-control" placeholder="أدخل اسم الإدارة التعليمية"></div>
-                <div class="form-group"><label for="schoolNameInput">المدرسة</label><input type="text" id="schoolNameInput" class="form-control" placeholder="أدخل اسم المدرسة"></div>
-                <div class="form-group"><label for="academicYearInput">العام الدراسي</label><input type="text" id="academicYearInput" class="form-control" placeholder="أدخل العام الدراسي"></div>
+                <div class="form-group">
+                    <label for="teacherNameInput">اسم المعلم</label>
+                    <input type="text" id="teacherNameInput" class="form-control" placeholder="أدخل اسم المعلم">
+                </div>
+                <div class="form-group">
+                    <label for="educationDeptInput">الإدارة التعليمية</label>
+                    <input type="text" id="educationDeptInput" class="form-control" placeholder="أدخل اسم الإدارة التعليمية">
+                </div>
+                <div class="form-group">
+                    <label for="schoolNameInput">المدرسة</label>
+                    <input type="text" id="schoolNameInput" class="form-control" placeholder="أدخل اسم المدرسة">
+                </div>
+                <div class="form-group">
+                    <label for="academicYearInput">العام الدراسي</label>
+                    <input type="text" id="academicYearInput" class="form-control" placeholder="أدخل العام الدراسي">
+                </div>
                 <button class="btn" id="saveBasicDataBtn">حفظ البيانات</button>
             </div>
             
+            <!-- Introduction Tab -->
             <div class="tab-content" id="intro-content">
                 <div class="intro-section">
                     <h2>مقدمة ملف شواهد الأداء الوظيفي للمعلم</h2>
                     <p>إن التعليم هو الأساس الذي تُبنى عليه الأوطان، والركيزة التي تقوم عليها النهضة الحضارية والتنموية في أي مجتمع. وقد أولت المملكة العربية السعودية، في ظل قيادتها الرشيدة، التعليم أهمية كبرى بوصفه محركًا أساسيًا لرؤية المملكة 2030 وأداة فاعلة لبناء الإنسان وتمكينه من مهارات القرن الحادي والعشرين.</p>
+                    <p>ومن هذا المنطلق، جاء إعداد هذا الملف الخاص بـ شواهد الأداء الوظيفي للمعلم، ليُبرز ما تم إنجازه من ممارسات تربوية وتعليمية تسهم في تحسين نواتج التعلم، وتوثيق العمل المهني المستند إلى معايير الجودة والتميز، وقياس مستوى تحقق المهارات والمعارف بما يدعم المسيرة التعليمية.</p>
+                    <p>وإيمانًا بأن المعلم هو حجر الزاوية في تطوير التعليم، فإن هذا الملف يُعد انعكاسًا حقيقيًا لدوره الريادي في بناء الأجيال وصناعة المستقبل، مستلهمين في ذلك كلمات ولاة أمرنا التي تُعد نبراسًا نهتدي به.</p>
                 </div>
+                
                 <div class="vision-mission-container">
-                    <div class="vision-box"><h2><i class="fas fa-eye"></i> الرؤية</h2><p>تحقيق تعليم نوعي عالي الجودة، يُسهم في بناء جيل واعٍ ومتمكن، منافس عالميًا، ومؤمن بقيمه الوطنية.</p></div>
-                    <div class="mission-box"><h2><i class="fas fa-bullseye"></i> الرسالة</h2><p>تقديم تعليم محفّز على الإبداع والتميّز، قائم على معايير مهنية، يعزز من دور المعلم في قيادة التعلم، ويركز على تمكين المتعلم من المهارات والمعارف اللازمة لمواكبة التغيرات العالمية.</p></div>
+                    <div class="vision-box">
+                        <h2><i class="fas fa-eye"></i> الرؤية</h2>
+                        <p>تحقيق تعليم نوعي عالي الجودة، يُسهم في بناء جيل واعٍ ومتمكن، منافس عالميًا، ومؤمن بقيمه الوطنية.</p>
+                    </div>
+                    
+                    <div class="mission-box">
+                        <h2><i class="fas fa-bullseye"></i> الرسالة</h2>
+                        <p>تقديم تعليم محفّز على الإبداع والتميّز، قائم على معايير مهنية، يعزز من دور المعلم في قيادة التعلم، ويركز على تمكين المتعلم من المهارات والمعارف اللازمة لمواكبة التغيرات العالمية.</p>
+                    </div>
+                </div>
+                
+                <div class="values-container">
+                    <h2>القيم</h2>
+                    <div class="values-grid">
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                            <div class="value-content">
+                                <h3>المواطنة</h3>
+                                <p>تعزيز الانتماء الوطني والاعتزاز بالهوية السعودية.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <i class="fas fa-award"></i>
+                            </div>
+                            <div class="value-content">
+                                <h3>الجودة</h3>
+                                <p>الالتزام بمعايير الأداء والتميّز المؤسسي.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                            <div class="value-content">
+                                <h3>المسؤولية</h3>
+                                <p>أداء الواجبات المهنية بأمانة ومصداقية.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="value-content">
+                                <h3>الابتكار</h3>
+                                <p>دعم الإبداع وتوظيف الحلول التقنية الحديثة.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="value-content">
+                                <h3>التمكين</h3>
+                                <p>بناء القدرات وتطوير الكفاءات التعليمية.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="value-item">
+                            <div class="value-icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <div class="value-content">
+                                <h3>العدالة</h3>
+                                <p>تحقيق المساواة وتكافؤ الفرص التعليمية.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
+            
+            <!-- Leaders Words Tab -->
             <div class="tab-content" id="leaders-content">
-                <div class="leaders-header"><h2>كلمات القادة</h2></div>
+                <div class="leaders-header">
+                    <h2>كلمات القادة</h2>
+                </div>
+                
                 <div class="leaders-container">
                     <div class="leader-card">
-                        <div class="leader-image-container"><img src="https://i.top4top.io/p_3485a0uv82.jpeg" alt="الملك سلمان بن عبدالعزيز" class="leader-image"></div>
-                        <div class="leader-content"><h3>كلمة خادم الحرمين الشريفين الملك سلمان بن عبدالعزيز آل سعود – حفظه الله</h3><p>"إن التعليم في السعودية هو الركيزة الأساسية للتنمية، ونحن نولي أبناءنا الطلاب والطالبات جلّ اهتمامنا، ونوفر لهم أفضل سبل التعليم الحديث، فهم عماد المستقبل وأمله."</p></div>
+                        <div class="leader-image-container">
+                            <img src="https://i.top4top.io/p_3485a0uv82.jpeg" alt="الملك سلمان بن عبدالعزيز" class="leader-image">
+                        </div>
+                        <div class="leader-content">
+                            <h3>كلمة خادم الحرمين الشريفين الملك سلمان بن عبدالعزيز آل سعود – حفظه الله</h3>
+                            <p>"إن التعليم في السعودية هو الركيزة الأساسية للتنمية، ونحن نولي أبناءنا الطلاب والطالبات جلّ اهتمامنا، ونوفر لهم أفضل سبل التعليم الحديث، فهم عماد المستقبل وأمله."</p>
+                        </div>
                     </div>
+                    
                     <div class="leader-card">
-                        <div class="leader-image-container"><img src="https://h.top4top.io/p_3485vnxie0.jpeg" alt="الأمير محمد بن سلمان" class="leader-image"></div>
-                        <div class="leader-content"><h3>كلمة صاحب السمو الملكي الأمير محمد بن سلمان بن عبدالعزيز – ولي العهد رئيس مجلس الوزراء – حفظه الله</h3><p>"طموحنا أن نبني وطنًا أكثر ازدهارًا، يجد فيه كل مواطن ما يتمناه، ويشارك في بناء مستقبله. ولن يكون ذلك إلا بتعليم رائد يصنع جيلاً واعيًا ومؤهلاً للمنافسة عالميًا."</p></div>
+                        <div class="leader-image-container">
+                            <img src="https://h.top4top.io/p_3485vnxie0.jpeg" alt="الأمير محمد بن سلمان" class="leader-image">
+                        </div>
+                        <div class="leader-content">
+                            <h3>كلمة صاحب السمو الملكي الأمير محمد بن سلمان بن عبدالعزيز – ولي العهد رئيس مجلس الوزراء – حفظه الله</h3>
+                            <p>"طموحنا أن نبني وطنًا أكثر ازدهارًا، يجد فيه كل مواطن ما يتمناه، ويشارك في بناء مستقبله. ولن يكون ذلك إلا بتعليم رائد يصنع جيلاً واعيًا ومؤهلاً للمنافسة عالميًا."</p>
+                        </div>
+                    </div>
+                    
+                    <div class="leader-card">
+                        <div class="leader-image-container">
+                            <img src="https://h.top4top.io/p_34853oi4r1.jpeg" alt="وزير التعليم" class="leader-image">
+                        </div>
+                        <div class="leader-content">
+                            <h3>كلمة معالي وزير التعليم يوسف البنيان</h3>
+                            <p>"نسعى في وزارة التعليم إلى تطوير المنظومة التعليمية بما يتماشى مع مستهدفات رؤية 2030، من خلال تمكين المعلم، وتحسين نواتج التعلم، وتوفير بيئة تعليمية محفزة للتميّز والإبداع."</p>
+                        </div>
                     </div>
                 </div>
             </div>
             
+            <!-- CV Tab -->
             <div class="tab-content" id="cv-content">
                 <h2>السيرة الذاتية</h2>
+                
                 <div class="cv-section">
                     <h3>البيانات الأساسية</h3>
-                    <div class="form-group"><label for="fullNameInput">الاسم الكامل</label><input type="text" id="fullNameInput" class="form-control" placeholder="أدخل الاسم الكامل"></div>
-                    <div class="form-group"><label for="specialtyInput">التخصص</label><input type="text" id="specialtyInput" class="form-control" placeholder="أدخل التخصص"></div>
-                    <div class="form-group"><label for="qualificationInput">المؤهل العلمي</label><input type="text" id="qualificationInput" class="form-control" placeholder="أدخل المؤهل العلمي"></div>
-                    <div class="form-group"><label for="yearsOfExperienceInput">سنوات الخبرة</label><input type="number" id="yearsOfExperienceInput" class="form-control" placeholder="أدخل عدد سنوات الخبرة"></div>
+                    <div class="form-group">
+                        <label for="fullNameInput">الاسم الكامل</label>
+                        <input type="text" id="fullNameInput" class="form-control" placeholder="أدخل الاسم الكامل">
+                    </div>
+                    <div class="form-group">
+                        <label for="specialtyInput">التخصص</label>
+                        <input type="text" id="specialtyInput" class="form-control" placeholder="أدخل التخصص">
+                    </div>
+                    <div class="form-group">
+                        <label for="qualificationInput">المؤهل العلمي</label>
+                        <input type="text" id="qualificationInput" class="form-control" placeholder="أدخل المؤهل العلمي">
+                    </div>
+                    <div class="form-group">
+                        <label for="yearsOfExperienceInput">سنوات الخبرة</label>
+                        <input type="number" id="yearsOfExperienceInput" class="form-control" placeholder="أدخل عدد سنوات الخبرة">
+                    </div>
                     <button class="btn" id="saveCvDataBtn">حفظ البيانات</button>
                 </div>
+                
                 <div class="cv-section">
                     <h3>الرخصة المهنية</h3>
-                    <div class="form-group"><label for="licenseUpload">رفع صورة الرخصة المهنية</label><input type="file" id="licenseUpload" accept="image/*" style="display: none;"><button class="btn" onclick="document.getElementById('licenseUpload').click()">اختر صورة الرخصة</button></div>
-                    <div class="certificate-container"><div class="certificate-item" id="licensePreview"><div class="certificate-placeholder">+</div></div></div>
+                    <div class="form-group">
+                        <label for="licenseUpload">رفع صورة الرخصة المهنية</label>
+                        <input type="file" id="licenseUpload" accept="image/*" style="display: none;">
+                        <button class="btn" id="licenseUploadBtn">اختر صورة الرخصة</button>
+                    </div>
+                    <div class="certificate-container">
+                        <div class="certificate-item" id="licensePreview">
+                            <div class="certificate-placeholder">+</div>
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="cv-section">
                     <h3>شهادات الشكر والتقدير</h3>
-                    <div class="form-group"><label for="certificateUpload">رفع شهادات الشكر والتقدير (الحد الأقصى 8 شهادات)</label><input type="file" id="certificateUpload" accept="image/*" style="display: none;"><button class="btn" id="certificateUploadBtn">اختر شهادة</button></div>
-                    <div class="certificate-container" id="certificatesContainer"></div>
+                    <div class="form-group">
+                        <label for="certificateUpload">رفع شهادات الشكر والتقدير (الحد الأقصى 8 شهادات)</label>
+                        <input type="file" id="certificateUpload" accept="image/*" style="display: none;">
+                        <button class="btn" id="certificateUploadBtn">اختر شهادة</button>
+                    </div>
+                    <div class="certificate-container" id="certificatesContainer">
+                        <div class="certificate-item certificate-add">
+                            <div class="certificate-placeholder">+</div>
+                        </div>
+                    </div>
                 </div>
+                
                 <div class="cv-section">
                     <h3>الدورات التدريبية</h3>
-                    <div class="form-group"><label for="courseNameInput">اسم الدورة</label><input type="text" id="courseNameInput" class="form-control" placeholder="أدخل اسم الدورة"></div>
-                    <div class="form-group"><label for="courseProviderInput">الجهة المقدمة</label><input type="text" id="courseProviderInput" class="form-control" placeholder="أدخل اسم الجهة المقدمة"></div>
-                    <div class="form-group"><label for="courseDateInput">تاريخ الدورة</label><input type="date" id="courseDateInput" class="form-control"></div>
-                    <div class="form-group"><label for="courseHoursInput">عدد الساعات</label><input type="number" id="courseHoursInput" class="form-control" placeholder="أدخل عدد ساعات الدورة"></div>
+                    <div class="form-group">
+                        <label for="courseNameInput">اسم الدورة</label>
+                        <input type="text" id="courseNameInput" class="form-control" placeholder="أدخل اسم الدورة">
+                    </div>
+                    <div class="form-group">
+                        <label for="courseProviderInput">الجهة المقدمة</label>
+                        <input type="text" id="courseProviderInput" class="form-control" placeholder="أدخل اسم الجهة المقدمة">
+                    </div>
+                    <div class="form-group">
+                        <label for="courseDateInput">تاريخ الدورة</label>
+                        <input type="date" id="courseDateInput" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="courseHoursInput">عدد الساعات</label>
+                        <input type="number" id="courseHoursInput" class="form-control" placeholder="أدخل عدد ساعات الدورة">
+                    </div>
                     <button class="btn" id="addCourseBtn">إضافة دورة</button>
-                    <div class="courses-list" id="coursesList"></div>
+                    
+                    <div class="courses-list" id="coursesList">
+                        <!-- Courses will be added here dynamically -->
+                    </div>
                 </div>
             </div>
             
+            <!-- Performance Tab -->
             <div class="tab-content" id="performance-content">
                 <h2>شواهد الأداء الوظيفي</h2>
-                <div id="performanceItems"></div>
+                
+                <div id="performanceItems">
+                    <!-- Performance items will be added here dynamically -->
+                </div>
+                
                 <div class="performance-result">
                     <div class="result-title">نتيجة التقييم الذاتي</div>
                     <div class="result-score" id="totalScore">0%</div>
@@ -1225,87 +1462,183 @@
                 </div>
             </div>
             
+            <!-- Documentation Tab -->
             <div class="tab-content" id="documentation-content">
-                 <h2>التوثيق والمتابعة</h2>
-                 <div class="documentation-section">
-                     <h3>المتابعة الأولى</h3>
-                     <div class="form-group"><label for="firstFollowupDate">تاريخ المتابعة</label><input type="date" id="firstFollowupDate" class="form-control"></div>
-                     <div class="form-group"><label for="firstFollowupName">اسم المتابع</label><input type="text" id="firstFollowupName" class="form-control" placeholder="أدخل اسم المتابع"></div>
-                     <div class="form-group"><label for="firstFollowupNotes">ملاحظات المتابعة</label><textarea id="firstFollowupNotes" class="form-control" rows="4" placeholder="أدخل ملاحظات المتابعة"></textarea></div>
-                     <button class="btn" id="saveFirstFollowupBtn">حفظ المتابعة الأولى</button>
-                 </div>
-                 <div class="documentation-section">
-                     <h3>المتابعة الثانية</h3>
-                     <div class="form-group"><label for="secondFollowupDate">تاريخ المتابعة</label><input type="date" id="secondFollowupDate" class="form-control"></div>
-                     <div class="form-group"><label for="secondFollowupName">اسم المتابع</label><input type="text" id="secondFollowupName" class="form-control" placeholder="أدخل اسم المتابع"></div>
-                     <div class="form-group"><label for="secondFollowupNotes">ملاحظات المتابعة</label><textarea id="secondFollowupNotes" class="form-control" rows="4" placeholder="أدخل ملاحظات المتابعة"></textarea></div>
-                     <button class="btn" id="saveSecondFollowupBtn">حفظ المتابعة الثانية</button>
-                 </div>
-                 <div class="documentation-section">
-                     <h3>التوصيات</h3>
-                     <div class="form-group"><label for="recommendations">التوصيات العامة</label><textarea id="recommendations" class="form-control" rows="6" placeholder="أدخل التوصيات العامة"></textarea></div>
-                     <button class="btn" id="saveRecommendationsBtn">حفظ التوصيات</button>
-                 </div>
-            </div>
-
-            <div class="tab-content" id="improvement-content">
-                <h2>خطة التحسين المقترحة</h2>
-                <div class="improvement-section">
-                    <p>بناءً على التقييم الذاتي وملاحظات المتابعة، يمكن وضع خطة تحسين للجوانب التي تحتاج إلى تطوير في الأداء الوظيفي.</p>
-                    <div class="improvement-form">
-                        <div class="form-group"><label for="improvementArea">مجال التحسين</label><select id="improvementArea" class="form-control"><option value="">اختر مجال التحسين</option><option value="أداء الواجبات الوظيفية">أداء الواجبات الوظيفية</option><option value="التفاعل مع المجتمع المهني">التفاعل مع المجتمع المهني</option></select></div>
-                        <div class="form-group"><label for="improvementPriority">أولوية التحسين</label><select id="improvementPriority" class="form-control"><option value="">اختر أولوية التحسين</option><option value="عالية">عالية</option><option value="متوسطة">متوسطة</option><option value="منخفضة">منخفضة</option></select></div>
-                        <div class="form-group"><label for="improvementGoal">هدف التحسين</label><input type="text" id="improvementGoal" class="form-control" placeholder="أدخل هدف التحسين"></div>
-                        <div class="form-group"><label for="improvementActions">الإجراءات المقترحة</label><textarea id="improvementActions" class="form-control" rows="4" placeholder="أدخل الإجراءات المقترحة"></textarea></div>
-                        <div class="form-group"><label for="improvementStartDate">تاريخ البداية</label><input type="date" id="improvementStartDate" class="form-control"></div>
-                        <div class="form-group"><label for="improvementEndDate">تاريخ النهاية</label><input type="date" id="improvementEndDate" class="form-control"></div>
-                        <button class="btn" id="addImprovementBtn">إضافة خطة تحسين</button>
+                <h2>التوثيق والمتابعة</h2>
+                
+                <div class="documentation-section">
+                    <h3>المتابعة الأولى</h3>
+                    <div class="form-group">
+                        <label for="firstFollowupDate">تاريخ المتابعة</label>
+                        <input type="date" id="firstFollowupDate" class="form-control">
                     </div>
-                    <div class="improvement-list" id="improvementList"></div>
+                    <div class="form-group">
+                        <label for="firstFollowupName">اسم المتابع</label>
+                        <input type="text" id="firstFollowupName" class="form-control" placeholder="أدخل اسم المتابع">
+                    </div>
+                    <div class="form-group">
+                        <label for="firstFollowupNotes">ملاحظات المتابعة</label>
+                        <textarea id="firstFollowupNotes" class="form-control" rows="4" placeholder="أدخل ملاحظات المتابعة"></textarea>
+                    </div>
+                    <button class="btn" id="saveFirstFollowupBtn">حفظ المتابعة الأولى</button>
+                </div>
+                
+                <div class="documentation-section">
+                    <h3>المتابعة الثانية</h3>
+                    <div class="form-group">
+                        <label for="secondFollowupDate">تاريخ المتابعة</label>
+                        <input type="date" id="secondFollowupDate" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="secondFollowupName">اسم المتابع</label>
+                        <input type="text" id="secondFollowupName" class="form-control" placeholder="أدخل اسم المتابع">
+                    </div>
+                    <div class="form-group">
+                        <label for="secondFollowupNotes">ملاحظات المتابعة</label>
+                        <textarea id="secondFollowupNotes" class="form-control" rows="4" placeholder="أدخل ملاحظات المتابعة"></textarea>
+                    </div>
+                    <button class="btn" id="saveSecondFollowupBtn">حفظ المتابعة الثانية</button>
+                </div>
+                
+                <div class="documentation-section">
+                    <h3>التوصيات</h3>
+                    <div class="form-group">
+                        <label for="recommendations">التوصيات العامة</label>
+                        <textarea id="recommendations" class="form-control" rows="6" placeholder="أدخل التوصيات العامة"></textarea>
+                    </div>
+                    <button class="btn" id="saveRecommendationsBtn">حفظ التوصيات</button>
                 </div>
             </div>
-
+            
+            <!-- Improvement Tab -->
+            <div class="tab-content" id="improvement-content">
+                <h2>خطة التحسين المقترحة</h2>
+                
+                <div class="improvement-section">
+                    <p>بناءً على التقييم الذاتي وملاحظات المتابعة، يمكن وضع خطة تحسين للجوانب التي تحتاج إلى تطوير في الأداء الوظيفي.</p>
+                    
+                    <div class="improvement-form">
+                        <div class="form-group">
+                            <label for="improvementArea">مجال التحسين</label>
+                            <select id="improvementArea" class="form-control">
+                                <option value="">اختر مجال التحسين</option>
+                                <option value="أداء الواجبات الوظيفية">أداء الواجبات الوظيفية</option>
+                                <option value="التفاعل مع المجتمع المهني">التفاعل مع المجتمع المهني</option>
+                                <option value="التفاعل مع أولياء الأمور">التفاعل مع أولياء الأمور</option>
+                                <option value="تنويع استراتيجيات التدريس">تنويع استراتيجيات التدريس</option>
+                                <option value="تحسين نتائج المتعلمين">تحسين نتائج المتعلمين</option>
+                                <option value="إعداد وتنفيذ خطة التعلم">إعداد وتنفيذ خطة التعلم</option>
+                                <option value="توظيف التقنيات والوسائل">توظيف التقنيات والوسائل</option>
+                                <option value="تهيئة البيئة التعليمية">تهيئة البيئة التعليمية</option>
+                                <option value="الإدارة الصفية">الإدارة الصفية</option>
+                                <option value="تحليل نتائج المتعلمين">تحليل نتائج المتعلمين</option>
+                                <option value="تنوع أساليب التقويم">تنوع أساليب التقويم</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="improvementPriority">أولوية التحسين</label>
+                            <select id="improvementPriority" class="form-control">
+                                <option value="">اختر أولوية التحسين</option>
+                                <option value="عالية">عالية</option>
+                                <option value="متوسطة">متوسطة</option>
+                                <option value="منخفضة">منخفضة</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="improvementGoal">هدف التحسين</label>
+                            <input type="text" id="improvementGoal" class="form-control" placeholder="أدخل هدف التحسين">
+                        </div>
+                        <div class="form-group">
+                            <label for="improvementActions">الإجراءات المقترحة</label>
+                            <textarea id="improvementActions" class="form-control" rows="4" placeholder="أدخل الإجراءات المقترحة"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="improvementStartDate">تاريخ البداية</label>
+                            <input type="date" id="improvementStartDate" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="improvementEndDate">تاريخ النهاية</label>
+                            <input type="date" id="improvementEndDate" class="form-control">
+                        </div>
+                        <button class="btn" id="addImprovementBtn">إضافة خطة تحسين</button>
+                    </div>
+                    
+                    <div class="improvement-list" id="improvementList">
+                        <!-- Improvement plans will be added here dynamically -->
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
-    <div class="modal" id="noteModal"><div class="modal-content"><span class="close-modal" id="closeNoteModal">&times;</span><h2>إضافة ملاحظة</h2><div class="form-group"><label for="noteText">الملاحظة</label><textarea id="noteText" class="form-control" rows="6" placeholder="أدخل ملاحظتك هنا"></textarea></div><button class="btn" id="saveNoteBtn">حفظ الملاحظة</button></div></div>
-    <div class="image-preview-modal" id="imagePreviewModal"><span class="close-preview" id="closePreviewModal">&times;</span><div class="image-preview-content"><img src="" alt="معاينة الصورة" class="preview-image" id="previewImage"></div></div>
+    <!-- Note Modal -->
+    <div class="modal" id="noteModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeNoteModal">&times;</span>
+            <h2>إضافة ملاحظة</h2>
+            <div class="form-group">
+                <label for="noteText">الملاحظة</label>
+                <textarea id="noteText" class="form-control" rows="6" placeholder="أدخل ملاحظتك هنا"></textarea>
+            </div>
+            <button class="btn" id="saveNoteBtn">حفظ الملاحظة</button>
+        </div>
+    </div>
     
-    <footer><div class="container"><div class="footer-content"><span>جميع الحقوق محفوظة لقناة رسم للتصميم والخدمات التعليمية</span><img src="https://h.top4top.io/p_3453yqc3h0.png" alt="شعار رسم" class="footer-logo"><a href="https://t.me/Rasm_MA1" target="_blank" class="footer-link">https://t.me/Rasm_MA1</a></div></div></footer>
+    <!-- Image Preview Modal -->
+    <div class="image-preview-modal" id="imagePreviewModal">
+        <span class="close-preview" id="closePreviewModal">&times;</span>
+        <div class="image-preview-content">
+            <img src="" alt="معاينة الصورة" class="preview-image" id="previewImage">
+        </div>
+    </div>
 
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js"></script>
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content" style="max-width: 400px; text-align: center;">
+            <h2 id="confirmTitle" style="margin-bottom: 15px;">هل أنت متأكد؟</h2>
+            <p id="confirmText" style="margin: 20px 0;"></p>
+            <div>
+                <button class="btn" id="confirmYesBtn" style="background-color: #f44336; margin-left: 10px;">نعم، حذف</button>
+                <button class="btn" id="confirmNoBtn" style="background-color: #aaa;">إلغاء</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <span>جميع الحقوق محفوظة لقناة رسم للتصميم والخدمات التعليمية</span>
+                <img src="https://h.top4top.io/p_3453yqc3h0.png" alt="شعار رسم" class="footer-logo">
+                <a href="https://t.me/Rasm_MA1" target="_blank" class="footer-link">https://t.me/Rasm_MA1</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Firebase SDKs -->
     <script type="module">
-        // START: Firebase Initialization
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion, arrayRemove } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-storage.js";
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, addDoc, getDocs, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // *** ضع كائن إعدادات Firebase هنا ***
-        const firebaseConfig = {
-          apiKey: "YOUR_API_KEY",
-          authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-          projectId: "YOUR_PROJECT_ID",
-          storageBucket: "YOUR_PROJECT_ID.appspot.com",
-          messagingSenderId: "YOUR_SENDER_ID",
-          appId: "YOUR_APP_ID"
-        };
-        
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-        const storage = getStorage(app);
-        let userId = null; // سيتم تعيينه بعد تسجيل الدخول
-        // END: Firebase Initialization
+        // --- Firebase Configuration ---
+        // This is now correctly handled by parsing the __firebase_config variable provided by the environment.
+        const firebaseConfig = JSON.parse(
+            typeof __firebase_config !== 'undefined' 
+            ? __firebase_config 
+            : '{}'
+        );
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
-        // Global Variables
+
+        // --- Global Variables ---
+        let db, auth, userId;
+        let unsubscribeListeners = []; // To store snapshot listeners
+        let confirmCallback = null; // For the custom confirm modal
         let currentNoteItemId = null;
         
-        // Performance Indicators Data
+        // Performance Indicators Data (static)
         const performanceIndicators = [
             { id: 'performance_1', title: 'أداء الواجبات الوظيفية', description: 'مدى التزام المعلم بأداء واجباته الوظيفية وفق اللوائح والأنظمة المعتمدة.', weight: 10 },
             { id: 'performance_2', title: 'التفاعل مع المجتمع المهني', description: 'مشاركة المعلم في الأنشطة المهنية والتعاون مع الزملاء والمجتمع المدرسي.', weight: 10 },
@@ -1320,242 +1653,60 @@
             { id: 'performance_11', title: 'تنوع أساليب التقويم', description: 'استخدام أساليب تقويم متنوعة لقياس تقدم المتعلمين.', weight: 10 }
         ];
 
-        // --- AUTHENTICATION & INITIALIZATION ---
-        onAuthStateChanged(auth, user => {
-            if (user) {
-                // User is signed in anonymously.
-                userId = user.uid;
-                console.log("User signed in anonymously with UID:", userId);
-                initializeApp();
-            } else {
-                // User is signed out. Sign in again.
-                signInAnonymously(auth).catch(error => {
-                    console.error("Error signing in anonymously:", error);
-                    alert("حدث خطأ أثناء الاتصال بالخدمة. يرجى تحديث الصفحة.");
+        // --- Initialization ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Initialize Firebase
+                const app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+                
+                // Set up authentication listener
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        console.log("User is signed in with UID:", userId);
+                        initializeAppWithUser();
+                    } else {
+                        console.log("User is signed out.");
+                        // Clean up listeners if user signs out
+                        unsubscribeListeners.forEach(unsub => unsub());
+                        unsubscribeListeners = [];
+                    }
                 });
+
+                // Sign in the user
+                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                // Setup general event listeners that don't depend on data
+                setupStaticEventListeners();
+
+            } catch (error) {
+                console.error("Firebase initialization failed:", error);
+                showNotification("فشل الاتصال بقاعدة البيانات", "error");
             }
         });
-
-        async function initializeApp() {
-            setupEventListeners();
-            await loadAllDataFromFirebase();
-        }
-
-        async function loadAllDataFromFirebase() {
-            if (!userId) return;
-            const docRef = doc(db, "profiles", userId);
-            const docSnap = await getDoc(docRef);
-
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                console.log("Data loaded from Firebase:", data);
-                // Load data into UI
-                updateHeaderInfo(data.basicInfo);
-                updateCvInputs(data.cv);
-                updateLicensePreview(data.cv?.licenseImageUrl);
-                renderCertificates(data.cv?.certificates || []);
-                renderCourses(data.cv?.courses || []);
-                renderPerformanceItems(data.performanceData || []);
-                updateDocumentation(data.documentation);
-                renderImprovementPlans(data.improvements || []);
-            } else {
-                console.log("No such document! Initializing new profile.");
-                // If no data exists, just render the empty templates
-                 renderPerformanceItems([]);
-                 renderCertificates([]);
-                 renderCourses([]);
-                 renderImprovementPlans([]);
-            }
-        }
         
-        // --- UI RENDERING FUNCTIONS ---
-        function updateHeaderInfo(basicInfo = {}) {
-            const { teacherName, educationDept, schoolName, academicYear } = basicInfo;
-            document.getElementById('teacherName').textContent = `اسم المعلم: ${teacherName || '-'}`;
-            document.getElementById('educationDept').textContent = `الإدارة التعليمية: ${educationDept || '-'}`;
-            document.getElementById('schoolName').textContent = `المدرسة: ${schoolName || '-'}`;
-            document.getElementById('academicYear').textContent = `العام الدراسي: ${academicYear || '-'}`;
+        // This function runs after a user is authenticated
+        function initializeAppWithUser() {
+            // Render static parts that might need re-rendering on user change
+            renderPerformanceItems(); 
             
-            document.getElementById('teacherNameInput').value = teacherName || '';
-            document.getElementById('educationDeptInput').value = educationDept || '';
-            document.getElementById('schoolNameInput').value = schoolName || '';
-            document.getElementById('academicYearInput').value = academicYear || '';
-        }
-
-        function updateCvInputs(cvData = {}) {
-            const { fullName, specialty, qualification, yearsOfExperience } = cvData;
-            document.getElementById('fullNameInput').value = fullName || '';
-            document.getElementById('specialtyInput').value = specialty || '';
-            document.getElementById('qualificationInput').value = qualification || '';
-            document.getElementById('yearsOfExperienceInput').value = yearsOfExperience || '';
-        }
-
-        function updateLicensePreview(url) {
-             const licensePreview = document.getElementById('licensePreview');
-             if(url) {
-                licensePreview.innerHTML = `<img src="${url}" alt="الرخصة المهنية">`;
-             } else {
-                licensePreview.innerHTML = `<div class="certificate-placeholder">+</div>`;
-             }
-        }
-
-        function renderCertificates(certificates = []) {
-            const container = document.getElementById('certificatesContainer');
-            container.innerHTML = '';
-            certificates.forEach(cert => {
-                const certItem = document.createElement('div');
-                certItem.className = 'certificate-item';
-                certItem.innerHTML = `<img src="${cert.url}" alt="شهادة">`;
-                certItem.onclick = () => showImagePreview(cert.url);
-
-                const deleteBtn = document.createElement('button');
-                deleteBtn.className = 'delete-btn';
-                deleteBtn.style.position = 'absolute';
-                deleteBtn.style.top = '5px';
-                deleteBtn.style.right = '5px';
-                deleteBtn.innerHTML = '×';
-                deleteBtn.onclick = (e) => {
-                    e.stopPropagation();
-                    deleteCertificate(cert);
-                };
-                certItem.appendChild(deleteBtn);
-                container.appendChild(certItem);
-            });
-             if (certificates.length < 8) {
-                const addItem = document.createElement('div');
-                addItem.className = 'certificate-item certificate-add';
-                addItem.innerHTML = '<div class="certificate-placeholder">+</div>';
-                addItem.onclick = () => document.getElementById('certificateUpload').click();
-                container.appendChild(addItem);
-            }
-        }
-
-        function renderCourses(courses = []) {
-             const list = document.getElementById('coursesList');
-             list.innerHTML = '';
-             courses.forEach(course => {
-                 const item = document.createElement('div');
-                 item.className = 'course-item';
-                 item.innerHTML = `
-                    <div>
-                        <strong>${course.name}</strong>
-                        <p>الجهة: ${course.provider} | التاريخ: ${formatDate(course.date)} | عدد الساعات: ${course.hours}</p>
-                    </div>
-                    <button class="delete-btn">حذف</button>
-                 `;
-                 item.querySelector('.delete-btn').onclick = () => deleteCourse(course);
-                 list.appendChild(item);
-             });
-        }
-        
-        function renderPerformanceItems(performanceData = []) {
-            const container = document.getElementById('performanceItems');
-            container.innerHTML = '';
-            performanceIndicators.forEach(indicator => {
-                const data = performanceData.find(item => item.id === indicator.id) || { id: indicator.id, rating: 0, note: '', files: [] };
-                const itemElement = document.createElement('div');
-                itemElement.className = 'performance-item';
-                itemElement.id = indicator.id;
-                
-                itemElement.innerHTML = `
-                    <div class="performance-header">
-                        <h3 class="performance-title">${indicator.title} (${indicator.weight}%)</h3>
-                        <button class="note-btn" data-id="${indicator.id}"><i class="fas fa-sticky-note note-icon"></i></button>
-                    </div>
-                    <p class="performance-description">${indicator.description}</p>
-                    <div class="performance-uploads">
-                        <label>الشواهد (الحد الأقصى 4 ملفات)</label>
-                        <div class="upload-container" id="uploads_${indicator.id}"></div>
-                    </div>
-                    <div class="performance-rating">
-                        <label>التقييم الذاتي</label>
-                        <div class="rating-container">
-                            <span class="rating-value">${data.rating}</span>
-                            <div class="rating-slider-container">
-                                <input type="range" min="0" max="5" step="1" value="${data.rating}" class="rating-slider" data-id="${indicator.id}">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="performance-note" style="${data.note ? 'display: block;' : ''}">
-                        <label>الملاحظات</label><textarea readonly>${data.note || ''}</textarea>
-                    </div>`;
-                container.appendChild(itemElement);
-
-                // Render uploads
-                const uploadContainer = itemElement.querySelector(`#uploads_${indicator.id}`);
-                (data.files || []).forEach(file => {
-                    const fileElement = createFileElement(file, indicator.id);
-                    uploadContainer.appendChild(fileElement);
-                });
-                const addUploadBtn = document.createElement('div');
-                addUploadBtn.className = 'upload-item upload-add';
-                addUploadBtn.innerHTML = '<div class="upload-placeholder">+</div>';
-                addUploadBtn.onclick = () => handlePerformanceFileUpload(indicator.id);
-                uploadContainer.appendChild(addUploadBtn);
-            });
-            addPerformanceEventListeners();
-            calculateTotalScore(performanceData);
-        }
-
-        function createFileElement(file, performanceId) {
-            const fileElement = document.createElement('div');
-            fileElement.className = 'upload-item';
+            // Setup listeners for dynamic data from Firestore
+            setupFirestoreListeners();
             
-            if (file.type.startsWith('image/')) {
-                fileElement.innerHTML = `<img src="${file.url}" alt="شاهد">`;
-                fileElement.onclick = () => showImagePreview(file.url);
-            } else {
-                fileElement.innerHTML = `<div class="upload-file-icon"><i class="fas fa-file-pdf"></i></div>`;
-                fileElement.onclick = () => window.open(file.url, '_blank');
-            }
-
-            const deleteBtn = document.createElement('button');
-            deleteBtn.className = 'delete-btn';
-            deleteBtn.style.position = 'absolute';
-            deleteBtn.style.top = '5px';
-            deleteBtn.style.right = '5px';
-            deleteBtn.innerHTML = '×';
-            deleteBtn.onclick = (e) => {
-                e.stopPropagation();
-                deletePerformanceFile(performanceId, file);
-            };
-            fileElement.appendChild(deleteBtn);
-            return fileElement;
-        }
-        
-        function updateDocumentation(docData = {}) {
-            const { firstFollowup = {}, secondFollowup = {}, recommendations = '' } = docData;
-            document.getElementById('firstFollowupDate').value = firstFollowup.date || '';
-            document.getElementById('firstFollowupName').value = firstFollowup.name || '';
-            document.getElementById('firstFollowupNotes').value = firstFollowup.notes || '';
-            document.getElementById('secondFollowupDate').value = secondFollowup.date || '';
-            document.getElementById('secondFollowupName').value = secondFollowup.name || '';
-            document.getElementById('secondFollowupNotes').value = secondFollowup.notes || '';
-            document.getElementById('recommendations').value = recommendations;
-        }
-        
-        function renderImprovementPlans(improvements = []) {
-            const list = document.getElementById('improvementList');
-            list.innerHTML = '';
-            improvements.forEach(item => {
-                const priorityClass = item.priority === 'عالية' ? 'priority-high' : item.priority === 'متوسطة' ? 'priority-medium' : 'priority-low';
-                const itemEl = document.createElement('div');
-                itemEl.className = 'improvement-item';
-                itemEl.innerHTML = `
-                    <h4>${item.area}</h4>
-                    <p><strong>الأولوية:</strong> <span class="${priorityClass}">${item.priority}</span></p>
-                    <p><strong>الهدف:</strong> ${item.goal}</p>
-                    <p><strong>الإجراءات المقترحة:</strong> ${item.actions}</p>
-                    <p><strong>الفترة الزمنية:</strong> ${formatDate(item.startDate)} إلى ${formatDate(item.endDate)}</p>
-                    <button class="delete-btn">حذف</button>
-                `;
-                itemEl.querySelector('.delete-btn').onclick = () => deleteImprovementPlan(item);
-                list.appendChild(itemEl);
-            });
+            // Setup event listeners that interact with data
+            setupDynamicEventListeners();
         }
 
-        // --- EVENT LISTENERS SETUP ---
-        function setupEventListeners() {
+        // --- Event Listeners Setup ---
+        
+        // Listeners that can be set up once on DOM load
+        function setupStaticEventListeners() {
             // Navigation
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', (e) => {
@@ -1567,208 +1718,297 @@
                     document.getElementById(`${tabId}-content`).classList.add('active');
                 });
             });
-            
-            // Save Buttons
-            document.getElementById('saveBasicDataBtn').onclick = saveBasicData;
-            document.getElementById('saveCvDataBtn').onclick = saveCvData;
-            document.getElementById('addCourseBtn').onclick = addCourse;
-            document.getElementById('saveFirstFollowupBtn').onclick = saveDocumentation;
-            document.getElementById('saveSecondFollowupBtn').onclick = saveDocumentation;
-            document.getElementById('saveRecommendationsBtn').onclick = saveDocumentation;
-            document.getElementById('addImprovementBtn').onclick = addImprovementPlan;
-            
-            // File Uploads
-            document.getElementById('licenseUpload').onchange = (e) => uploadLicense(e.target.files[0]);
-            document.getElementById('certificateUploadBtn').onclick = () => document.getElementById('certificateUpload').click();
-            document.getElementById('certificateUpload').onchange = (e) => uploadCertificate(e.target.files[0]);
-            
+
             // Modals
-            document.getElementById('closeNoteModal').onclick = () => document.getElementById('noteModal').style.display = 'none';
-            document.getElementById('saveNoteBtn').onclick = saveNote;
-            document.getElementById('closePreviewModal').onclick = () => document.getElementById('imagePreviewModal').style.display = 'none';
-        }
-        
-        function addPerformanceEventListeners() {
-            document.querySelectorAll('.note-btn').forEach(btn => btn.onclick = () => openNoteModal(btn.dataset.id));
-            document.querySelectorAll('.rating-slider').forEach(slider => {
-                slider.oninput = () => {
-                    const value = slider.value;
-                    const id = slider.dataset.id;
-                    slider.parentElement.previousElementSibling.textContent = value;
-                    updatePerformanceRating(id, parseInt(value));
-                };
+            document.getElementById('closeNoteModal').addEventListener('click', () => document.getElementById('noteModal').style.display = 'none');
+            document.getElementById('closePreviewModal').addEventListener('click', () => document.getElementById('imagePreviewModal').style.display = 'none');
+            
+            // Confirmation Modal Buttons
+            document.getElementById('confirmNoBtn').addEventListener('click', () => {
+                document.getElementById('confirmModal').style.display = 'none';
+                confirmCallback = null;
+            });
+
+            document.getElementById('confirmYesBtn').addEventListener('click', () => {
+                if (confirmCallback) {
+                    confirmCallback();
+                }
+                document.getElementById('confirmModal').style.display = 'none';
+                confirmCallback = null;
+            });
+            
+            window.addEventListener('click', (e) => {
+                if (e.target === document.getElementById('imagePreviewModal')) {
+                    document.getElementById('imagePreviewModal').style.display = 'none';
+                }
+                if (e.target === document.getElementById('noteModal')) {
+                    document.getElementById('noteModal').style.display = 'none';
+                }
+                if (e.target === document.getElementById('confirmModal')) {
+                    document.getElementById('confirmModal').style.display = 'none';
+                    confirmCallback = null;
+                }
             });
         }
-        
-        // --- DATA SAVING/UPDATING FUNCTIONS ---
+
+        // Listeners for buttons that modify data (require userId)
+        function setupDynamicEventListeners() {
+            // --- SAVE BUTTONS ---
+            document.getElementById('saveBasicDataBtn').addEventListener('click', saveBasicData);
+            document.getElementById('saveCvDataBtn').addEventListener('click', saveCvData);
+            document.getElementById('saveFirstFollowupBtn').addEventListener('click', () => saveDocumentation('firstFollowup'));
+            document.getElementById('saveSecondFollowupBtn').addEventListener('click', () => saveDocumentation('secondFollowup'));
+            document.getElementById('saveRecommendationsBtn').addEventListener('click', () => saveDocumentation('recommendations'));
+            document.getElementById('saveNoteBtn').addEventListener('click', saveNote);
+
+            // --- ADD/UPLOAD BUTTONS ---
+            document.getElementById('licenseUploadBtn').addEventListener('click', () => document.getElementById('licenseUpload').click());
+            document.getElementById('licenseUpload').addEventListener('change', handleLicenseUpload);
+            
+            document.getElementById('certificateUploadBtn').addEventListener('click', () => document.getElementById('certificateUpload').click());
+            document.getElementById('certificateUpload').addEventListener('change', handleCertificateUpload);
+
+            document.getElementById('addCourseBtn').addEventListener('click', addCourse);
+            document.getElementById('addImprovementBtn').addEventListener('click', addImprovementPlan);
+        }
+
+        // --- Firestore Real-time Listeners ---
+        function setupFirestoreListeners() {
+            // Clean up any previous listeners
+            unsubscribeListeners.forEach(unsub => unsub());
+            unsubscribeListeners = [];
+
+            const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
+
+            // Listener for the main user document (basic info, cv, documentation)
+            const unsubUserDoc = onSnapshot(userDocRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    updateHeaderInfo(data.basicInfo);
+                    updateCvInputs(data.cvInfo);
+                    updateLicensePreview(data.licenseImage);
+                    updateDocumentationInputs(data);
+                } else {
+                    console.log("No user document found. A new one will be created on save.");
+                    // Reset UI to default state if no data
+                    updateHeaderInfo({});
+                    updateCvInputs({});
+                    updateLicensePreview(null);
+                    updateDocumentationInputs({});
+                }
+            }, (error) => {
+                console.error("Error listening to user document:", error);
+                showNotification("خطأ في تحديث البيانات", "error");
+            });
+            unsubscribeListeners.push(unsubUserDoc);
+
+            // Listener for certificates subcollection
+            const certsColRef = collection(userDocRef, "certificates");
+            const unsubCerts = onSnapshot(certsColRef, (querySnapshot) => {
+                const certificates = [];
+                querySnapshot.forEach((doc) => {
+                    certificates.push({ id: doc.id, ...doc.data() });
+                });
+                renderCertificates(certificates);
+            }, (error) => console.error("Error listening to certificates:", error));
+            unsubscribeListeners.push(unsubCerts);
+
+            // Listener for courses subcollection
+            const coursesColRef = collection(userDocRef, "courses");
+            const unsubCourses = onSnapshot(coursesColRef, (querySnapshot) => {
+                const courses = [];
+                querySnapshot.forEach((doc) => {
+                    courses.push({ id: doc.id, ...doc.data() });
+                });
+                renderCourses(courses);
+            }, (error) => console.error("Error listening to courses:", error));
+            unsubscribeListeners.push(unsubCourses);
+
+            // Listener for improvements subcollection
+            const improvementsColRef = collection(userDocRef, "improvements");
+            const unsubImprovements = onSnapshot(improvementsColRef, (querySnapshot) => {
+                const improvements = [];
+                querySnapshot.forEach((doc) => {
+                    improvements.push({ id: doc.id, ...doc.data() });
+                });
+                renderImprovementPlans(improvements);
+            }, (error) => console.error("Error listening to improvements:", error));
+            unsubscribeListeners.push(unsubImprovements);
+
+            // Listener for performance data subcollection
+            const performanceColRef = collection(userDocRef, "performanceData");
+            const unsubPerformance = onSnapshot(performanceColRef, (querySnapshot) => {
+                const performanceData = [];
+                 querySnapshot.forEach((doc) => {
+                    performanceData.push({ id: doc.id, ...doc.data() });
+                });
+                updatePerformanceUI(performanceData);
+            }, (error) => console.error("Error listening to performance data:", error));
+            unsubscribeListeners.push(unsubPerformance);
+        }
+
+        // --- Data Handling Functions (Read from UI, Write to DB) ---
+
         async function saveBasicData() {
             const data = {
                 teacherName: document.getElementById('teacherNameInput').value,
                 educationDept: document.getElementById('educationDeptInput').value,
                 schoolName: document.getElementById('schoolNameInput').value,
-                academicYear: document.getElementById('academicYearInput').value
+                academicYear: document.getElementById('academicYearInput').value,
             };
-            await setDoc(doc(db, "profiles", userId), { basicInfo: data }, { merge: true });
-            updateHeaderInfo(data);
-            alert('تم حفظ البيانات بنجاح');
+            try {
+                const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
+                await setDoc(userDocRef, { basicInfo: data }, { merge: true });
+                showNotification("تم حفظ البيانات الأساسية بنجاح", "success");
+            } catch (error) {
+                console.error("Error saving basic data: ", error);
+                showNotification("خطأ في حفظ البيانات", "error");
+            }
         }
 
         async function saveCvData() {
-             const data = {
+            const data = {
                 fullName: document.getElementById('fullNameInput').value,
                 specialty: document.getElementById('specialtyInput').value,
                 qualification: document.getElementById('qualificationInput').value,
-                yearsOfExperience: document.getElementById('yearsOfExperienceInput').value
+                yearsOfExperience: document.getElementById('yearsOfExperienceInput').value,
             };
-            await updateDoc(doc(db, "profiles", userId), { "cv.basic": data });
-            alert('تم حفظ بيانات السيرة الذاتية بنجاح');
-        }
-        
-        async function uploadFile(file, path) {
-            if (!userId || !file) return null;
-            const storageRef = ref(storage, `profiles/${userId}/${path}/${Date.now()}-${file.name}`);
-            await uploadBytes(storageRef, file);
-            const downloadURL = await getDownloadURL(storageRef);
-            return downloadURL;
-        }
-
-        async function uploadLicense(file) {
-            if(!file) return;
-            const url = await uploadFile(file, 'license');
-            if(url) {
-                await updateDoc(doc(db, "profiles", userId), { "cv.licenseImageUrl": url });
-                updateLicensePreview(url);
-                alert('تم رفع صورة الرخصة بنجاح');
+            try {
+                const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
+                await setDoc(userDocRef, { cvInfo: data }, { merge: true });
+                showNotification("تم حفظ بيانات السيرة الذاتية بنجاح", "success");
+            } catch (error) {
+                console.error("Error saving CV data: ", error);
+                showNotification("خطأ في حفظ البيانات", "error");
             }
         }
         
-        async function uploadCertificate(file) {
-             if(!file) return;
-             const url = await uploadFile(file, 'certificates');
-             if(url) {
-                const newCert = { id: `cert_${Date.now()}`, url: url };
-                await updateDoc(doc(db, "profiles", userId), { "cv.certificates": arrayUnion(newCert) });
-                const docSnap = await getDoc(doc(db, "profiles", userId));
-                renderCertificates(docSnap.data().cv.certificates);
-                alert('تم رفع الشهادة بنجاح');
-             }
+        async function saveDocumentation(field) {
+            let data = {};
+            try {
+                const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
+                if (field === 'firstFollowup') {
+                    data.firstFollowup = {
+                        date: document.getElementById('firstFollowupDate').value,
+                        name: document.getElementById('firstFollowupName').value,
+                        notes: document.getElementById('firstFollowupNotes').value,
+                    };
+                } else if (field === 'secondFollowup') {
+                    data.secondFollowup = {
+                        date: document.getElementById('secondFollowupDate').value,
+                        name: document.getElementById('secondFollowupName').value,
+                        notes: document.getElementById('secondFollowupNotes').value,
+                    };
+                } else if (field === 'recommendations') {
+                    data.recommendations = document.getElementById('recommendations').value;
+                }
+                await setDoc(userDocRef, data, { merge: true });
+                showNotification("تم حفظ بيانات التوثيق بنجاح", "success");
+            } catch(e) {
+                console.error("Error saving documentation:", e);
+                showNotification("خطأ في حفظ البيانات", "error");
+            }
+        }
+
+        function handleLicenseUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = async function(event) {
+                const base64String = event.target.result;
+                try {
+                    const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
+                    await setDoc(userDocRef, { licenseImage: base64String }, { merge: true });
+                    showNotification("تم رفع صورة الرخصة بنجاح", "success");
+                } catch (error) {
+                    console.error("Error uploading license: ", error);
+                    showNotification("خطأ في رفع الصورة", "error");
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleCertificateUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            const certificatesContainer = document.getElementById('certificatesContainer');
+            if (certificatesContainer.querySelectorAll('.certificate-item').length -1 >= 8) {
+                 showNotification('لقد وصلت للحد الأقصى من الشهادات (8 شهادات)', "error");
+                 return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = async function(event) {
+                const base64String = event.target.result;
+                try {
+                    const certsColRef = collection(db, `artifacts/${appId}/users/${userId}/certificates`);
+                    await addDoc(certsColRef, { url: base64String, createdAt: new Date() });
+                    showNotification("تم إضافة الشهادة بنجاح", "success");
+                } catch (error) {
+                    console.error("Error adding certificate: ", error);
+                    showNotification("خطأ في إضافة الشهادة", "error");
+                }
+            };
+            reader.readAsDataURL(file);
         }
         
+        async function deleteCertificate(certId) {
+            showConfirmModal("هل أنت متأكد من حذف هذه الشهادة؟", async () => {
+                try {
+                    const certDocRef = doc(db, `artifacts/${appId}/users/${userId}/certificates`, certId);
+                    await deleteDoc(certDocRef);
+                    showNotification("تم حذف الشهادة بنجاح", "success");
+                } catch (error) {
+                    console.error("Error deleting certificate: ", error);
+                    showNotification("خطأ في حذف الشهادة", "error");
+                }
+            });
+        }
+
         async function addCourse() {
-            const newCourse = {
-                id: `course_${Date.now()}`,
+            const course = {
                 name: document.getElementById('courseNameInput').value,
                 provider: document.getElementById('courseProviderInput').value,
                 date: document.getElementById('courseDateInput').value,
-                hours: document.getElementById('courseHoursInput').value
+                hours: document.getElementById('courseHoursInput').value,
             };
-            if(!newCourse.name || !newCourse.provider) return alert('يرجى ملء حقول الدورة');
-            
-            await updateDoc(doc(db, "profiles", userId), { "cv.courses": arrayUnion(newCourse) });
-            const docSnap = await getDoc(doc(db, "profiles", userId));
-            renderCourses(docSnap.data().cv.courses);
-            
-            document.getElementById('courseNameInput').value = '';
-            document.getElementById('courseProviderInput').value = '';
-            document.getElementById('courseDateInput').value = '';
-            document.getElementById('courseHoursInput').value = '';
-        }
-        
-        async function updatePerformanceRating(performanceId, rating) {
-             const docRef = doc(db, "profiles", userId);
-             const docSnap = await getDoc(docRef);
-             let performanceData = docSnap.data()?.performanceData || [];
-             
-             let itemIndex = performanceData.findIndex(item => item.id === performanceId);
-             if (itemIndex === -1) {
-                performanceData.push({ id: performanceId, rating: rating, note: '', files: [] });
-             } else {
-                performanceData[itemIndex].rating = rating;
-             }
-             
-             await setDoc(docRef, { performanceData: performanceData }, { merge: true });
-             calculateTotalScore(performanceData);
-        }
 
-        function openNoteModal(performanceId) {
-             currentNoteItemId = performanceId;
-             const noteText = document.querySelector(`#${performanceId} .performance-note textarea`).value;
-             document.getElementById('noteText').value = noteText;
-             document.getElementById('noteModal').style.display = 'block';
-        }
-
-        async function saveNote() {
-            const note = document.getElementById('noteText').value;
-            const docRef = doc(db, "profiles", userId);
-            const docSnap = await getDoc(docRef);
-            let performanceData = docSnap.data()?.performanceData || [];
-
-            let itemIndex = performanceData.findIndex(item => item.id === currentNoteItemId);
-            if(itemIndex !== -1) {
-                performanceData[itemIndex].note = note;
-            } else {
-                performanceData.push({ id: currentNoteItemId, rating: 0, note: note, files: [] });
+            if (!course.name || !course.provider || !course.date || !course.hours) {
+                showNotification("يرجى ملء جميع حقول الدورة التدريبية", "error");
+                return;
             }
-
-            await setDoc(docRef, { performanceData: performanceData }, { merge: true });
-            document.querySelector(`#${currentNoteItemId} .performance-note textarea`).value = note;
-            document.querySelector(`#${currentNoteItemId} .performance-note`).style.display = note ? 'block' : 'none';
-            document.getElementById('noteModal').style.display = 'none';
-            alert('تم حفظ الملاحظة');
-        }
-
-        async function handlePerformanceFileUpload(performanceId) {
-            const fileInput = document.createElement('input');
-            fileInput.type = 'file';
-            fileInput.accept = 'image/*,application/pdf';
-            fileInput.onchange = async e => {
-                const file = e.target.files[0];
-                if (file) {
-                    const url = await uploadFile(file, `performance/${performanceId}`);
-                    if(url) {
-                        const newFile = { id: `file_${Date.now()}`, url: url, type: file.type };
-                        
-                        const docRef = doc(db, "profiles", userId);
-                        const docSnap = await getDoc(docRef);
-                        let performanceData = docSnap.data()?.performanceData || [];
-
-                        let itemIndex = performanceData.findIndex(item => item.id === performanceId);
-                        if (itemIndex === -1) {
-                            performanceData.push({ id: performanceId, rating: 0, note: '', files: [newFile] });
-                        } else {
-                            performanceData[itemIndex].files.push(newFile);
-                        }
-                        
-                        await setDoc(docRef, { performanceData: performanceData }, { merge: true });
-                        renderPerformanceItems(performanceData);
-                        alert('تم رفع الشاهد بنجاح');
-                    }
-                }
-            };
-            fileInput.click();
+            
+            try {
+                const coursesColRef = collection(db, `artifacts/${appId}/users/${userId}/courses`);
+                await addDoc(coursesColRef, { ...course, createdAt: new Date() });
+                showNotification("تمت إضافة الدورة بنجاح", "success");
+                // Clear inputs
+                document.getElementById('courseNameInput').value = '';
+                document.getElementById('courseProviderInput').value = '';
+                document.getElementById('courseDateInput').value = '';
+                document.getElementById('courseHoursInput').value = '';
+            } catch (error) {
+                console.error("Error adding course: ", error);
+                showNotification("خطأ في إضافة الدورة", "error");
+            }
         }
         
-        async function saveDocumentation() {
-             const data = {
-                firstFollowup: {
-                    date: document.getElementById('firstFollowupDate').value,
-                    name: document.getElementById('firstFollowupName').value,
-                    notes: document.getElementById('firstFollowupNotes').value,
-                },
-                secondFollowup: {
-                    date: document.getElementById('secondFollowupDate').value,
-                    name: document.getElementById('secondFollowupName').value,
-                    notes: document.getElementById('secondFollowupNotes').value,
-                },
-                recommendations: document.getElementById('recommendations').value,
-            };
-            await setDoc(doc(db, "profiles", userId), { documentation: data }, { merge: true });
-            alert('تم حفظ البيانات بنجاح');
+        async function deleteCourse(courseId) {
+            showConfirmModal("هل أنت متأكد من حذف هذه الدورة؟", async () => {
+                try {
+                    const courseDocRef = doc(db, `artifacts/${appId}/users/${userId}/courses`, courseId);
+                    await deleteDoc(courseDocRef);
+                    showNotification("تم حذف الدورة بنجاح", "success");
+                } catch (error) {
+                    console.error("Error deleting course: ", error);
+                    showNotification("خطأ في حذف الدورة", "error");
+                }
+            });
         }
 
         async function addImprovementPlan() {
-             const newItem = {
-                id: `imp_${Date.now()}`,
+            const plan = {
                 area: document.getElementById('improvementArea').value,
                 priority: document.getElementById('improvementPriority').value,
                 goal: document.getElementById('improvementGoal').value,
@@ -1776,70 +2016,388 @@
                 startDate: document.getElementById('improvementStartDate').value,
                 endDate: document.getElementById('improvementEndDate').value,
             };
-            if(!newItem.area || !newItem.goal) return alert('يرجى ملء الحقول المطلوبة');
-            await updateDoc(doc(db, "profiles", userId), { "improvements": arrayUnion(newItem) });
-            const docSnap = await getDoc(doc(db, "profiles", userId));
-            renderImprovementPlans(docSnap.data().improvements);
-        }
-        
-        // --- DELETION FUNCTIONS ---
-        async function deleteFileFromStorage(url) {
+
+            if (!plan.area || !plan.priority || !plan.goal || !plan.actions || !plan.startDate || !plan.endDate) {
+                showNotification("يرجى ملء جميع حقول خطة التحسين", "error");
+                return;
+            }
+            
             try {
-                const fileRef = ref(storage, url);
-                await deleteObject(fileRef);
-                return true;
+                const improvementsColRef = collection(db, `artifacts/${appId}/users/${userId}/improvements`);
+                await addDoc(improvementsColRef, { ...plan, createdAt: new Date() });
+                showNotification("تمت إضافة خطة التحسين بنجاح", "success");
+                 // Clear inputs
+                document.getElementById('improvementArea').value = '';
+                document.getElementById('improvementPriority').value = '';
+                document.getElementById('improvementGoal').value = '';
+                document.getElementById('improvementActions').value = '';
+                document.getElementById('improvementStartDate').value = '';
+                document.getElementById('improvementEndDate').value = '';
+            } catch(error) {
+                console.error("Error adding improvement plan:", error);
+                showNotification("خطأ في إضافة الخطة", "error");
+            }
+        }
+        
+        async function deleteImprovement(improvementId) {
+            showConfirmModal("هل أنت متأكد من حذف هذه الخطة؟", async () => {
+                try {
+                    const improvementDocRef = doc(db, `artifacts/${appId}/users/${userId}/improvements`, improvementId);
+                    await deleteDoc(improvementDocRef);
+                    showNotification("تم حذف الخطة بنجاح", "success");
+                } catch (error) {
+                    console.error("Error deleting improvement plan:", error);
+                    showNotification("خطأ في حذف الخطة", "error");
+                }
+            });
+        }
+
+        async function updatePerformanceRating(performanceId, rating) {
+            try {
+                const perfDocRef = doc(db, `artifacts/${appId}/users/${userId}/performanceData`, performanceId);
+                await setDoc(perfDocRef, { rating: rating }, { merge: true });
+                // No notification here to avoid spamming on slider move
             } catch (error) {
-                console.error("Error deleting file from storage:", error);
-                // If file not found, it's okay, just proceed.
-                if (error.code === 'storage/object-not-found') return true;
-                return false;
-            }
-        }
-        
-        async function deleteCertificate(certToDelete) {
-            if(!confirm("هل أنت متأكد من حذف هذه الشهادة؟")) return;
-            await deleteFileFromStorage(certToDelete.url);
-            await updateDoc(doc(db, "profiles", userId), { "cv.certificates": arrayRemove(certToDelete) });
-            const docSnap = await getDoc(doc(db, "profiles", userId));
-            renderCertificates(docSnap.data().cv.certificates);
-            alert('تم حذف الشهادة');
-        }
-
-        async function deleteCourse(courseToDelete) {
-             if(!confirm("هل أنت متأكد من حذف هذه الدورة؟")) return;
-             await updateDoc(doc(db, "profiles", userId), { "cv.courses": arrayRemove(courseToDelete) });
-             const docSnap = await getDoc(doc(db, "profiles", userId));
-             renderCourses(docSnap.data().cv.courses);
-             alert('تم حذف الدورة');
-        }
-
-        async function deletePerformanceFile(performanceId, fileToDelete) {
-            if(!confirm("هل أنت متأكد من حذف هذا الشاهد؟")) return;
-
-            await deleteFileFromStorage(fileToDelete.url);
-
-            const docRef = doc(db, "profiles", userId);
-            const docSnap = await getDoc(docRef);
-            let performanceData = docSnap.data()?.performanceData || [];
-            let itemIndex = performanceData.findIndex(item => item.id === performanceId);
-
-            if (itemIndex !== -1) {
-                performanceData[itemIndex].files = performanceData[itemIndex].files.filter(f => f.id !== fileToDelete.id);
-                await setDoc(docRef, { performanceData: performanceData }, { merge: true });
-                renderPerformanceItems(performanceData);
-                alert('تم حذف الشاهد');
+                console.error("Error updating rating:", error);
+                showNotification("خطأ في تحديث التقييم", "error");
             }
         }
 
-        async function deleteImprovementPlan(itemToDelete) {
-            if(!confirm("هل أنت متأكد من حذف خطة التحسين هذه؟")) return;
-            await updateDoc(doc(db, "profiles", userId), { "improvements": arrayRemove(itemToDelete) });
-            const docSnap = await getDoc(doc(db, "profiles", userId));
-            renderImprovementPlans(docSnap.data().improvements);
-            alert('تم حذف الخطة');
+        async function saveNote() {
+            if (!currentNoteItemId) return;
+            const note = document.getElementById('noteText').value;
+            try {
+                const perfDocRef = doc(db, `artifacts/${appId}/users/${userId}/performanceData`, currentNoteItemId);
+                await setDoc(perfDocRef, { note: note }, { merge: true });
+                showNotification("تم حفظ الملاحظة بنجاح", "success");
+                document.getElementById('noteModal').style.display = 'none';
+                currentNoteItemId = null;
+            } catch (error) {
+                console.error("Error saving note:", error);
+                showNotification("خطأ في حفظ الملاحظة", "error");
+            }
+        }
+
+        function handlePerformanceFileUpload(file, performanceId) {
+            const reader = new FileReader();
+            reader.onload = async function(event) {
+                const fileData = {
+                    name: file.name,
+                    type: file.type,
+                    url: event.target.result // base64
+                };
+                 try {
+                    const perfDocRef = doc(db, `artifacts/${appId}/users/${userId}/performanceData`, performanceId);
+                    // To add to an array, we need to read first, then write.
+                    const docSnap = await getDoc(perfDocRef);
+                    const existingFiles = docSnap.exists() && docSnap.data().files ? docSnap.data().files : [];
+                    if (existingFiles.length >= 4) {
+                        showNotification('لقد وصلت للحد الأقصى من الملفات (4 ملفات)', 'error');
+                        return;
+                    }
+                    existingFiles.push(fileData);
+                    await setDoc(perfDocRef, { files: existingFiles }, { merge: true });
+                    showNotification("تم رفع الشاهد بنجاح", "success");
+                } catch (error) {
+                    console.error("Error uploading performance file:", error);
+                    showNotification("خطأ في رفع الملف", "error");
+                }
+            };
+            reader.readAsDataURL(file);
+        }
+
+        async function deletePerformanceFile(performanceId, fileUrl) {
+            showConfirmModal("هل أنت متأكد من حذف هذا الشاهد؟", async () => {
+                try {
+                    const perfDocRef = doc(db, `artifacts/${appId}/users/${userId}/performanceData`, performanceId);
+                    const docSnap = await getDoc(perfDocRef);
+                    if (docSnap.exists()) {
+                        const existingFiles = docSnap.data().files || [];
+                        const updatedFiles = existingFiles.filter(f => f.url !== fileUrl);
+                        await updateDoc(perfDocRef, { files: updatedFiles });
+                        showNotification("تم حذف الشاهد بنجاح", "success");
+                    }
+                } catch (error) {
+                    console.error("Error deleting performance file:", error);
+                    showNotification("خطأ في حذف الملف", "error");
+                }
+            });
+        }
+
+        // --- UI Rendering Functions (Read from DB, Write to UI) ---
+
+        function updateHeaderInfo(basicInfo = {}) {
+            document.getElementById('teacherName').textContent = 'اسم المعلم: ' + (basicInfo.teacherName || '-');
+            document.getElementById('educationDept').textContent = 'الإدارة التعليمية: ' + (basicInfo.educationDept || '-');
+            document.getElementById('schoolName').textContent = 'المدرسة: ' + (basicInfo.schoolName || '-');
+            document.getElementById('academicYear').textContent = 'العام الدراسي: ' + (basicInfo.academicYear || '-');
+            
+            document.getElementById('teacherNameInput').value = basicInfo.teacherName || '';
+            document.getElementById('educationDeptInput').value = basicInfo.educationDept || '';
+            document.getElementById('schoolNameInput').value = basicInfo.schoolName || '';
+            document.getElementById('academicYearInput').value = basicInfo.academicYear || '';
+        }
+
+        function updateCvInputs(cvInfo = {}) {
+            document.getElementById('fullNameInput').value = cvInfo.fullName || '';
+            document.getElementById('specialtyInput').value = cvInfo.specialty || '';
+            document.getElementById('qualificationInput').value = cvInfo.qualification || '';
+            document.getElementById('yearsOfExperienceInput').value = cvInfo.yearsOfExperience || '';
+        }
+
+        function updateLicensePreview(licenseImage) {
+            const licensePreview = document.getElementById('licensePreview');
+            if (licenseImage) {
+                licensePreview.innerHTML = `<img src="${licenseImage}" alt="الرخصة المهنية">`;
+            } else {
+                licensePreview.innerHTML = '<div class="certificate-placeholder">+</div>';
+            }
         }
         
-        // --- UTILITY FUNCTIONS ---
+        function updateDocumentationInputs(docData = {}) {
+            const firstFollowup = docData.firstFollowup || {};
+            document.getElementById('firstFollowupDate').value = firstFollowup.date || '';
+            document.getElementById('firstFollowupName').value = firstFollowup.name || '';
+            document.getElementById('firstFollowupNotes').value = firstFollowup.notes || '';
+
+            const secondFollowup = docData.secondFollowup || {};
+            document.getElementById('secondFollowupDate').value = secondFollowup.date || '';
+            document.getElementById('secondFollowupName').value = secondFollowup.name || '';
+            document.getElementById('secondFollowupNotes').value = secondFollowup.notes || '';
+            
+            document.getElementById('recommendations').value = docData.recommendations || '';
+        }
+        
+        function renderCertificates(certificates = []) {
+            const container = document.getElementById('certificatesContainer');
+            container.innerHTML = ''; // Clear
+            
+            certificates.forEach(cert => {
+                const certItem = document.createElement('div');
+                certItem.className = 'certificate-item';
+                certItem.innerHTML = `<img src="${cert.url}" alt="شهادة">`;
+                certItem.addEventListener('click', () => {
+                    document.getElementById('previewImage').src = cert.url;
+                    document.getElementById('imagePreviewModal').style.display = 'block';
+                });
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'delete-btn';
+                deleteBtn.style.position = 'absolute';
+                deleteBtn.style.top = '5px';
+                deleteBtn.style.right = '5px';
+                deleteBtn.innerHTML = '&times;';
+                deleteBtn.onclick = (e) => { e.stopPropagation(); deleteCertificate(cert.id); };
+                certItem.appendChild(deleteBtn);
+                container.appendChild(certItem);
+            });
+
+            if (certificates.length < 8) {
+                const addItem = document.createElement('div');
+                addItem.className = 'certificate-item certificate-add';
+                addItem.innerHTML = '<div class="certificate-placeholder">+</div>';
+                addItem.onclick = () => document.getElementById('certificateUpload').click();
+                container.appendChild(addItem);
+            }
+        }
+
+        function renderCourses(courses = []) {
+            const list = document.getElementById('coursesList');
+            list.innerHTML = '';
+            courses.forEach(course => {
+                const item = document.createElement('div');
+                item.className = 'course-item';
+                item.innerHTML = `
+                    <div>
+                        <strong>${course.name}</strong>
+                        <p>الجهة: ${course.provider} | التاريخ: ${formatDate(course.date)} | عدد الساعات: ${course.hours}</p>
+                    </div>
+                    <button class="delete-btn" data-id="${course.id}">حذف</button>
+                `;
+                item.querySelector('.delete-btn').onclick = () => deleteCourse(course.id);
+                list.appendChild(item);
+            });
+        }
+        
+        function renderImprovementPlans(improvements = []) {
+            const list = document.getElementById('improvementList');
+            list.innerHTML = '';
+            improvements.forEach(plan => {
+                const priorityClass = plan.priority === 'عالية' ? 'priority-high' : plan.priority === 'متوسطة' ? 'priority-medium' : 'priority-low';
+                const item = document.createElement('div');
+                item.className = 'improvement-item';
+                item.innerHTML = `
+                    <h4>${plan.area}</h4>
+                    <p><strong>الأولوية:</strong> <span class="${priorityClass}">${plan.priority}</span></p>
+                    <p><strong>الهدف:</strong> ${plan.goal}</p>
+                    <p><strong>الإجراءات المقترحة:</strong> ${plan.actions}</p>
+                    <p><strong>الفترة الزمنية:</strong> ${formatDate(plan.startDate)} إلى ${formatDate(plan.endDate)}</p>
+                    <button class="delete-btn" data-id="${plan.id}">حذف</button>
+                `;
+                item.querySelector('.delete-btn').onclick = () => deleteImprovement(plan.id);
+                list.appendChild(item);
+            });
+        }
+        
+        // This renders the static structure of performance items
+        function renderPerformanceItems() {
+            const container = document.getElementById('performanceItems');
+            container.innerHTML = '';
+            performanceIndicators.forEach(indicator => {
+                const itemElement = document.createElement('div');
+                itemElement.className = 'performance-item';
+                itemElement.id = indicator.id;
+                itemElement.innerHTML = `
+                    <div class="performance-header">
+                        <h3 class="performance-title">${indicator.title} (${indicator.weight}%)</h3>
+                        <button class="note-btn" data-id="${indicator.id}">
+                            <i class="fas fa-sticky-note note-icon"></i>
+                        </button>
+                    </div>
+                    <p class="performance-description">${indicator.description}</p>
+                    <div class="performance-uploads">
+                        <label>الشواهد (الحد الأقصى 4 ملفات)</label>
+                        <div class="upload-container" id="uploads_${indicator.id}">
+                            <div class="upload-item upload-add" data-id="${indicator.id}">
+                                <div class="upload-placeholder">+</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="performance-rating">
+                        <label>التقييم الذاتي</label>
+                        <div class="rating-container">
+                            <span class="rating-value">0</span>
+                            <div class="rating-slider-container">
+                                <input type="range" min="0" max="5" step="1" value="0" class="rating-slider" data-id="${indicator.id}">
+                                <div class="rating-numbers">
+                                    ${[0,1,2,3,4,5].map(n => `<span class="rating-number ${n === 0 ? 'active' : ''}" data-value="${n}">${n}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="performance-note">
+                        <label>الملاحظات</label>
+                        <textarea readonly placeholder="افتح الملاحظات للتعديل"></textarea>
+                    </div>`;
+                container.appendChild(itemElement);
+            });
+            addPerformanceEventListeners();
+        }
+
+        // This updates the dynamic parts of performance items with data
+        function updatePerformanceUI(performanceData = []) {
+            performanceIndicators.forEach(indicator => {
+                const data = performanceData.find(item => item.id === indicator.id) || {};
+                const itemElement = document.getElementById(indicator.id);
+                if (!itemElement) return;
+
+                // Update rating
+                const rating = data.rating || 0;
+                itemElement.querySelector('.rating-value').textContent = rating;
+                itemElement.querySelector('.rating-slider').value = rating;
+                itemElement.querySelectorAll('.rating-number').forEach(num => {
+                    num.classList.toggle('active', parseInt(num.dataset.value) === rating);
+                });
+
+                // Update note
+                const noteTextarea = itemElement.querySelector('.performance-note textarea');
+                noteTextarea.value = data.note || '';
+                itemElement.querySelector('.performance-note').style.display = data.note ? 'block' : 'none';
+
+                // Update files
+                const uploadContainer = itemElement.querySelector('.upload-container');
+                // Clear previous files except the add button
+                uploadContainer.querySelectorAll('.upload-item:not(.upload-add)').forEach(el => el.remove());
+                const files = data.files || [];
+                files.forEach(file => {
+                    const fileElement = createFileElement(file, indicator.id);
+                    uploadContainer.insertBefore(fileElement, uploadContainer.lastChild);
+                });
+            });
+            calculateTotalScore(performanceData);
+        }
+        
+        function createFileElement(file, performanceId) {
+            const fileElement = document.createElement('div');
+            fileElement.className = 'upload-item';
+            
+            if (file.type && file.type.startsWith('image/')) {
+                fileElement.innerHTML = `<img src="${file.url}" alt="شاهد">`;
+                fileElement.onclick = () => {
+                    document.getElementById('previewImage').src = file.url;
+                    document.getElementById('imagePreviewModal').style.display = 'block';
+                };
+            } else {
+                fileElement.innerHTML = `<div class="upload-file-icon"><i class="fas fa-file-pdf"></i></div>`;
+                fileElement.onclick = () => window.open(file.url, '_blank');
+            }
+            
+            const deleteBtn = document.createElement('button');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.style.position = 'absolute';
+            deleteBtn.style.top = '5px';
+            deleteBtn.style.right = '5px';
+            deleteBtn.innerHTML = '&times;';
+            deleteBtn.onclick = (e) => { e.stopPropagation(); deletePerformanceFile(performanceId, file.url); };
+            fileElement.appendChild(deleteBtn);
+            return fileElement;
+        }
+
+        function addPerformanceEventListeners() {
+            document.querySelectorAll('.note-btn').forEach(btn => {
+                btn.onclick = () => {
+                    currentNoteItemId = btn.dataset.id;
+                    const itemData = document.getElementById(currentNoteItemId);
+                    const note = itemData.querySelector('.performance-note textarea').value;
+                    document.getElementById('noteText').value = note;
+                    document.getElementById('noteModal').style.display = 'block';
+                };
+            });
+
+            document.querySelectorAll('.rating-slider').forEach(slider => {
+                slider.oninput = () => {
+                    const value = parseInt(slider.value);
+                    const container = slider.closest('.performance-rating');
+                    container.querySelector('.rating-value').textContent = value;
+                    container.querySelectorAll('.rating-number').forEach(num => {
+                        num.classList.toggle('active', parseInt(num.dataset.value) === value);
+                    });
+                    updatePerformanceRating(slider.dataset.id, value);
+                };
+            });
+            
+            document.querySelectorAll('.rating-number').forEach(number => {
+                number.onclick = () => {
+                    const value = parseInt(number.dataset.value);
+                    const container = number.closest('.performance-rating');
+                    container.querySelector('.rating-slider').value = value;
+                    container.querySelector('.rating-value').textContent = value;
+                    container.querySelectorAll('.rating-number').forEach(num => num.classList.remove('active'));
+                    number.classList.add('active');
+                    updatePerformanceRating(container.querySelector('.rating-slider').dataset.id, value);
+                };
+            });
+
+            document.querySelectorAll('.upload-add').forEach(btn => {
+                btn.onclick = () => {
+                    const performanceId = btn.dataset.id;
+                    const fileInput = document.createElement('input');
+                    fileInput.type = 'file';
+                    fileInput.accept = 'image/*,application/pdf';
+                    fileInput.style.display = 'none';
+                    fileInput.onchange = (e) => {
+                        const file = e.target.files[0];
+                        if (file) handlePerformanceFileUpload(file, performanceId);
+                        document.body.removeChild(fileInput);
+                    };
+                    document.body.appendChild(fileInput);
+                    fileInput.click();
+                };
+            });
+        }
+        
+        // --- Helper & Utility Functions ---
+        
         function calculateTotalScore(performanceData = []) {
             let totalWeightedScore = 0;
             let totalWeight = 0;
@@ -1847,7 +2405,7 @@
             
             performanceIndicators.forEach(indicator => {
                 const data = performanceData.find(item => item.id === indicator.id);
-                const rating = data ? data.rating : 0;
+                const rating = data ? data.rating || 0 : 0;
                 const weightedScore = (rating / 5) * indicator.weight;
                 
                 totalWeightedScore += weightedScore;
@@ -1856,22 +2414,36 @@
                 detailsHTML += `<p>${indicator.title}: <span>${rating} من 5</span> <span>(${weightedScore.toFixed(1)}%)</span></p>`;
             });
             
-            const finalScore = totalWeight > 0 ? (totalWeightedScore / totalWeight) * 100 : 0;
+            const finalScore = totalWeight > 0 ? totalWeightedScore : 0; // The score is already a percentage of 100
             
             document.getElementById('totalScore').textContent = `${finalScore.toFixed(1)}%`;
             document.getElementById('scoreDetails').innerHTML = detailsHTML;
         }
-        
-        function showImagePreview(url) {
-            document.getElementById('previewImage').src = url;
-            document.getElementById('imagePreviewModal').style.display = 'block';
+
+        function showNotification(message, type = "success") {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${type} show`;
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        function showConfirmModal(text, callback) {
+            document.getElementById('confirmText').textContent = text;
+            confirmCallback = callback;
+            document.getElementById('confirmModal').style.display = 'block';
         }
 
         function formatDate(dateString) {
             if (!dateString) return '';
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            return new Date(dateString).toLocaleDateString('ar-SA', options);
+            // Add a day to the date to fix potential timezone issues with input[type=date]
+            const date = new Date(dateString);
+            date.setDate(date.getDate() + 1);
+            return date.toLocaleDateString('ar-SA', options);
         }
+
     </script>
 </body>
 </html>
