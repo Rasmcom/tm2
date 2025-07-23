@@ -25,7 +25,6 @@
             margin: 0 auto;
             padding: 0 15px;
         }
-        /* Header Styles */
         header {
             background-color: #2F3246;
             padding: 15px 0;
@@ -79,7 +78,6 @@
             text-align: left;
             font-size: 14px;
         }
-        /* Sidebar Menu - Redesigned for more professional look */
         .menu-toggle {
             background: transparent;
             border: none;
@@ -108,7 +106,7 @@
             background-color: #ffffff;
             z-index: 1000;
             transition: all 0.3s ease-in-out;
-            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: -2px 0 10px rgba(0,0,0,0.1);
             overflow-y: auto;
             padding-top: 70px;
         }
@@ -118,7 +116,7 @@
         .sidebar-header {
             padding: 20px;
             text-align: center;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
             margin-bottom: 20px;
         }
         .sidebar-header h3 {
@@ -172,7 +170,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0,0,0,0.5);
             z-index: 999;
             display: none;
             transition: all 0.3s ease;
@@ -180,7 +178,6 @@
         .overlay.active {
             display: block;
         }
-        /* Tab Content */
         .tab-content {
             display: none;
             padding: 30px 0;
@@ -193,7 +190,6 @@
             from { opacity: 0; }
             to { opacity: 1; }
         }
-        /* Form Styles */
         .form-group {
             margin-bottom: 20px;
         }
@@ -222,7 +218,6 @@
         .btn:hover {
             background-color: #0b7dda;
         }
-        /* Cards */
         .card {
             background-color: white;
             border-radius: 8px;
@@ -238,7 +233,6 @@
             border-bottom: 2px solid #f1f1f1;
             padding-bottom: 10px;
         }
-        /* Leaders Section */
         .leaders-container {
             display: flex;
             flex-wrap: wrap;
@@ -255,9 +249,6 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
             border: 1px solid #eee;
-        }
-        .leader-card:hover {
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         .leader-img {
             width: 150px;
@@ -301,14 +292,6 @@
             border: 1px solid #eee;
             text-align: justify;
         }
-        .leader-card .leader-quote {
-            transition: all 0.3s ease;
-        }
-        .leader-card:hover .leader-quote {
-            background-color: #f0f8ff;
-            border-color: #2196F3;
-        }
-        /* CV Section */
         .certificates-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -326,10 +309,6 @@
             justify-content: center;
             transition: all 0.3s ease;
             background-color: #f9f9f9;
-        }
-        .certificate-item:hover {
-            border-color: #2196F3;
-            background-color: #f0f8ff;
         }
         .certificate-item img {
             max-width: 100%;
@@ -357,10 +336,6 @@
             opacity: 0;
             cursor: pointer;
         }
-        .certificate-item.uploading {
-            border-color: #2196F3;
-            background-color: #e3f2fd;
-        }
         .training-courses {
             margin-top: 20px;
         }
@@ -376,41 +351,6 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-        .course-item:hover {
-            background-color: #f0f8ff;
-            border-color: #2196F3;
-        }
-        .course-item input {
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-family: 'Cairo', sans-serif;
-        }
-        .course-item .course-name {
-            flex: 2;
-            min-width: 200px;
-        }
-        .course-item .course-date {
-            flex: 1;
-            min-width: 150px;
-        }
-        .course-item .course-hours {
-            flex: 0.5;
-            min-width: 100px;
-        }
-        .course-item button {
-            background-color: #f44336;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 8px 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        .course-item button:hover {
-            background-color: #d32f2f;
-            transform: scale(1.05);
-        }
         .add-course-btn {
             background-color: #4CAF50;
             color: white;
@@ -425,19 +365,6 @@
             align-items: center;
             gap: 8px;
             width: fit-content;
-        }
-        .add-course-btn:hover {
-            background-color: #388e3c;
-            transform: translateY(-2px);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-        }
-        .add-course-btn i {
-            font-size: 14px;
-        }
-        /* Introduction page styles */
-        .intro-content {
-            padding: 10px 0;
-            line-height: 1.8;
         }
         .intro-content p {
             margin-bottom: 15px;
@@ -467,15 +394,11 @@
             margin-top: 10px;
             transition: all 0.3s ease;
         }
-        .edit-btn:hover {
-            background-color: #e0e0e0;
-        }
         .btn-secondary {
             background-color: #f1f1f1;
             color: #333;
             margin-right: 10px;
         }
-        /* Performance Indicators */
         .performance-item {
             margin-bottom: 30px;
             border-radius: 8px;
@@ -509,10 +432,6 @@
             border-radius: 20px;
             font-size: 14px;
         }
-        .performance-description {
-            margin-bottom: 15px;
-            color: #555;
-        }
         .evidence-container {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
@@ -531,12 +450,6 @@
             transition: all 0.3s ease;
             background-color: rgba(255, 255, 255, 0.7);
         }
-        .evidence-item:hover {
-            border-color: #2196F3;
-            background-color: rgba(255, 255, 255, 0.9);
-            transform: translateY(-2px);
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-        }
         .evidence-item img {
             max-width: 100%;
             max-height: 100%;
@@ -550,15 +463,6 @@
             text-align: center;
             padding: 10px;
         }
-        .evidence-item .upload-icon i {
-            font-size: 28px;
-            margin-bottom: 8px;
-            color: #2196F3;
-        }
-        .evidence-item .upload-icon p {
-            margin: 0;
-            font-size: 14px;
-        }
         .evidence-item input[type="file"] {
             position: absolute;
             top: 0;
@@ -567,13 +471,6 @@
             height: 100%;
             opacity: 0;
             cursor: pointer;
-        }
-        .evidence-item.uploading {
-            border-color: #2196F3;
-            background-color: rgba(33, 150, 243, 0.1);
-        }
-        .note-container {
-            margin-bottom: 15px;
         }
         .note-container textarea {
             width: 100%;
@@ -588,9 +485,6 @@
             display: flex;
             align-items: center;
             gap: 10px;
-        }
-        .rating-label {
-            min-width: 80px;
         }
         .rating-slider {
             flex: 1;
@@ -608,12 +502,6 @@
             margin-top: 30px;
             text-align: center;
         }
-        .result-title {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: #2196F3;
-        }
         .result-score {
             font-size: 36px;
             font-weight: 700;
@@ -623,18 +511,11 @@
         .result-description {
             color: #555;
         }
-        /* Follow-up Section */
         .follow-up-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
         }
-        @media (max-width: 768px) {
-            .follow-up-container {
-                grid-template-columns: 1fr;
-            }
-        }
-        /* Improvement Plan */
         .improvement-form {
             margin-bottom: 20px;
         }
@@ -646,14 +527,6 @@
             padding: 15px;
             border-radius: 5px;
             margin-bottom: 10px;
-        }
-        .improvement-item-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-        .improvement-area {
-            font-weight: 700;
         }
         .improvement-priority {
             padding: 3px 8px;
@@ -670,7 +543,6 @@
         .priority-low {
             background-color: #4CAF50;
         }
-        /* Modal Styles */
         .modal {
             display: none;
             position: fixed;
@@ -712,7 +584,6 @@
             color: #2196F3;
             text-align: center;
         }
-        /* Image Preview Modal */
         .preview-modal {
             display: none;
             position: fixed;
@@ -737,11 +608,6 @@
             border: 5px solid white;
             border-radius: 5px;
         }
-        .preview-content iframe {
-            width: 90vw;
-            height: 90vh;
-            border: none;
-        }
         .close-preview {
             position: absolute;
             top: -40px;
@@ -750,7 +616,6 @@
             color: white;
             cursor: pointer;
         }
-        /* Footer */
         footer {
             background-color: #444;
             color: white;
@@ -774,7 +639,6 @@
         .footer-text a:hover {
             text-decoration: underline;
         }
-        /* Responsive Styles */
         @media (max-width: 768px) {
             .header-content {
                 flex-direction: column;
@@ -805,19 +669,12 @@
                 margin-top: 10px;
             }
         }
-        /* Main content transition when sidebar opens */
         .main-content {
             transition: margin-right 0.3s ease-in-out;
         }
         .main-content.shifted {
             margin-right: 280px;
         }
-        @media (max-width: 768px) {
-            .main-content.shifted {
-                margin-right: 0;
-            }
-        }
-        /* Header layout adjustments */
         .header-left-section {
             display: flex;
             align-items: center;
@@ -827,7 +684,6 @@
             align-items: center;
             gap: 15px;
         }
-        /* Toast notification */
         .toast {
             position: fixed;
             bottom: 20px;
@@ -855,33 +711,20 @@
     <!-- Firebase SDK -->
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js ";
-      import {
-        getDatabase,
-        ref,
-        set,
-        get
-      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js ";
+      import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js ";
 
-      // تهيئة Firebase
+      // ⚠️ عدّل هذه البيانات ببيانات مشروعك من Firebase Console
       const firebaseConfig = {
-        apiKey: "AIzaSyB8XtKk0oJ5v6q6Q5q1w0u5v6q6Q5q1w0u", // ⚠️ عدّلها
+        apiKey: "AIzaSyD1234567890", // ⚠️ ضروري
         authDomain: "testm2-6ffa1.firebaseapp.com",
-        databaseURL: "https://testm2-6ffa1-default-rtdb.firebaseio.com ",
         projectId: "testm2-6ffa1",
         storageBucket: "testm2-6ffa1.appspot.com",
-        messagingSenderId: "123456789012", // ⚠️ عدّلها
-        appId: "1:123456789012:web:abcdef1234567890abcdef" // ⚠️ عدّلها
+        messagingSenderId: "1234567890",
+        appId: "1:1234567890:web:abcdef123456"
       };
 
-      // تهيئة Firebase
       const app = initializeApp(firebaseConfig);
-      const db = getDatabase(app);
-
-      // جعل قاعدة البيانات متاحة
-      window.firebaseDB = db;
-      window.firebaseRef = ref;
-      window.firebaseSet = set;
-      window.firebaseGet = get;
+      const db = getFirestore(app);
 
       // معرف المستخدم
       window.userId = localStorage.getItem('userId') || 'user_' + Date.now();
@@ -889,25 +732,24 @@
         localStorage.setItem('userId', window.userId);
       }
 
-      // دالة لحفظ البيانات
-      window.saveToFirebase = function(key, data) {
-        if (!window.firebaseDB) return;
-        const userId = window.userId;
-        set(ref(db, `users/${userId}/${key}`), data)
-          .then(() => console.log(`${key} تم حفظها`))
-          .catch(err => console.error("خطأ:", err));
+      // دالة لحفظ البيانات في Firestore
+      window.saveToFirestore = async function(collection, data) {
+        try {
+          await setDoc(doc(db, collection, window.userId), data);
+          console.log(`${collection} تم حفظها في Firestore`);
+        } catch (e) {
+          console.error("خطأ في الحفظ:", e);
+        }
       };
 
-      // دالة لتحميل البيانات
-      window.loadFromFirebase = async function(key, defaultValue = null) {
-        if (!window.firebaseDB) return defaultValue;
-        const userId = window.userId;
-        const dataRef = ref(db, `users/${userId}/${key}`);
+      // دالة لتحميل البيانات من Firestore
+      window.loadFromFirestore = async function(collection, defaultValue = null) {
         try {
-          const snapshot = await get(dataRef);
-          return snapshot.exists() ? snapshot.val() : defaultValue;
-        } catch (err) {
-          console.error(`خطأ في تحميل ${key}:`, err);
+          const docRef = doc(db, collection, window.userId);
+          const docSnap = await getDoc(docRef);
+          return docSnap.exists() ? docSnap.data() : defaultValue;
+        } catch (e) {
+          console.error("خطأ في التحميل:", e);
           return defaultValue;
         }
       };
@@ -963,11 +805,8 @@
             </li>
         </ul>
     </div>
-    <!-- Overlay -->
     <div class="overlay" id="overlay"></div>
-    <!-- Main Content -->
     <div class="main-content" id="mainContent">
-        <!-- Header -->
         <header>
             <div class="container">
                 <div class="header-content">
@@ -1336,8 +1175,7 @@
     <!-- Toast Notification -->
     <div class="toast" id="toast"></div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- نفس الكود الأصلي مع استبدال localStorage ---
+        document.addEventListener('DOMContentLoaded', async function() {
             const menuToggle = document.getElementById('menuToggle');
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('overlay');
@@ -1473,7 +1311,7 @@
             const closeUpdateModal = document.getElementById('closeUpdateModal');
             const saveModalData = document.getElementById('saveModalData');
             updateDataBtn.addEventListener('click', async function() {
-                const teacherData = await loadFromFirebase('teacherData', {});
+                const teacherData = await loadFromFirestore('teacherData', {});
                 document.getElementById('modalTeacherName').value = teacherData.name || '';
                 document.getElementById('modalEducationDept').value = teacherData.department || '';
                 document.getElementById('modalSchoolName').value = teacherData.school || '';
@@ -1490,7 +1328,7 @@
                     school: document.getElementById('modalSchoolName').value,
                     year: document.getElementById('modalAcademicYear').value
                 };
-                saveToFirebase('teacherData', teacherData);
+                await saveToFirestore('teacherData', teacherData);
                 updateTeacherInfo(teacherData);
                 updateDataModal.style.display = 'none';
                 document.getElementById('teacherName').value = teacherData.name;
@@ -1507,7 +1345,7 @@
                     school: document.getElementById('schoolName').value,
                     year: document.getElementById('academicYear').value
                 };
-                saveToFirebase('teacherData', teacherData);
+                await saveToFirestore('teacherData', teacherData);
                 updateTeacherInfo(teacherData);
                 showToast('تم حفظ البيانات بنجاح!');
             });
@@ -1530,25 +1368,27 @@
                     teacherInfoHeader.innerHTML = '<p>لم يتم إدخال البيانات بعد</p>';
                 }
             }
-            loadFromFirebase('teacherData', {}).then(teacherData => {
-                updateTeacherInfo(teacherData);
-                document.getElementById('teacherName').value = teacherData.name || '';
-                document.getElementById('educationDept').value = teacherData.department || '';
-                document.getElementById('schoolName').value = teacherData.school || '';
-                document.getElementById('academicYear').value = teacherData.year || '';
-            });
-            window.editContent = function(contentId) {
+            const teacherData = await loadFromFirestore('teacherData', {});
+            updateTeacherInfo(teacherData);
+            document.getElementById('teacherName').value = teacherData.name || '';
+            document.getElementById('educationDept').value = teacherData.department || '';
+            document.getElementById('schoolName').value = teacherData.school || '';
+            document.getElementById('academicYear').value = teacherData.year || '';
+
+            window.editContent = async function(contentId) {
+                const introData = await loadFromFirestore('introductionData', {});
                 document.getElementById(contentId + 'Form').style.display = 'block';
                 document.getElementById(contentId + 'Form').previousElementSibling.style.display = 'none';
+                document.getElementById(contentId).value = introData[contentId] || '';
             };
             window.saveContent = async function(contentId) {
                 const textarea = document.getElementById(contentId);
                 const content = textarea.value;
                 const form = document.getElementById(contentId + 'Form');
                 const contentElement = form.previousElementSibling;
-                const introData = await loadFromFirebase('introductionData', {});
+                const introData = await loadFromFirestore('introductionData', {});
                 introData[contentId] = content;
-                saveToFirebase('introductionData', introData);
+                await saveToFirestore('introductionData', introData);
                 if (contentId === 'values') {
                     const valuesList = document.querySelector('.values-list');
                     valuesList.innerHTML = '';
@@ -1590,25 +1430,24 @@
                 document.getElementById(contentId + 'Form').style.display = 'none';
                 document.getElementById(contentId + 'Form').previousElementSibling.style.display = 'block';
             };
-            loadFromFirebase('introductionData', {}).then(data => {
-                if (data.generalIntro) document.getElementById('generalIntro').value = data.generalIntro;
-                if (data.vision) document.getElementById('vision').value = data.vision;
-                if (data.mission) document.getElementById('mission').value = data.mission;
-                if (data.values) document.getElementById('values').value = data.values;
-            });
+            const introData = await loadFromFirestore('introductionData', {});
+            if (introData.generalIntro) document.getElementById('generalIntro').value = introData.generalIntro;
+            if (introData.vision) document.getElementById('vision').value = introData.vision;
+            if (introData.mission) document.getElementById('mission').value = introData.mission;
+            if (introData.values) document.getElementById('values').value = introData.values;
 
             ['kingImage', 'princeImage', 'ministerImage'].forEach(id => {
-                document.getElementById(id).addEventListener('click', function() {
+                document.getElementById(id).addEventListener('click', async function() {
                     const input = document.createElement('input');
                     input.type = 'file';
                     input.accept = 'image/*';
-                    input.onchange = function(e) {
+                    input.onchange = async function(e) {
                         const file = e.target.files[0];
                         if (file) {
                             const reader = new FileReader();
-                            reader.onload = function(e) {
+                            reader.onload = async function(e) {
                                 document.getElementById(id).src = e.target.result;
-                                saveToFirebase(id, e.target.result);
+                                await saveToFirestore(id, { data: e.target.result });
                             };
                             reader.readAsDataURL(file);
                         }
@@ -1616,12 +1455,13 @@
                     input.click();
                 });
             });
-            loadFromFirebase('kingImage').then(img => { if (img) document.getElementById('kingImage').src = img; });
-            loadFromFirebase('princeImage').then(img => { if (img) document.getElementById('princeImage').src = img; });
-            loadFromFirebase('ministerImage').then(img => { if (img) document.getElementById('ministerImage').src = img; });
+            for (const id of ['kingImage', 'princeImage', 'ministerImage']) {
+                const data = await loadFromFirestore(id, {});
+                if (data.data) document.getElementById(id).src = data.data;
+            }
 
             const saveCV = document.getElementById('saveCV');
-            saveCV.addEventListener('click', function() {
+            saveCV.addEventListener('click', async function() {
                 const cvData = {
                     fullName: document.getElementById('fullName').value,
                     specialization: document.getElementById('specialization').value,
@@ -1629,71 +1469,67 @@
                     graduationYear: document.getElementById('graduationYear').value,
                     yearsOfExperience: document.getElementById('yearsOfExperience').value
                 };
-                saveToFirebase('cvData', cvData);
+                await saveToFirestore('cvData', cvData);
                 showToast('تم حفظ المعلومات بنجاح!');
             });
-            loadFromFirebase('cvData', {}).then(cvData => {
-                document.getElementById('fullName').value = cvData.fullName || '';
-                document.getElementById('specialization').value = cvData.specialization || '';
-                document.getElementById('qualification').value = cvData.qualification || '';
-                document.getElementById('graduationYear').value = cvData.graduationYear || '';
-                document.getElementById('yearsOfExperience').value = cvData.yearsOfExperience || '';
-            });
+            const cvData = await loadFromFirestore('cvData', {});
+            document.getElementById('fullName').value = cvData.fullName || '';
+            document.getElementById('specialization').value = cvData.specialization || '';
+            document.getElementById('qualification').value = cvData.qualification || '';
+            document.getElementById('graduationYear').value = cvData.graduationYear || '';
+            document.getElementById('yearsOfExperience').value = cvData.yearsOfExperience || '';
 
-            document.getElementById('licenseUpload').addEventListener('change', function(e) {
+            document.getElementById('licenseUpload').addEventListener('change', async function(e) {
                 const file = e.target.files[0];
                 if (file) {
                     const reader = new FileReader();
-                    reader.onload = function(e) {
+                    reader.onload = async function(e) {
                         document.getElementById('licensePreview').src = e.target.result;
                         document.getElementById('licensePreview').style.display = 'block';
                         document.getElementById('licenseUploadIcon').style.display = 'none';
-                        saveToFirebase('licenseImage', e.target.result);
+                        await saveToFirestore('licenseImage', { data: e.target.result });
                     };
                     reader.readAsDataURL(file);
                 }
             });
-            loadFromFirebase('licenseImage').then(img => {
-                if (img) {
-                    document.getElementById('licensePreview').src = img;
-                    document.getElementById('licensePreview').style.display = 'block';
-                    document.getElementById('licenseUploadIcon').style.display = 'none';
-                }
-            });
+            const licenseData = await loadFromFirestore('licenseImage', {});
+            if (licenseData.data) {
+                document.getElementById('licensePreview').src = licenseData.data;
+                document.getElementById('licensePreview').style.display = 'block';
+                document.getElementById('licenseUploadIcon').style.display = 'none';
+            }
 
             document.querySelectorAll('.certificate-upload').forEach((upload, index) => {
-                upload.addEventListener('change', function(e) {
+                upload.addEventListener('change', async function(e) {
                     const file = e.target.files[0];
                     if (file) {
                         const reader = new FileReader();
-                        reader.onload = function(e) {
+                        reader.onload = async function(e) {
                             const preview = upload.previousElementSibling;
                             const icon = preview.previousElementSibling;
                             preview.src = e.target.result;
                             preview.style.display = 'block';
                             icon.style.display = 'none';
-                            loadFromFirebase('certificates', []).then(certificates => {
-                                certificates[index] = { type: 'image', data: e.target.result };
-                                saveToFirebase('certificates', certificates);
-                            });
+                            const certificates = await loadFromFirestore('certificates', []) || [];
+                            certificates[index] = { type: 'image', data: e.target.result };
+                            await saveToFirestore('certificates', certificates);
                         };
                         reader.readAsDataURL(file);
                     }
                 });
             });
-            loadFromFirebase('certificates', []).then(certificates => {
-                certificates.forEach((cert, index) => {
-                    if (!cert) return;
-                    const certificateItems = document.querySelectorAll('.certificate-item');
-                    if (index >= certificateItems.length) return;
-                    const preview = certificateItems[index].querySelector('.certificate-preview');
-                    const icon = certificateItems[index].querySelector('.upload-icon');
-                    if (cert.type === 'image') {
-                        preview.src = cert.data;
-                        preview.style.display = 'block';
-                        icon.style.display = 'none';
-                    }
-                });
+            const certificates = await loadFromFirestore('certificates', []);
+            certificates.forEach((cert, index) => {
+                if (!cert) return;
+                const certificateItems = document.querySelectorAll('.certificate-item');
+                if (index >= certificateItems.length) return;
+                const preview = certificateItems[index].querySelector('.certificate-preview');
+                const icon = certificateItems[index].querySelector('.upload-icon');
+                if (cert.type === 'image') {
+                    preview.src = cert.data;
+                    preview.style.display = 'block';
+                    icon.style.display = 'none';
+                }
             });
 
             const addCourseBtn = document.getElementById('addCourseBtn');
@@ -1719,7 +1555,7 @@
                 });
                 saveCourses();
             });
-            function saveCourses() {
+            async function saveCourses() {
                 const courses = [];
                 document.querySelectorAll('.course-item').forEach(item => {
                     courses.push({
@@ -1728,37 +1564,36 @@
                         hours: item.querySelector('.course-hours')?.value || ''
                     });
                 });
-                saveToFirebase('courses', courses);
+                await saveToFirestore('courses', courses);
             }
-            loadFromFirebase('courses', []).then(courses => {
-                courses.forEach(course => {
-                    const courseItem = document.createElement('div');
-                    courseItem.className = 'course-item';
-                    courseItem.innerHTML = `
-                        <input type="text" class="course-input course-name" value="${course.name || ''}" placeholder="اسم البرنامج">
-                        <input type="date" class="course-input course-date" value="${course.date || ''}" placeholder="تاريخ البرنامج">
-                        <input type="number" class="course-input course-hours" value="${course.hours || ''}" placeholder="عدد الساعات" min="1">
-                        <button class="remove-course-btn">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    `;
-                    trainingCourses.appendChild(courseItem);
-                    courseItem.querySelector('.remove-course-btn').addEventListener('click', function() {
-                        courseItem.remove();
-                        saveCourses();
-                    });
-                    courseItem.querySelectorAll('.course-input').forEach(input => {
-                        input.addEventListener('input', saveCourses);
-                    });
+            const courses = await loadFromFirestore('courses', []);
+            courses.forEach(course => {
+                const courseItem = document.createElement('div');
+                courseItem.className = 'course-item';
+                courseItem.innerHTML = `
+                    <input type="text" class="course-input course-name" value="${course.name || ''}" placeholder="اسم البرنامج">
+                    <input type="date" class="course-input course-date" value="${course.date || ''}" placeholder="تاريخ البرنامج">
+                    <input type="number" class="course-input course-hours" value="${course.hours || ''}" placeholder="عدد الساعات" min="1">
+                    <button class="remove-course-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                `;
+                trainingCourses.appendChild(courseItem);
+                courseItem.querySelector('.remove-course-btn').addEventListener('click', function() {
+                    courseItem.remove();
+                    saveCourses();
+                });
+                courseItem.querySelectorAll('.course-input').forEach(input => {
+                    input.addEventListener('input', saveCourses);
                 });
             });
 
             document.querySelectorAll('.evidence-upload').forEach((upload, index) => {
-                upload.addEventListener('change', function(e) {
+                upload.addEventListener('change', async function(e) {
                     const file = e.target.files[0];
                     if (file) {
                         const reader = new FileReader();
-                        reader.onload = function(e) {
+                        reader.onload = async function(e) {
                             const preview = upload.previousElementSibling;
                             const icon = preview.previousElementSibling;
                             preview.src = e.target.result;
@@ -1768,7 +1603,7 @@
                             const performanceId = performanceItem.dataset.id;
                             const evidenceItems = performanceItem.querySelectorAll('.evidence-item');
                             const evidenceIndex = Array.from(evidenceItems).findIndex(item => item.contains(upload));
-                            saveToFirebase(`evidence_${performanceId}_${evidenceIndex}`, e.target.result);
+                            await saveToFirestore(`evidence_${performanceId}_${evidenceIndex}`, { data: e.target.result });
                         };
                         reader.readAsDataURL(file);
                     }
@@ -1776,99 +1611,93 @@
             });
             for (let i = 1; i <= 11; i++) {
                 for (let j = 0; j < 4; j++) {
-                    loadFromFirebase(`evidence_${i}_${j}`).then(img => {
-                        if (img) {
-                            const item = document.querySelector(`.performance-item[data-id="${i}"] .evidence-item:nth-child(${j+1})`);
-                            if (item) {
-                                const preview = item.querySelector('.evidence-preview');
-                                const icon = item.querySelector('.upload-icon');
-                                preview.src = img;
-                                preview.style.display = 'block';
-                                icon.style.display = 'none';
-                            }
+                    const data = await loadFromFirestore(`evidence_${i}_${j}`, {});
+                    if (data.data) {
+                        const item = document.querySelector(`.performance-item[data-id="${i}"] .evidence-item:nth-child(${j+1})`);
+                        if (item) {
+                            const preview = item.querySelector('.evidence-preview');
+                            const icon = item.querySelector('.upload-icon');
+                            preview.src = data.data;
+                            preview.style.display = 'block';
+                            icon.style.display = 'none';
                         }
-                    });
+                    }
                 }
             }
 
             document.querySelectorAll('.performance-note').forEach(note => {
-                note.addEventListener('input', function() {
+                note.addEventListener('input', async function() {
                     const performanceId = this.dataset.id;
-                    loadFromFirebase('performanceNotes', {}).then(notes => {
-                        notes[performanceId] = this.value;
-                        saveToFirebase('performanceNotes', notes);
-                    });
+                    const notes = await loadFromFirestore('performanceNotes', {}) || {};
+                    notes[performanceId] = this.value;
+                    await saveToFirestore('performanceNotes', notes);
                 });
             });
-            loadFromFirebase('performanceNotes', {}).then(notes => {
-                Object.keys(notes).forEach(id => {
-                    const noteTextarea = document.querySelector(`.performance-note[data-id="${id}"]`);
-                    if (noteTextarea) noteTextarea.value = notes[id];
-                });
+            const notes = await loadFromFirestore('performanceNotes', {});
+            Object.keys(notes).forEach(id => {
+                const noteTextarea = document.querySelector(`.performance-note[data-id="${id}"]`);
+                if (noteTextarea) noteTextarea.value = notes[id];
             });
 
             document.querySelectorAll('.rating-slider').forEach(slider => {
-                slider.addEventListener('input', function() {
+                slider.addEventListener('input', async function() {
                     const value = this.value;
                     this.nextElementSibling.textContent = value;
-                    loadFromFirebase('performanceRatings', {}).then(ratings => {
-                        ratings[this.dataset.id] = value;
-                        saveToFirebase('performanceRatings', ratings);
-                        updateTotalScore();
-                    });
+                    const ratings = await loadFromFirestore('performanceRatings', {}) || {};
+                    ratings[this.dataset.id] = value;
+                    await saveToFirestore('performanceRatings', ratings);
+                    updateTotalScore();
                 });
             });
-            loadFromFirebase('performanceRatings', {}).then(ratings => {
-                Object.keys(ratings).forEach(id => {
-                    const slider = document.querySelector(`.rating-slider[data-id="${id}"]`);
-                    if (slider) {
-                        slider.value = ratings[id];
-                        slider.nextElementSibling.textContent = ratings[id];
-                    }
-                });
-                updateTotalScore();
+            const ratings = await loadFromFirestore('performanceRatings', {});
+            Object.keys(ratings).forEach(id => {
+                const slider = document.querySelector(`.rating-slider[data-id="${id}"]`);
+                if (slider) {
+                    slider.value = ratings[id];
+                    slider.nextElementSibling.textContent = ratings[id];
+                }
             });
+            updateTotalScore();
 
-            function updateTotalScore() {
-                loadFromFirebase('performanceRatings', {}).then(ratings => {
-                    let totalScore = 0;
-                    let totalWeight = 0;
-                    let ratedItemsCount = 0;
-                    document.querySelectorAll('.performance-item').forEach(item => {
-                        const id = item.dataset.id;
-                        const weight = parseInt(item.dataset.weight);
-                        const rating = ratings[id] ? parseInt(ratings[id]) : 0;
-                        if (rating > 0) {
-                            totalScore += (rating / 5) * weight;
-                            totalWeight += weight;
-                            ratedItemsCount++;
-                        }
-                    });
-                    let percentage = 0;
-                    if (totalWeight > 0) {
-                        percentage = Math.round((totalScore / totalWeight) * 100);
+            async function updateTotalScore() {
+                const ratings = await loadFromFirestore('performanceRatings', {});
+                let totalScore = 0;
+                let totalWeight = 0;
+                let ratedItemsCount = 0;
+                document.querySelectorAll('.performance-item').forEach(item => {
+                    const id = item.dataset.id;
+                    const weight = parseInt(item.dataset.weight);
+                    const rating = ratings[id] ? parseInt(ratings[id]) : 0;
+                    if (rating > 0) {
+                        totalScore += (rating / 5) * weight;
+                        totalWeight += weight;
+                        ratedItemsCount++;
                     }
-                    document.getElementById('totalScore').textContent = `${percentage}%`;
-                    const scoreDescription = document.getElementById('scoreDescription');
-                    if (ratedItemsCount === 0) {
-                        scoreDescription.textContent = 'قم بتقييم بنود الأداء للحصول على النتيجة';
-                    } else if (percentage >= 90) {
-                        scoreDescription.textContent = 'ممتاز - أداء متميز';
-                    } else if (percentage >= 80) {
-                        scoreDescription.textContent = 'جيد جداً - أداء فوق المتوسط';
-                    } else if (percentage >= 70) {
-                        scoreDescription.textContent = 'جيد - أداء متوسط';
-                    } else if (percentage >= 60) {
-                        scoreDescription.textContent = 'مقبول - يحتاج إلى تحسين';
-                    } else {
-                        scoreDescription.textContent = 'ضعيف - يحتاج إلى تطوير كبير';
-                    }
-                    saveToFirebase('totalPerformanceScore', percentage);
                 });
+                let percentage = 0;
+                if (totalWeight > 0) {
+                    percentage = Math.round((totalScore / totalWeight) * 100);
+                }
+                document.getElementById('totalScore').textContent = `${percentage}%`;
+                const scoreDescription = document.getElementById('scoreDescription');
+                if (ratedItemsCount === 0) {
+                    scoreDescription.textContent = 'قم بتقييم بنود الأداء للحصول على النتيجة';
+                } else if (percentage >= 90) {
+                    scoreDescription.textContent = 'ممتاز - أداء متميز';
+                } else if (percentage >= 80) {
+                    scoreDescription.textContent = 'جيد جداً - أداء فوق المتوسط';
+                } else if (percentage >= 70) {
+                    scoreDescription.textContent = 'جيد - أداء متوسط';
+                } else if (percentage >= 60) {
+                    scoreDescription.textContent = 'مقبول - يحتاج إلى تحسين';
+                } else {
+                    scoreDescription.textContent = 'ضعيف - يحتاج إلى تطوير كبير';
+                }
+                await saveToFirestore('totalPerformanceScore', percentage);
             }
 
             const saveFollowup = document.getElementById('saveFollowup');
-            saveFollowup.addEventListener('click', function() {
+            saveFollowup.addEventListener('click', async function() {
                 const followupData = {
                     firstDate: document.getElementById('firstFollowupDate').value,
                     firstNotes: document.getElementById('firstFollowupNotes').value,
@@ -1878,22 +1707,21 @@
                     secondName: document.getElementById('secondFollowupName').value,
                     recommendations: document.getElementById('recommendations').value
                 };
-                saveToFirebase('followupData', followupData);
+                await saveToFirestore('followupData', followupData);
                 showToast('تم حفظ المعلومات بنجاح!');
             });
-            loadFromFirebase('followupData', {}).then(followupData => {
-                document.getElementById('firstFollowupDate').value = followupData.firstDate || '';
-                document.getElementById('firstFollowupNotes').value = followupData.firstNotes || '';
-                document.getElementById('firstFollowupName').value = followupData.firstName || '';
-                document.getElementById('secondFollowupDate').value = followupData.secondDate || '';
-                document.getElementById('secondFollowupNotes').value = followupData.secondNotes || '';
-                document.getElementById('secondFollowupName').value = followupData.secondName || '';
-                document.getElementById('recommendations').value = followupData.recommendations || '';
-            });
+            const followupData = await loadFromFirestore('followupData', {});
+            document.getElementById('firstFollowupDate').value = followupData.firstDate || '';
+            document.getElementById('firstFollowupNotes').value = followupData.firstNotes || '';
+            document.getElementById('firstFollowupName').value = followupData.firstName || '';
+            document.getElementById('secondFollowupDate').value = followupData.secondDate || '';
+            document.getElementById('secondFollowupNotes').value = followupData.secondNotes || '';
+            document.getElementById('secondFollowupName').value = followupData.secondName || '';
+            document.getElementById('recommendations').value = followupData.recommendations || '';
 
             const addImprovementBtn = document.getElementById('addImprovementBtn');
             const improvementItems = document.getElementById('improvementItems');
-            addImprovementBtn.addEventListener('click', function() {
+            addImprovementBtn.addEventListener('click', async function() {
                 const area = document.getElementById('improvementArea').value;
                 const priority = document.getElementById('improvementPriority').value;
                 const goal = document.getElementById('improvementGoal').value;
@@ -1941,7 +1769,7 @@
                 const date = new Date(dateString);
                 return date.toLocaleDateString('ar-SA');
             }
-            function saveImprovements() {
+            async function saveImprovements() {
                 const improvements = [];
                 document.querySelectorAll('.improvement-item').forEach(item => {
                     const area = item.querySelector('.improvement-area').textContent;
@@ -1951,34 +1779,33 @@
                     const period = item.querySelector('p:nth-child(4)').textContent.replace('الفترة:', '').trim();
                     improvements.push({ area, priority, goal, actions, period });
                 });
-                saveToFirebase('improvements', improvements);
+                await saveToFirestore('improvements', improvements);
             }
-            loadFromFirebase('improvements', []).then(improvements => {
-                improvements.forEach(imp => {
-                    const improvementItem = document.createElement('div');
-                    improvementItem.className = 'improvement-item';
-                    let priorityClass = '';
-                    if (imp.priority === 'عالية') priorityClass = 'priority-high';
-                    else if (imp.priority === 'متوسطة') priorityClass = 'priority-medium';
-                    else priorityClass = 'priority-low';
-                    improvementItem.innerHTML = `
-                        <div class="improvement-item-header">
-                            <div class="improvement-area">${imp.area}</div>
-                            <div class="improvement-priority ${priorityClass}">${imp.priority}</div>
-                        </div>
-                        <p><strong>الهدف:</strong> ${imp.goal}</p>
-                        <p><strong>الإجراءات:</strong> ${imp.actions}</p>
-                        <p><strong>الفترة:</strong> ${imp.period}</p>
-                        <button class="remove-improvement-btn btn" style="margin-top: 10px; background-color: #f44336;">
-                            <i class="fas fa-trash"></i>
-                            حذف
-                        </button>
-                    `;
-                    improvementItems.appendChild(improvementItem);
-                    improvementItem.querySelector('.remove-improvement-btn').addEventListener('click', function() {
-                        improvementItem.remove();
-                        saveImprovements();
-                    });
+            const improvements = await loadFromFirestore('improvements', []);
+            improvements.forEach(imp => {
+                const improvementItem = document.createElement('div');
+                improvementItem.className = 'improvement-item';
+                let priorityClass = '';
+                if (imp.priority === 'عالية') priorityClass = 'priority-high';
+                else if (imp.priority === 'متوسطة') priorityClass = 'priority-medium';
+                else priorityClass = 'priority-low';
+                improvementItem.innerHTML = `
+                    <div class="improvement-item-header">
+                        <div class="improvement-area">${imp.area}</div>
+                        <div class="improvement-priority ${priorityClass}">${imp.priority}</div>
+                    </div>
+                    <p><strong>الهدف:</strong> ${imp.goal}</p>
+                    <p><strong>الإجراءات:</strong> ${imp.actions}</p>
+                    <p><strong>الفترة:</strong> ${imp.period}</p>
+                    <button class="remove-improvement-btn btn" style="margin-top: 10px; background-color: #f44336;">
+                        <i class="fas fa-trash"></i>
+                        حذف
+                    </button>
+                `;
+                improvementItems.appendChild(improvementItem);
+                improvementItem.querySelector('.remove-improvement-btn').addEventListener('click', function() {
+                    improvementItem.remove();
+                    saveImprovements();
                 });
             });
 
