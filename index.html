@@ -278,6 +278,7 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
+            flex-wrap: wrap;
         }
         
         .footer-logo {
@@ -288,6 +289,14 @@
         .footer-link {
             color: #2196F3;
             text-decoration: none;
+        }
+
+        #userIdDisplay {
+            font-size: 10px;
+            color: #888;
+            width: 100%;
+            margin-top: 10px;
+            word-break: break-all;
         }
         
         /* Introduction Page - Enhanced Design */
@@ -1611,6 +1620,7 @@
                 <span>جميع الحقوق محفوظة لقناة رسم للتصميم والخدمات التعليمية</span>
                 <img src="https://h.top4top.io/p_3453yqc3h0.png" alt="شعار رسم" class="footer-logo">
                 <a href="https://t.me/Rasm_MA1" target="_blank" class="footer-link">https://t.me/Rasm_MA1</a>
+                <div id="userIdDisplay"></div>
             </div>
         </div>
     </footer>
@@ -1621,19 +1631,10 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, addDoc, getDocs, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-
-        // --- Firebase Configuration ---
-        // This is now correctly handled by parsing the __firebase_config variable provided by the environment.
-        const firebaseConfig = JSON.parse(
-            typeof __firebase_config !== 'undefined' 
-            ? __firebase_config 
-            : '{}'
-        );
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
+        import { getStorage, ref, uploadString, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
 
         // --- Global Variables ---
-        let db, auth, userId;
+        let db, auth, storage, userId;
         let unsubscribeListeners = []; // To store snapshot listeners
         let confirmCallback = null; // For the custom confirm modal
         let currentNoteItemId = null;
@@ -1655,20 +1656,41 @@
 
         // --- Initialization ---
         document.addEventListener('DOMContentLoaded', async () => {
+            // --- Firebase Configuration ---
+            const firebaseConfigString = typeof __firebase_config !== 'undefined' ? __firebase_config : '{}';
+            let firebaseConfig = {};
+
+            try {
+                firebaseConfig = JSON.parse(firebaseConfigString);
+                // Check for essential keys after parsing
+                if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
+                    throw new Error("Firebase configuration from environment is missing or invalid.");
+                }
+            } catch (e) {
+                console.error("Firebase configuration error:", e.message);
+                showNotification("خطأ في إعدادات Firebase. لا يمكن الاتصال بقاعدة البيانات.", "error");
+                return; // Stop execution if config is bad
+            }
+
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
             try {
                 // Initialize Firebase
                 const app = initializeApp(firebaseConfig);
                 db = getFirestore(app);
                 auth = getAuth(app);
-                
+                storage = getStorage(app);
+
                 // Set up authentication listener
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
                         userId = user.uid;
+                        document.getElementById('userIdDisplay').textContent = `UserID: ${userId}`;
                         console.log("User is signed in with UID:", userId);
                         initializeAppWithUser();
                     } else {
                         console.log("User is signed out.");
+                        document.getElementById('userIdDisplay').textContent = 'غير مسجل';
                         // Clean up listeners if user signs out
                         unsubscribeListeners.forEach(unsub => unsub());
                         unsubscribeListeners = [];
@@ -1686,8 +1708,8 @@
                 setupStaticEventListeners();
 
             } catch (error) {
-                console.error("Firebase initialization failed:", error);
-                showNotification("فشل الاتصال بقاعدة البيانات", "error");
+                console.error("Firebase initialization/auth failed:", error);
+                showNotification("فشل الاتصال بقاعدة البيانات. يرجى التحقق من إعدادات المشروع.", "error");
             }
         });
         
@@ -1778,6 +1800,7 @@
             unsubscribeListeners.forEach(unsub => unsub());
             unsubscribeListeners = [];
 
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
             const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
 
             // Listener for the main user document (basic info, cv, documentation)
@@ -1857,6 +1880,7 @@
                 academicYear: document.getElementById('academicYearInput').value,
             };
             try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
                 const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
                 await setDoc(userDocRef, { basicInfo: data }, { merge: true });
                 showNotification("تم حفظ البيانات الأساسية بنجاح", "success");
@@ -1874,6 +1898,7 @@
                 yearsOfExperience: document.getElementById('yearsOfExperienceInput').value,
             };
             try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
                 const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
                 await setDoc(userDocRef, { cvInfo: data }, { merge: true });
                 showNotification("تم حفظ بيانات السيرة الذاتية بنجاح", "success");
@@ -1886,6 +1911,7 @@
         async function saveDocumentation(field) {
             let data = {};
             try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
                 const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
                 if (field === 'firstFollowup') {
                     data.firstFollowup = {
@@ -1910,15 +1936,27 @@
             }
         }
 
-        function handleLicenseUpload(e) {
+        async function handleFileUpload(file, path) {
+            if (!file) return null;
+            showNotification("جاري رفع الملف...", "success");
+            const storageRef = ref(storage, path);
+            const uploadResult = await uploadString(storageRef, file, 'data_url');
+            const downloadURL = await getDownloadURL(uploadResult.ref);
+            return { downloadURL, path: uploadResult.metadata.fullPath };
+        }
+
+        async function handleLicenseUpload(e) {
             const file = e.target.files[0];
             if (!file) return;
             const reader = new FileReader();
             reader.onload = async function(event) {
-                const base64String = event.target.result;
                 try {
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                    const filePath = `artifacts/${appId}/users/${userId}/license/${file.name}_${Date.now()}`;
+                    const { downloadURL, path } = await handleFileUpload(event.target.result, filePath);
+                    
                     const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
-                    await setDoc(userDocRef, { licenseImage: base64String }, { merge: true });
+                    await setDoc(userDocRef, { licenseImage: { url: downloadURL, path: path } }, { merge: true });
                     showNotification("تم رفع صورة الرخصة بنجاح", "success");
                 } catch (error) {
                     console.error("Error uploading license: ", error);
@@ -1928,22 +1966,24 @@
             reader.readAsDataURL(file);
         }
 
-        function handleCertificateUpload(e) {
+        async function handleCertificateUpload(e) {
             const file = e.target.files[0];
             if (!file) return;
             
-            const certificatesContainer = document.getElementById('certificatesContainer');
-            if (certificatesContainer.querySelectorAll('.certificate-item').length -1 >= 8) {
+            if (document.getElementById('certificatesContainer').querySelectorAll('.certificate-item').length - 1 >= 8) {
                  showNotification('لقد وصلت للحد الأقصى من الشهادات (8 شهادات)', "error");
                  return;
             }
 
             const reader = new FileReader();
             reader.onload = async function(event) {
-                const base64String = event.target.result;
                 try {
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                    const filePath = `artifacts/${appId}/users/${userId}/certificates/${file.name}_${Date.now()}`;
+                    const { downloadURL, path } = await handleFileUpload(event.target.result, filePath);
+
                     const certsColRef = collection(db, `artifacts/${appId}/users/${userId}/certificates`);
-                    await addDoc(certsColRef, { url: base64String, createdAt: new Date() });
+                    await addDoc(certsColRef, { url: downloadURL, path: path, createdAt: new Date() });
                     showNotification("تم إضافة الشهادة بنجاح", "success");
                 } catch (error) {
                     console.error("Error adding certificate: ", error);
@@ -1953,9 +1993,15 @@
             reader.readAsDataURL(file);
         }
         
-        async function deleteCertificate(certId) {
+        async function deleteCertificate(certId, path) {
             showConfirmModal("هل أنت متأكد من حذف هذه الشهادة؟", async () => {
                 try {
+                    // Delete from Storage
+                    const fileRef = ref(storage, path);
+                    await deleteObject(fileRef);
+
+                    // Delete from Firestore
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
                     const certDocRef = doc(db, `artifacts/${appId}/users/${userId}/certificates`, certId);
                     await deleteDoc(certDocRef);
                     showNotification("تم حذف الشهادة بنجاح", "success");
@@ -1980,6 +2026,7 @@
             }
             
             try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
                 const coursesColRef = collection(db, `artifacts/${appId}/users/${userId}/courses`);
                 await addDoc(coursesColRef, { ...course, createdAt: new Date() });
                 showNotification("تمت إضافة الدورة بنجاح", "success");
@@ -1997,6 +2044,7 @@
         async function deleteCourse(courseId) {
             showConfirmModal("هل أنت متأكد من حذف هذه الدورة؟", async () => {
                 try {
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
                     const courseDocRef = doc(db, `artifacts/${appId}/users/${userId}/courses`, courseId);
                     await deleteDoc(courseDocRef);
                     showNotification("تم حذف الدورة بنجاح", "success");
@@ -2023,6 +2071,7 @@
             }
             
             try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
                 const improvementsColRef = collection(db, `artifacts/${appId}/users/${userId}/improvements`);
                 await addDoc(improvementsColRef, { ...plan, createdAt: new Date() });
                 showNotification("تمت إضافة خطة التحسين بنجاح", "success");
@@ -2042,6 +2091,7 @@
         async function deleteImprovement(improvementId) {
             showConfirmModal("هل أنت متأكد من حذف هذه الخطة؟", async () => {
                 try {
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
                     const improvementDocRef = doc(db, `artifacts/${appId}/users/${userId}/improvements`, improvementId);
                     await deleteDoc(improvementDocRef);
                     showNotification("تم حذف الخطة بنجاح", "success");
@@ -2054,6 +2104,7 @@
 
         async function updatePerformanceRating(performanceId, rating) {
             try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
                 const perfDocRef = doc(db, `artifacts/${appId}/users/${userId}/performanceData`, performanceId);
                 await setDoc(perfDocRef, { rating: rating }, { merge: true });
                 // No notification here to avoid spamming on slider move
@@ -2067,6 +2118,7 @@
             if (!currentNoteItemId) return;
             const note = document.getElementById('noteText').value;
             try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
                 const perfDocRef = doc(db, `artifacts/${appId}/users/${userId}/performanceData`, currentNoteItemId);
                 await setDoc(perfDocRef, { note: note }, { merge: true });
                 showNotification("تم حفظ الملاحظة بنجاح", "success");
@@ -2078,17 +2130,17 @@
             }
         }
 
-        function handlePerformanceFileUpload(file, performanceId) {
+        async function handlePerformanceFileUpload(file, performanceId) {
             const reader = new FileReader();
             reader.onload = async function(event) {
-                const fileData = {
-                    name: file.name,
-                    type: file.type,
-                    url: event.target.result // base64
-                };
-                 try {
+                try {
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                    const filePath = `artifacts/${appId}/users/${userId}/performance/${performanceId}/${file.name}_${Date.now()}`;
+                    const { downloadURL, path } = await handleFileUpload(event.target.result, filePath);
+                    
+                    const fileData = { name: file.name, type: file.type, url: downloadURL, path: path };
+
                     const perfDocRef = doc(db, `artifacts/${appId}/users/${userId}/performanceData`, performanceId);
-                    // To add to an array, we need to read first, then write.
                     const docSnap = await getDoc(perfDocRef);
                     const existingFiles = docSnap.exists() && docSnap.data().files ? docSnap.data().files : [];
                     if (existingFiles.length >= 4) {
@@ -2106,14 +2158,20 @@
             reader.readAsDataURL(file);
         }
 
-        async function deletePerformanceFile(performanceId, fileUrl) {
+        async function deletePerformanceFile(performanceId, filePath) {
             showConfirmModal("هل أنت متأكد من حذف هذا الشاهد؟", async () => {
                 try {
+                    // Delete from Storage
+                    const fileRef = ref(storage, filePath);
+                    await deleteObject(fileRef);
+
+                    // Remove from Firestore array
+                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
                     const perfDocRef = doc(db, `artifacts/${appId}/users/${userId}/performanceData`, performanceId);
                     const docSnap = await getDoc(perfDocRef);
                     if (docSnap.exists()) {
                         const existingFiles = docSnap.data().files || [];
-                        const updatedFiles = existingFiles.filter(f => f.url !== fileUrl);
+                        const updatedFiles = existingFiles.filter(f => f.path !== filePath);
                         await updateDoc(perfDocRef, { files: updatedFiles });
                         showNotification("تم حذف الشاهد بنجاح", "success");
                     }
@@ -2147,8 +2205,8 @@
 
         function updateLicensePreview(licenseImage) {
             const licensePreview = document.getElementById('licensePreview');
-            if (licenseImage) {
-                licensePreview.innerHTML = `<img src="${licenseImage}" alt="الرخصة المهنية">`;
+            if (licenseImage && licenseImage.url) {
+                licensePreview.innerHTML = `<img src="${licenseImage.url}" alt="الرخصة المهنية">`;
             } else {
                 licensePreview.innerHTML = '<div class="certificate-placeholder">+</div>';
             }
@@ -2187,7 +2245,7 @@
                 deleteBtn.style.top = '5px';
                 deleteBtn.style.right = '5px';
                 deleteBtn.innerHTML = '&times;';
-                deleteBtn.onclick = (e) => { e.stopPropagation(); deleteCertificate(cert.id); };
+                deleteBtn.onclick = (e) => { e.stopPropagation(); deleteCertificate(cert.id, cert.path); };
                 certItem.appendChild(deleteBtn);
                 container.appendChild(certItem);
             });
@@ -2338,7 +2396,7 @@
             deleteBtn.style.top = '5px';
             deleteBtn.style.right = '5px';
             deleteBtn.innerHTML = '&times;';
-            deleteBtn.onclick = (e) => { e.stopPropagation(); deletePerformanceFile(performanceId, file.url); };
+            deleteBtn.onclick = (e) => { e.stopPropagation(); deletePerformanceFile(performanceId, file.path); };
             fileElement.appendChild(deleteBtn);
             return fileElement;
         }
@@ -2400,21 +2458,17 @@
         
         function calculateTotalScore(performanceData = []) {
             let totalWeightedScore = 0;
-            let totalWeight = 0;
             let detailsHTML = '';
             
             performanceIndicators.forEach(indicator => {
                 const data = performanceData.find(item => item.id === indicator.id);
                 const rating = data ? data.rating || 0 : 0;
                 const weightedScore = (rating / 5) * indicator.weight;
-                
                 totalWeightedScore += weightedScore;
-                totalWeight += indicator.weight;
-                
                 detailsHTML += `<p>${indicator.title}: <span>${rating} من 5</span> <span>(${weightedScore.toFixed(1)}%)</span></p>`;
             });
             
-            const finalScore = totalWeight > 0 ? totalWeightedScore : 0; // The score is already a percentage of 100
+            const finalScore = totalWeightedScore;
             
             document.getElementById('totalScore').textContent = `${finalScore.toFixed(1)}%`;
             document.getElementById('scoreDetails').innerHTML = detailsHTML;
