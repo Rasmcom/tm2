@@ -17,6 +17,7 @@
         body {
             background-color: #f5f5f5;
             color: #333;
+            padding-right: 70px; /* Space for sidebar */
         }
         
         .container {
@@ -24,49 +25,13 @@
             margin: 0 auto;
             padding: 0 15px;
         }
-
-        /* Notification Styles */
-        .notification {
-            position: fixed;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 12px 25px;
-            border-radius: 8px;
-            color: white;
-            font-weight: bold;
-            z-index: 2000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.5s, visibility 0.5s, top 0.5s;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .notification.show {
-            opacity: 1;
-            visibility: visible;
-            top: 30px;
-        }
-
-        .notification.success {
-            background-color: #4CAF50;
-        }
-
-        .notification.error {
-            background-color: #f44336;
-        }
         
         /* Header Styles */
         header {
             background-color: #333;
             padding: 15px 0;
             position: relative;
-        }
-        
-        .header-gradient {
-            height: 4px;
-            background: linear-gradient(to left, #4CAF50, #2196F3);
-            margin-top: 5px;
+            width: 100%;
         }
         
         .header-content {
@@ -101,6 +66,13 @@
             font-weight: 700;
         }
         
+        .teacher-name {
+            color: #4CAF50;
+            font-size: 20px;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+        
         .header-info {
             color: white;
             font-size: 14px;
@@ -121,66 +93,84 @@
             min-height: calc(100vh - 200px); /* Adjust for header and footer */
         }
         
-        /* Sidebar Navigation */
+        /* Sidebar Navigation - Fixed on right side */
         .sidebar {
-            width: 80px;
+            width: 70px;
             background-color: #333;
-            position: sticky;
+            position: fixed;
             top: 0;
-            height: 100vh;
-            transition: width 0.3s;
-            overflow: hidden;
+            right: 0;
+            height: 100%;
             z-index: 100;
-        }
-        
-        .sidebar:hover {
-            width: 220px;
+            padding-top: 180px; /* Changed from 200px to 180px */
         }
         
         .nav-list {
             list-style: none;
-            padding: 20px 0;
+            padding: 0;
         }
         
         .nav-item {
+            position: relative;
             margin-bottom: 5px;
         }
         
         .nav-link {
             display: flex;
             align-items: center;
-            padding: 12px 15px;
+            justify-content: center;
+            padding: 15px 0;
             color: white;
             text-decoration: none;
-            white-space: nowrap;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
         }
         
-        .nav-link:hover, .nav-link.active {
+        .nav-link:hover {
+            background-color: rgba(76, 175, 80, 0.2);
+        }
+        
+        .nav-link.active {
             background-color: #4CAF50;
         }
         
         .nav-icon {
             font-size: 20px;
-            min-width: 50px;
             text-align: center;
         }
         
         .nav-text {
-            margin-right: 10px;
+            position: absolute;
+            right: 70px; /* Position on the right side of the sidebar */
+            top: 0; /* Align with the top of the nav-link */
+            background-color: #333;
+            padding: 8px 15px 8px 15px; /* Added padding on both sides */
+            border-radius: 8px 0 0 8px; /* Rounded corners only on left side, increased radius */
+            white-space: nowrap;
             opacity: 0;
-            transition: opacity 0.3s;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.2); /* Enhanced shadow */
+            height: 100%; /* Match height of nav-link */
+            display: flex;
+            align-items: center;
+            margin: 0;
+            font-weight: bold; /* Make text bold */
         }
         
-        .sidebar:hover .nav-text {
+        .nav-link:hover .nav-text {
             opacity: 1;
+            visibility: visible;
+            right: 50px; /* Changed from 65px to 50px */
+            background: linear-gradient(to right, #2196F3, #4CAF50); /* Blue first, then green */
+            color: white; /* Ensure text is white against gradient */
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2); /* Add text shadow for better readability */
         }
         
         /* Content Area */
         .content-area {
             flex: 1;
             padding: 20px;
-            transition: margin-right 0.3s;
+            width: 100%;
         }
         
         /* Tab Content */
@@ -278,25 +268,21 @@
             align-items: center;
             justify-content: center;
             gap: 15px;
-            flex-wrap: wrap;
         }
         
         .footer-logo {
             width: 40px;
             height: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-logo:hover {
+            transform: scale(1.1);
         }
         
         .footer-link {
             color: #2196F3;
             text-decoration: none;
-        }
-
-        #userIdDisplay {
-            font-size: 10px;
-            color: #888;
-            width: 100%;
-            margin-top: 10px;
-            word-break: break-all;
         }
         
         /* Introduction Page - Enhanced Design */
@@ -317,7 +303,7 @@
             right: 0;
             width: 5px;
             height: 100%;
-            background: linear-gradient(to bottom, #4CAF50, #2196F3);
+            background: linear-gradient(to bottom, #2196F3, #4CAF50); /* Blue first, then green */
         }
         
         .intro-section h2 {
@@ -420,7 +406,7 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(to right, #4CAF50, #2196F3);
+            background: linear-gradient(to right, #2196F3, #4CAF50); /* Blue first, then green */
         }
         
         .values-container h2 {
@@ -454,7 +440,7 @@
         .value-icon {
             width: 40px;
             height: 40px;
-            background-color: #e8f5e9;
+            background: linear-gradient(to bottom, #2196F3, #4CAF50); /* Blue first, then green */
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -464,7 +450,7 @@
         }
         
         .value-icon i {
-            color: #4CAF50;
+            color: white;
             font-size: 18px;
         }
         
@@ -501,7 +487,7 @@
             transform: translateX(-50%);
             width: 80px;
             height: 3px;
-            background: linear-gradient(to right, #4CAF50, #2196F3);
+            background: linear-gradient(to right, #2196F3, #4CAF50); /* Blue first, then green */
         }
         
         .leaders-container {
@@ -534,7 +520,7 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(to right, #4CAF50, #2196F3);
+            background: linear-gradient(to right, #2196F3, #4CAF50); /* Blue first, then green */
         }
         
         .leader-image-container {
@@ -581,7 +567,7 @@
             transform: translateX(-50%);
             width: 50px;
             height: 2px;
-            background-color: #4CAF50;
+            background: linear-gradient(to right, #2196F3, #4CAF50); /* Blue first, then green */
         }
         
         .leader-content p {
@@ -776,13 +762,13 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #2196F3;
+            background: linear-gradient(to bottom, #2196F3, #4CAF50); /* Blue first, then green */
             cursor: pointer;
             transition: all 0.3s;
         }
         
         .rating-slider::-webkit-slider-thumb:hover {
-            background: #0b7dda;
+            background: linear-gradient(to bottom, #0b7dda, #3d8b40); /* Darker blue first, then darker green */
             transform: scale(1.2);
         }
         
@@ -790,14 +776,14 @@
             width: 20px;
             height: 20px;
             border-radius: 50%;
-            background: #2196F3;
+            background: linear-gradient(to bottom, #2196F3, #4CAF50); /* Blue first, then green */
             cursor: pointer;
             transition: all 0.3s;
             border: none;
         }
         
         .rating-slider::-moz-range-thumb:hover {
-            background: #0b7dda;
+            background: linear-gradient(to bottom, #0b7dda, #3d8b40); /* Darker blue first, then darker green */
             transform: scale(1.2);
         }
         
@@ -821,7 +807,7 @@
         }
         
         .rating-number.active {
-            background-color: #2196F3;
+            background: linear-gradient(to bottom, #2196F3, #4CAF50); /* Blue first, then green */
             color: white;
         }
         
@@ -833,7 +819,7 @@
         }
         
         .note-btn {
-            background-color: #f0f0f0;
+            background-color: #4CAF50;
             border: none;
             width: 40px;
             height: 40px;
@@ -846,12 +832,13 @@
         }
         
         .note-btn:hover {
-            background-color: #e0e0e0;
+            transform: scale(1.1);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
         
         .note-icon {
             font-size: 20px;
-            color: #555;
+            color: white;
         }
         
         .performance-note {
@@ -886,7 +873,7 @@
             left: 0;
             width: 100%;
             height: 5px;
-            background: linear-gradient(to right, #4CAF50, #2196F3);
+            background: linear-gradient(to right, #2196F3, #4CAF50); /* Blue first, then green */
         }
         
         .result-title {
@@ -899,7 +886,7 @@
         .result-score {
             font-size: 48px;
             font-weight: 700;
-            color: #4CAF50;
+            color: #2196F3;
             margin-bottom: 20px;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
@@ -1035,8 +1022,12 @@
         .performance-item:nth-child(10) { border-top: 4px solid #607D8B; }
         .performance-item:nth-child(11) { border-top: 4px solid #009688; }
         
-        /* Responsive Styles - FIXED FOR MOBILE */
+        /* Responsive Styles */
         @media (max-width: 768px) {
+            body {
+                padding-right: 60px; /* Smaller padding for sidebar on mobile */
+            }
+            
             .header-top {
                 flex-direction: column;
                 text-align: center;
@@ -1054,46 +1045,16 @@
                 gap: 5px;
             }
             
-            .main-layout {
-                flex-direction: row; /* Keep as row instead of column */
-            }
-            
             .sidebar {
-                width: 60px; /* Smaller width on mobile */
-                height: 100vh;
-                position: fixed; /* Fixed position */
-                top: 0;
-                right: 0;
-                z-index: 100;
-            }
-            
-            .sidebar:hover {
-                width: 180px; /* Smaller expanded width on mobile */
-            }
-            
-            .nav-list {
-                display: flex;
-                flex-direction: column; /* Keep as column */
-                padding: 10px 0;
-            }
-            
-            .nav-item {
-                margin: 5px 0;
+                width: 60px;
             }
             
             .nav-link {
-                padding: 10px;
+                padding: 12px 0;
             }
             
             .nav-icon {
-                min-width: 40px;
                 font-size: 18px;
-            }
-            
-            .content-area {
-                margin-right: 60px; /* Add margin to account for sidebar */
-                width: calc(100% - 60px);
-                padding: 15px;
             }
             
             .leader-card {
@@ -1120,42 +1081,38 @@
                 font-size: 14px;
                 padding: 8px 15px;
             }
-            
-            /* Make sure the sidebar is always visible */
-            .sidebar {
-                display: block !important;
-            }
         }
         
         /* For very small screens */
         @media (max-width: 480px) {
+            body {
+                padding-right: 50px; /* Even smaller padding for very small screens */
+            }
+            
             .sidebar {
                 width: 50px;
-            }
-            
-            .content-area {
-                margin-right: 50px;
-                width: calc(100% - 50px);
-                padding: 10px;
-            }
-            
-            .nav-icon {
-                min-width: 30px;
-                font-size: 16px;
             }
             
             .site-title {
                 font-size: 16px;
             }
             
+            .teacher-name {
+                font-size: 16px;
+            }
+            
             .header-info {
+                font-size: 12px;
+            }
+            
+            .nav-text {
+                padding: 5px 10px;
                 font-size: 12px;
             }
         }
     </style>
 </head>
 <body>
-    <div id="notification" class="notification"></div>
     <!-- Header -->
     <header>
         <div class="container">
@@ -1163,70 +1120,68 @@
                 <div class="header-top">
                     <div class="logo-container">
                         <img src="https://salogos.org/wp-content/uploads/2021/11/UntiTtled-1-1300x988.png" alt="شعار وزارة التعليم" class="logo">
-                        <h1 class="site-title">ملف شواهد الأداء الوظيفي للمعلم</h1>
+                        <h1 class="site-title">ملف شواهد الأداء الوظيفي للمعلم <span class="teacher-name" id="headerTeacherName">-</span></h1>
                     </div>
                 </div>
                 <div class="header-info" id="headerInfo">
-                    <p id="teacherName">اسم المعلم: -</p>
                     <p id="educationDept">الإدارة التعليمية: -</p>
                     <p id="schoolName">المدرسة: -</p>
                     <p id="academicYear">العام الدراسي: -</p>
                 </div>
             </div>
         </div>
-        <div class="header-gradient"></div>
     </header>
+    
+    <!-- Sidebar Navigation -->
+    <div class="sidebar">
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a href="#" class="nav-link active" data-tab="home">
+                    <i class="fas fa-home nav-icon"></i>
+                    <span class="nav-text">الرئيسية</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-tab="intro">
+                    <i class="fas fa-info-circle nav-icon"></i>
+                    <span class="nav-text">مقدمة الملف</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-tab="leaders">
+                    <i class="fas fa-quote-right nav-icon"></i>
+                    <span class="nav-text">كلمات القادة</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-tab="cv">
+                    <i class="fas fa-user-tie nav-icon"></i>
+                    <span class="nav-text">السيرة الذاتية</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-tab="performance">
+                    <i class="fas fa-chart-line nav-icon"></i>
+                    <span class="nav-text">شواهد الأداء</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-tab="documentation">
+                    <i class="fas fa-clipboard-check nav-icon"></i>
+                    <span class="nav-text">التوثيق والمتابعة</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link" data-tab="improvement">
+                    <i class="fas fa-tasks nav-icon"></i>
+                    <span class="nav-text">خطة التحسين</span>
+                </a>
+            </li>
+        </ul>
+    </div>
     
     <!-- Main Layout -->
     <div class="main-layout">
-        <!-- Sidebar Navigation -->
-        <div class="sidebar">
-            <ul class="nav-list">
-                <li class="nav-item">
-                    <a href="#" class="nav-link active" data-tab="home">
-                        <i class="fas fa-home nav-icon"></i>
-                        <span class="nav-text">الرئيسية</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-tab="intro">
-                        <i class="fas fa-info-circle nav-icon"></i>
-                        <span class="nav-text">مقدمة الملف</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-tab="leaders">
-                        <i class="fas fa-quote-right nav-icon"></i>
-                        <span class="nav-text">كلمات القادة</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-tab="cv">
-                        <i class="fas fa-user-tie nav-icon"></i>
-                        <span class="nav-text">السيرة الذاتية</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-tab="performance">
-                        <i class="fas fa-chart-line nav-icon"></i>
-                        <span class="nav-text">شواهد الأداء</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-tab="documentation">
-                        <i class="fas fa-clipboard-check nav-icon"></i>
-                        <span class="nav-text">التوثيق والمتابعة</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link" data-tab="improvement">
-                        <i class="fas fa-tasks nav-icon"></i>
-                        <span class="nav-text">خطة التحسين</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        
         <!-- Content Area -->
         <div class="content-area">
             <!-- Home Tab -->
@@ -1251,7 +1206,7 @@
                 <button class="btn" id="saveBasicDataBtn">حفظ البيانات</button>
             </div>
             
-            <!-- Introduction Tab -->
+            <!-- Introduction Tab - Enhanced Design -->
             <div class="tab-content" id="intro-content">
                 <div class="intro-section">
                     <h2>مقدمة ملف شواهد الأداء الوظيفي للمعلم</h2>
@@ -1338,7 +1293,7 @@
                 </div>
             </div>
             
-            <!-- Leaders Words Tab -->
+            <!-- Leaders Words Tab - Enhanced Design -->
             <div class="tab-content" id="leaders-content">
                 <div class="leaders-header">
                     <h2>كلمات القادة</h2>
@@ -1351,7 +1306,7 @@
                         </div>
                         <div class="leader-content">
                             <h3>كلمة خادم الحرمين الشريفين الملك سلمان بن عبدالعزيز آل سعود – حفظه الله</h3>
-                            <p>"إن التعليم في السعودية هو الركيزة الأساسية للتنمية، ونحن نولي أبناءنا الطلاب والطالبات جلّ اهتمامنا، ونوفر لهم أفضل سبل التعليم الحديث، فهم عماد المستقبل وأمله."</p>
+                            <p>" إن التعليم في السعودية هو الركيزة الأساسية للتنمية، ونحن نولي أبناءنا الطلاب والطالبات جلّ اهتمامنا، ونوفر لهم أفضل سبل التعليم الحديث، فهم عماد المستقبل وأمله ."</p>
                         </div>
                     </div>
                     
@@ -1361,7 +1316,7 @@
                         </div>
                         <div class="leader-content">
                             <h3>كلمة صاحب السمو الملكي الأمير محمد بن سلمان بن عبدالعزيز – ولي العهد رئيس مجلس الوزراء – حفظه الله</h3>
-                            <p>"طموحنا أن نبني وطنًا أكثر ازدهارًا، يجد فيه كل مواطن ما يتمناه، ويشارك في بناء مستقبله. ولن يكون ذلك إلا بتعليم رائد يصنع جيلاً واعيًا ومؤهلاً للمنافسة عالميًا."</p>
+                            <p>" طموحنا أن نبني وطنًا أكثر ازدهارًا، يجد فيه كل مواطن ما يتمناه، ويشارك في بناء مستقبله . ولن يكون ذلك إلا بتعليم رائد يصنع جيلاً واعيًا ومؤهلاً للمنافسة عالميًا ."</p>
                         </div>
                     </div>
                     
@@ -1371,7 +1326,7 @@
                         </div>
                         <div class="leader-content">
                             <h3>كلمة معالي وزير التعليم يوسف البنيان</h3>
-                            <p>"نسعى في وزارة التعليم إلى تطوير المنظومة التعليمية بما يتماشى مع مستهدفات رؤية 2030، من خلال تمكين المعلم، وتحسين نواتج التعلم، وتوفير بيئة تعليمية محفزة للتميّز والإبداع."</p>
+                            <p>" نسعى في وزارة التعليم إلى تطوير المنظومة التعليمية بما يتماشى مع مستهدفات رؤية 2030، من خلال تمكين المعلم، وتحسين نواتج التعلم، وتوفير بيئة تعليمية محفزة للتميّز والإبداع ."</p>
                         </div>
                     </div>
                 </div>
@@ -1600,165 +1555,370 @@
             <img src="" alt="معاينة الصورة" class="preview-image" id="previewImage">
         </div>
     </div>
-
-    <!-- Confirmation Modal -->
-    <div class="modal" id="confirmModal">
-        <div class="modal-content" style="max-width: 400px; text-align: center;">
-            <h2 id="confirmTitle" style="margin-bottom: 15px;">هل أنت متأكد؟</h2>
-            <p id="confirmText" style="margin: 20px 0;"></p>
-            <div>
-                <button class="btn" id="confirmYesBtn" style="background-color: #f44336; margin-left: 10px;">نعم، حذف</button>
-                <button class="btn" id="confirmNoBtn" style="background-color: #aaa;">إلغاء</button>
-            </div>
-        </div>
-    </div>
     
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="footer-content">
                 <span>جميع الحقوق محفوظة لقناة رسم للتصميم والخدمات التعليمية</span>
-                <img src="https://h.top4top.io/p_3453yqc3h0.png" alt="شعار رسم" class="footer-logo">
-                <a href="https://t.me/Rasm_MA1" target="_blank" class="footer-link">https://t.me/Rasm_MA1</a>
-                <div id="userIdDisplay"></div>
+                <a href="https://t.me/Rasm_MA1" target="_blank">
+                    <img src="https://h.top4top.io/p_3453yqc3h0.png" alt="شعار رسم" class="footer-logo" title="زيارة قناة رسم على تليجرام">
+                </a>
             </div>
         </div>
     </footer>
-
-    <!-- Firebase SDKs -->
-    <script type="module">
-        // Import Firebase modules
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, updateDoc, deleteDoc, onSnapshot, collection, addDoc, getDocs, writeBatch } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
-        import { getStorage, ref, uploadString, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-storage.js";
-
-        // --- Global Variables ---
-        let db, auth, storage, userId;
-        let unsubscribeListeners = []; // To store snapshot listeners
-        let confirmCallback = null; // For the custom confirm modal
+    
+    <script>
+        // Global Variables
+        let certificates = [];
+        let courses = [];
+        let performanceData = [];
         let currentNoteItemId = null;
+        let improvements = [];
         
-        // Performance Indicators Data (static)
+        // Performance Indicators Data
         const performanceIndicators = [
-            { id: 'performance_1', title: 'أداء الواجبات الوظيفية', description: 'مدى التزام المعلم بأداء واجباته الوظيفية وفق اللوائح والأنظمة المعتمدة.', weight: 10 },
-            { id: 'performance_2', title: 'التفاعل مع المجتمع المهني', description: 'مشاركة المعلم في الأنشطة المهنية والتعاون مع الزملاء والمجتمع المدرسي.', weight: 10 },
-            { id: 'performance_3', title: 'التفاعل مع أولياء الأمور', description: 'التواصل الفعال مع أولياء الأمور وإشراكهم في العملية التعليمية.', weight: 10 },
-            { id: 'performance_4', title: 'تنويع استراتيجيات التدريس', description: 'استخدام استراتيجيات تدريس متنوعة تناسب احتياجات المتعلمين وأنماط تعلمهم.', weight: 10 },
-            { id: 'performance_5', title: 'تحسين نتائج المتعلمين', description: 'العمل على تحسين نتائج المتعلمين وتطوير مستوياتهم التحصيلية.', weight: 10 },
-            { id: 'performance_6', title: 'إعداد وتنفيذ خطة التعلم', description: 'إعداد وتنفيذ خطط تعليمية فعالة تحقق أهداف المنهج.', weight: 10 },
-            { id: 'performance_7', title: 'توظيف التقنيات والوسائل', description: 'استخدام التقنيات والوسائل التعليمية المناسبة لتعزيز عملية التعلم.', weight: 10 },
-            { id: 'performance_8', title: 'تهيئة البيئة التعليمية', description: 'تهيئة بيئة تعليمية محفزة وآمنة للمتعلمين.', weight: 5 },
-            { id: 'performance_9', title: 'الإدارة الصفية', description: 'إدارة الصف بفاعلية وتنظيم وقت التعلم بكفاءة.', weight: 5 },
-            { id: 'performance_10', title: 'تحليل نتائج المتعلمين', description: 'تحليل نتائج المتعلمين واستخدامها في تحسين الممارسات التعليمية.', weight: 10 },
-            { id: 'performance_11', title: 'تنوع أساليب التقويم', description: 'استخدام أساليب تقويم متنوعة لقياس تقدم المتعلمين.', weight: 10 }
+            {
+                id: 'performance_1',
+                title: 'أداء الواجبات الوظيفية',
+                description: 'مدى التزام المعلم بأداء واجباته الوظيفية وفق اللوائح والأنظمة المعتمدة.',
+                weight: 10
+            },
+            {
+                id: 'performance_2',
+                title: 'التفاعل مع المجتمع المهني',
+                description: 'مشاركة المعلم في الأنشطة المهنية والتعاون مع الزملاء والمجتمع المدرسي.',
+                weight: 10
+            },
+            {
+                id: 'performance_3',
+                title: 'التفاعل مع أولياء الأمور',
+                description: 'التواصل الفعال مع أولياء الأمور وإشراكهم في العملية التعليمية.',
+                weight: 10
+            },
+            {
+                id: 'performance_4',
+                title: 'تنويع استراتيجيات التدريس',
+                description: 'استخدام استراتيجيات تدريس متنوعة تناسب احتياجات المتعلمين وأنماط تعلمهم.',
+                weight: 10
+            },
+            {
+                id: 'performance_5',
+                title: 'تحسين نتائج المتعلمين',
+                description: 'العمل على تحسين نتائج المتعلمين وتطوير مستوياتهم التحصيلية.',
+                weight: 10
+            },
+            {
+                id: 'performance_6',
+                title: 'إعداد وتنفيذ خطة التعلم',
+                description: 'إعداد وتنفيذ خطط تعليمية فعالة تحقق أهداف المنهج.',
+                weight: 10
+            },
+            {
+                id: 'performance_7',
+                title: 'توظيف التقنيات والوسائل',
+                description: 'استخدام التقنيات والوسائل التعليمية المناسبة لتعزيز عملية التعلم.',
+                weight: 10
+            },
+            {
+                id: 'performance_8',
+                title: 'تهيئة البيئة التعليمية',
+                description: 'تهيئة بيئة تعليمية محفزة وآمنة للمتعلمين.',
+                weight: 5
+            },
+            {
+                id: 'performance_9',
+                title: 'الإدارة الصفية',
+                description: 'إدارة الصف بفاعلية وتنظيم وقت التعلم بكفاءة.',
+                weight: 5
+            },
+            {
+                id: 'performance_10',
+                title: 'تحليل نتائج المتعلمين',
+                description: 'تحليل نتائج المتعلمين واستخدامها في تحسين الممارسات التعليمية.',
+                weight: 10
+            },
+            {
+                id: 'performance_11',
+                title: 'تنوع أساليب التقويم',
+                description: 'استخدام أساليب تقويم متنوعة لقياس تقدم المتعلمين.',
+                weight: 10
+            }
         ];
-
-        // --- Initialization ---
-        document.addEventListener('DOMContentLoaded', async () => {
-            // --- Firebase Configuration ---
-            const firebaseConfigString = typeof __firebase_config !== 'undefined' ? __firebase_config : '{}';
-            let firebaseConfig = {};
-
-            try {
-                firebaseConfig = JSON.parse(firebaseConfigString);
-                // Check for essential keys after parsing
-                if (!firebaseConfig.apiKey || !firebaseConfig.projectId) {
-                    throw new Error("Firebase configuration from environment is missing or invalid.");
-                }
-            } catch (e) {
-                console.error("Firebase configuration error:", e.message);
-                showNotification("خطأ في إعدادات Firebase. لا يمكن الاتصال بقاعدة البيانات.", "error");
-                return; // Stop execution if config is bad
-            }
-
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-
-            try {
-                // Initialize Firebase
-                const app = initializeApp(firebaseConfig);
-                db = getFirestore(app);
-                auth = getAuth(app);
-                storage = getStorage(app);
-
-                // Set up authentication listener
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        userId = user.uid;
-                        document.getElementById('userIdDisplay').textContent = `UserID: ${userId}`;
-                        console.log("User is signed in with UID:", userId);
-                        initializeAppWithUser();
-                    } else {
-                        console.log("User is signed out.");
-                        document.getElementById('userIdDisplay').textContent = 'غير مسجل';
-                        // Clean up listeners if user signs out
-                        unsubscribeListeners.forEach(unsub => unsub());
-                        unsubscribeListeners = [];
-                    }
-                });
-
-                // Sign in the user
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
-
-                // Setup general event listeners that don't depend on data
-                setupStaticEventListeners();
-
-            } catch (error) {
-                console.error("Firebase initialization/auth failed:", error);
-                showNotification("فشل الاتصال بقاعدة البيانات. يرجى التحقق من إعدادات المشروع.", "error");
-            }
+        
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeApp();
+            setupEventListeners();
         });
         
-        // This function runs after a user is authenticated
-        function initializeAppWithUser() {
-            // Render static parts that might need re-rendering on user change
-            renderPerformanceItems(); 
-            
-            // Setup listeners for dynamic data from Firestore
-            setupFirestoreListeners();
-            
-            // Setup event listeners that interact with data
-            setupDynamicEventListeners();
+        function initializeApp() {
+            loadUserData();
+            loadCertificates();
+            loadCourses();
+            renderPerformanceItems();
+            loadPerformanceData();
+            loadDocumentationData();
+            loadImprovementPlans();
         }
-
-        // --- Event Listeners Setup ---
         
-        // Listeners that can be set up once on DOM load
-        function setupStaticEventListeners() {
+        function setupEventListeners() {
             // Navigation
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const tabId = link.getAttribute('data-tab');
+                    
+                    // Remove active class from all links and contents
                     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
                     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+                    
+                    // Add active class to current link and content
                     link.classList.add('active');
                     document.getElementById(`${tabId}-content`).classList.add('active');
                 });
             });
-
-            // Modals
-            document.getElementById('closeNoteModal').addEventListener('click', () => document.getElementById('noteModal').style.display = 'none');
-            document.getElementById('closePreviewModal').addEventListener('click', () => document.getElementById('imagePreviewModal').style.display = 'none');
             
-            // Confirmation Modal Buttons
-            document.getElementById('confirmNoBtn').addEventListener('click', () => {
-                document.getElementById('confirmModal').style.display = 'none';
-                confirmCallback = null;
+            // Save Basic Data from Home Tab
+            document.getElementById('saveBasicDataBtn').addEventListener('click', () => {
+                const teacherName = document.getElementById('teacherNameInput').value;
+                const educationDept = document.getElementById('educationDeptInput').value;
+                const schoolName = document.getElementById('schoolNameInput').value;
+                const academicYear = document.getElementById('academicYearInput').value;
+                
+                // Save to localStorage
+                saveBasicData(teacherName, educationDept, schoolName, academicYear);
+                
+                // Update header info immediately
+                updateHeaderInfo();
+                
+                alert('تم حفظ البيانات بنجاح');
             });
-
-            document.getElementById('confirmYesBtn').addEventListener('click', () => {
-                if (confirmCallback) {
-                    confirmCallback();
+            
+            // Save CV Data
+            document.getElementById('saveCvDataBtn').addEventListener('click', () => {
+                const fullName = document.getElementById('fullNameInput').value;
+                const specialty = document.getElementById('specialtyInput').value;
+                const qualification = document.getElementById('qualificationInput').value;
+                const yearsOfExperience = document.getElementById('yearsOfExperienceInput').value;
+                
+                // Save to localStorage
+                saveCvData(fullName, specialty, qualification, yearsOfExperience);
+                
+                alert('تم حفظ بيانات السيرة الذاتية بنجاح');
+            });
+            
+            // License Upload
+            document.getElementById('licenseUploadBtn').addEventListener('click', () => {
+                document.getElementById('licenseUpload').click();
+            });
+            
+            document.getElementById('licenseUpload').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const imageUrl = event.target.result;
+                        document.getElementById('licensePreview').innerHTML = `<img src="${imageUrl}" alt="الرخصة المهنية">`;
+                        
+                        // Save to localStorage
+                        localStorage.setItem('licenseImage', imageUrl);
+                        
+                        // Add click event to show preview
+                        document.getElementById('licensePreview').addEventListener('click', () => {
+                            showImagePreview(imageUrl);
+                        });
+                    };
+                    reader.readAsDataURL(file);
                 }
-                document.getElementById('confirmModal').style.display = 'none';
-                confirmCallback = null;
             });
             
+            // Certificate Upload
+            document.getElementById('certificateUploadBtn').addEventListener('click', () => {
+                if (certificates.length < 8) {
+                    document.getElementById('certificateUpload').click();
+                } else {
+                    alert('لقد وصلت للحد الأقصى من الشهادات (8 شهادات)');
+                }
+            });
+            
+            document.getElementById('certificateUpload').addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        const imageUrl = event.target.result;
+                        const certificateId = 'cert_' + Date.now();
+                        certificates.push({
+                            id: certificateId,
+                            url: imageUrl
+                        });
+                        
+                        renderCertificates();
+                        saveCertificates();
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Add Course
+            document.getElementById('addCourseBtn').addEventListener('click', () => {
+                const courseName = document.getElementById('courseNameInput').value;
+                const courseProvider = document.getElementById('courseProviderInput').value;
+                const courseDate = document.getElementById('courseDateInput').value;
+                const courseHours = document.getElementById('courseHoursInput').value;
+                
+                if (courseName && courseProvider && courseDate && courseHours) {
+                    const courseId = 'course_' + Date.now();
+                    const course = {
+                        id: courseId,
+                        name: courseName,
+                        provider: courseProvider,
+                        date: courseDate,
+                        hours: courseHours
+                    };
+                    
+                    courses.push(course);
+                    renderCourses();
+                    saveCourses();
+                    
+                    // Clear inputs
+                    document.getElementById('courseNameInput').value = '';
+                    document.getElementById('courseProviderInput').value = '';
+                    document.getElementById('courseDateInput').value = '';
+                    document.getElementById('courseHoursInput').value = '';
+                } else {
+                    alert('يرجى ملء جميع حقول الدورة التدريبية');
+                }
+            });
+            
+            // Save First Followup
+            document.getElementById('saveFirstFollowupBtn').addEventListener('click', () => {
+                const date = document.getElementById('firstFollowupDate').value;
+                const name = document.getElementById('firstFollowupName').value;
+                const notes = document.getElementById('firstFollowupNotes').value;
+                
+                if (date && name) {
+                    const followupData = {
+                        date,
+                        name,
+                        notes
+                    };
+                    
+                    // Save to localStorage
+                    localStorage.setItem('firstFollowup', JSON.stringify(followupData));
+                    
+                    alert('تم حفظ بيانات المتابعة الأولى بنجاح');
+                } else {
+                    alert('يرجى ملء التاريخ واسم المتابع');
+                }
+            });
+            
+            // Save Second Followup
+            document.getElementById('saveSecondFollowupBtn').addEventListener('click', () => {
+                const date = document.getElementById('secondFollowupDate').value;
+                const name = document.getElementById('secondFollowupName').value;
+                const notes = document.getElementById('secondFollowupNotes').value;
+                
+                if (date && name) {
+                    const followupData = {
+                        date,
+                        name,
+                        notes
+                    };
+                    
+                    // Save to localStorage
+                    localStorage.setItem('secondFollowup', JSON.stringify(followupData));
+                    
+                    alert('تم حفظ بيانات المتابعة الثانية بنجاح');
+                } else {
+                    alert('يرجى ملء التاريخ واسم المتابع');
+                }
+            });
+            
+            // Save Recommendations
+            document.getElementById('saveRecommendationsBtn').addEventListener('click', () => {
+                const recommendations = document.getElementById('recommendations').value;
+                
+                // Save to localStorage
+                localStorage.setItem('recommendations', recommendations);
+                
+                alert('تم حفظ التوصيات بنجاح');
+            });
+            
+            // Add Improvement Plan
+            document.getElementById('addImprovementBtn').addEventListener('click', () => {
+                const area = document.getElementById('improvementArea').value;
+                const priority = document.getElementById('improvementPriority').value;
+                const goal = document.getElementById('improvementGoal').value;
+                const actions = document.getElementById('improvementActions').value;
+                const startDate = document.getElementById('improvementStartDate').value;
+                const endDate = document.getElementById('improvementEndDate').value;
+                
+                if (area && priority && goal && actions && startDate && endDate) {
+                    const improvementId = 'improvement_' + Date.now();
+                    const improvement = {
+                        id: improvementId,
+                        area,
+                        priority,
+                        goal,
+                        actions,
+                        startDate,
+                        endDate
+                    };
+                    
+                    improvements.push(improvement);
+                    renderImprovementPlans();
+                    saveImprovements();
+                    
+                    // Clear inputs
+                    document.getElementById('improvementArea').value = '';
+                    document.getElementById('improvementPriority').value = '';
+                    document.getElementById('improvementGoal').value = '';
+                    document.getElementById('improvementActions').value = '';
+                    document.getElementById('improvementStartDate').value = '';
+                    document.getElementById('improvementEndDate').value = '';
+                } else {
+                    alert('يرجى ملء جميع حقول خطة التحسين');
+                }
+            });
+            
+            // Note Modal
+            document.getElementById('closeNoteModal').addEventListener('click', () => {
+                document.getElementById('noteModal').style.display = 'none';
+            });
+            
+            document.getElementById('saveNoteBtn').addEventListener('click', () => {
+                if (currentNoteItemId) {
+                    const note = document.getElementById('noteText').value;
+                    
+                    // Find the performance item and update its note
+                    const itemIndex = performanceData.findIndex(item => item.id === currentNoteItemId);
+                    if (itemIndex !== -1) {
+                        performanceData[itemIndex].note = note;
+                        
+                        // Save to localStorage
+                        savePerformanceData();
+                        
+                        // Update UI
+                        const noteElement = document.querySelector(`#${currentNoteItemId} .performance-note textarea`);
+                        if (noteElement) {
+                            noteElement.value = note;
+                        }
+                    }
+                    
+                    // Close modal
+                    document.getElementById('noteModal').style.display = 'none';
+                    currentNoteItemId = null;
+                }
+            });
+            
+            // Image Preview Modal
+            document.getElementById('closePreviewModal').addEventListener('click', () => {
+                document.getElementById('imagePreviewModal').style.display = 'none';
+            });
+            
+            // Window click to close modals
             window.addEventListener('click', (e) => {
                 if (e.target === document.getElementById('imagePreviewModal')) {
                     document.getElementById('imagePreviewModal').style.display = 'none';
@@ -1766,545 +1926,147 @@
                 if (e.target === document.getElementById('noteModal')) {
                     document.getElementById('noteModal').style.display = 'none';
                 }
-                if (e.target === document.getElementById('confirmModal')) {
-                    document.getElementById('confirmModal').style.display = 'none';
-                    confirmCallback = null;
-                }
             });
         }
-
-        // Listeners for buttons that modify data (require userId)
-        function setupDynamicEventListeners() {
-            // --- SAVE BUTTONS ---
-            document.getElementById('saveBasicDataBtn').addEventListener('click', saveBasicData);
-            document.getElementById('saveCvDataBtn').addEventListener('click', saveCvData);
-            document.getElementById('saveFirstFollowupBtn').addEventListener('click', () => saveDocumentation('firstFollowup'));
-            document.getElementById('saveSecondFollowupBtn').addEventListener('click', () => saveDocumentation('secondFollowup'));
-            document.getElementById('saveRecommendationsBtn').addEventListener('click', () => saveDocumentation('recommendations'));
-            document.getElementById('saveNoteBtn').addEventListener('click', saveNote);
-
-            // --- ADD/UPLOAD BUTTONS ---
-            document.getElementById('licenseUploadBtn').addEventListener('click', () => document.getElementById('licenseUpload').click());
-            document.getElementById('licenseUpload').addEventListener('change', handleLicenseUpload);
-            
-            document.getElementById('certificateUploadBtn').addEventListener('click', () => document.getElementById('certificateUpload').click());
-            document.getElementById('certificateUpload').addEventListener('change', handleCertificateUpload);
-
-            document.getElementById('addCourseBtn').addEventListener('click', addCourse);
-            document.getElementById('addImprovementBtn').addEventListener('click', addImprovementPlan);
-        }
-
-        // --- Firestore Real-time Listeners ---
-        function setupFirestoreListeners() {
-            // Clean up any previous listeners
-            unsubscribeListeners.forEach(unsub => unsub());
-            unsubscribeListeners = [];
-
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
-
-            // Listener for the main user document (basic info, cv, documentation)
-            const unsubUserDoc = onSnapshot(userDocRef, (docSnap) => {
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    updateHeaderInfo(data.basicInfo);
-                    updateCvInputs(data.cvInfo);
-                    updateLicensePreview(data.licenseImage);
-                    updateDocumentationInputs(data);
-                } else {
-                    console.log("No user document found. A new one will be created on save.");
-                    // Reset UI to default state if no data
-                    updateHeaderInfo({});
-                    updateCvInputs({});
-                    updateLicensePreview(null);
-                    updateDocumentationInputs({});
-                }
-            }, (error) => {
-                console.error("Error listening to user document:", error);
-                showNotification("خطأ في تحديث البيانات", "error");
-            });
-            unsubscribeListeners.push(unsubUserDoc);
-
-            // Listener for certificates subcollection
-            const certsColRef = collection(userDocRef, "certificates");
-            const unsubCerts = onSnapshot(certsColRef, (querySnapshot) => {
-                const certificates = [];
-                querySnapshot.forEach((doc) => {
-                    certificates.push({ id: doc.id, ...doc.data() });
-                });
-                renderCertificates(certificates);
-            }, (error) => console.error("Error listening to certificates:", error));
-            unsubscribeListeners.push(unsubCerts);
-
-            // Listener for courses subcollection
-            const coursesColRef = collection(userDocRef, "courses");
-            const unsubCourses = onSnapshot(coursesColRef, (querySnapshot) => {
-                const courses = [];
-                querySnapshot.forEach((doc) => {
-                    courses.push({ id: doc.id, ...doc.data() });
-                });
-                renderCourses(courses);
-            }, (error) => console.error("Error listening to courses:", error));
-            unsubscribeListeners.push(unsubCourses);
-
-            // Listener for improvements subcollection
-            const improvementsColRef = collection(userDocRef, "improvements");
-            const unsubImprovements = onSnapshot(improvementsColRef, (querySnapshot) => {
-                const improvements = [];
-                querySnapshot.forEach((doc) => {
-                    improvements.push({ id: doc.id, ...doc.data() });
-                });
-                renderImprovementPlans(improvements);
-            }, (error) => console.error("Error listening to improvements:", error));
-            unsubscribeListeners.push(unsubImprovements);
-
-            // Listener for performance data subcollection
-            const performanceColRef = collection(userDocRef, "performanceData");
-            const unsubPerformance = onSnapshot(performanceColRef, (querySnapshot) => {
-                const performanceData = [];
-                 querySnapshot.forEach((doc) => {
-                    performanceData.push({ id: doc.id, ...doc.data() });
-                });
-                updatePerformanceUI(performanceData);
-            }, (error) => console.error("Error listening to performance data:", error));
-            unsubscribeListeners.push(unsubPerformance);
-        }
-
-        // --- Data Handling Functions (Read from UI, Write to DB) ---
-
-        async function saveBasicData() {
-            const data = {
-                teacherName: document.getElementById('teacherNameInput').value,
-                educationDept: document.getElementById('educationDeptInput').value,
-                schoolName: document.getElementById('schoolNameInput').value,
-                academicYear: document.getElementById('academicYearInput').value,
-            };
-            try {
-                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
-                await setDoc(userDocRef, { basicInfo: data }, { merge: true });
-                showNotification("تم حفظ البيانات الأساسية بنجاح", "success");
-            } catch (error) {
-                console.error("Error saving basic data: ", error);
-                showNotification("خطأ في حفظ البيانات", "error");
-            }
-        }
-
-        async function saveCvData() {
-            const data = {
-                fullName: document.getElementById('fullNameInput').value,
-                specialty: document.getElementById('specialtyInput').value,
-                qualification: document.getElementById('qualificationInput').value,
-                yearsOfExperience: document.getElementById('yearsOfExperienceInput').value,
-            };
-            try {
-                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
-                await setDoc(userDocRef, { cvInfo: data }, { merge: true });
-                showNotification("تم حفظ بيانات السيرة الذاتية بنجاح", "success");
-            } catch (error) {
-                console.error("Error saving CV data: ", error);
-                showNotification("خطأ في حفظ البيانات", "error");
-            }
+        
+        // Helper Functions
+        function saveBasicData(teacherName, educationDept, schoolName, academicYear) {
+            // Save to localStorage
+            localStorage.setItem('teacherName', teacherName);
+            localStorage.setItem('educationDept', educationDept);
+            localStorage.setItem('schoolName', schoolName);
+            localStorage.setItem('academicYear', academicYear);
         }
         
-        async function saveDocumentation(field) {
-            let data = {};
-            try {
-                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
-                if (field === 'firstFollowup') {
-                    data.firstFollowup = {
-                        date: document.getElementById('firstFollowupDate').value,
-                        name: document.getElementById('firstFollowupName').value,
-                        notes: document.getElementById('firstFollowupNotes').value,
-                    };
-                } else if (field === 'secondFollowup') {
-                    data.secondFollowup = {
-                        date: document.getElementById('secondFollowupDate').value,
-                        name: document.getElementById('secondFollowupName').value,
-                        notes: document.getElementById('secondFollowupNotes').value,
-                    };
-                } else if (field === 'recommendations') {
-                    data.recommendations = document.getElementById('recommendations').value;
-                }
-                await setDoc(userDocRef, data, { merge: true });
-                showNotification("تم حفظ بيانات التوثيق بنجاح", "success");
-            } catch(e) {
-                console.error("Error saving documentation:", e);
-                showNotification("خطأ في حفظ البيانات", "error");
-            }
-        }
-
-        async function handleFileUpload(file, path) {
-            if (!file) return null;
-            showNotification("جاري رفع الملف...", "success");
-            const storageRef = ref(storage, path);
-            const uploadResult = await uploadString(storageRef, file, 'data_url');
-            const downloadURL = await getDownloadURL(uploadResult.ref);
-            return { downloadURL, path: uploadResult.metadata.fullPath };
-        }
-
-        async function handleLicenseUpload(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = async function(event) {
-                try {
-                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                    const filePath = `artifacts/${appId}/users/${userId}/license/${file.name}_${Date.now()}`;
-                    const { downloadURL, path } = await handleFileUpload(event.target.result, filePath);
-                    
-                    const userDocRef = doc(db, `artifacts/${appId}/users/${userId}`);
-                    await setDoc(userDocRef, { licenseImage: { url: downloadURL, path: path } }, { merge: true });
-                    showNotification("تم رفع صورة الرخصة بنجاح", "success");
-                } catch (error) {
-                    console.error("Error uploading license: ", error);
-                    showNotification("خطأ في رفع الصورة", "error");
-                }
-            };
-            reader.readAsDataURL(file);
-        }
-
-        async function handleCertificateUpload(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            
-            if (document.getElementById('certificatesContainer').querySelectorAll('.certificate-item').length - 1 >= 8) {
-                 showNotification('لقد وصلت للحد الأقصى من الشهادات (8 شهادات)', "error");
-                 return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = async function(event) {
-                try {
-                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                    const filePath = `artifacts/${appId}/users/${userId}/certificates/${file.name}_${Date.now()}`;
-                    const { downloadURL, path } = await handleFileUpload(event.target.result, filePath);
-
-                    const certsColRef = collection(db, `artifacts/${appId}/users/${userId}/certificates`);
-                    await addDoc(certsColRef, { url: downloadURL, path: path, createdAt: new Date() });
-                    showNotification("تم إضافة الشهادة بنجاح", "success");
-                } catch (error) {
-                    console.error("Error adding certificate: ", error);
-                    showNotification("خطأ في إضافة الشهادة", "error");
-                }
-            };
-            reader.readAsDataURL(file);
+        function saveCvData(fullName, specialty, qualification, yearsOfExperience) {
+            // Save to localStorage
+            localStorage.setItem('fullName', fullName);
+            localStorage.setItem('specialty', specialty);
+            localStorage.setItem('qualification', qualification);
+            localStorage.setItem('yearsOfExperience', yearsOfExperience);
         }
         
-        async function deleteCertificate(certId, path) {
-            showConfirmModal("هل أنت متأكد من حذف هذه الشهادة؟", async () => {
-                try {
-                    // Delete from Storage
-                    const fileRef = ref(storage, path);
-                    await deleteObject(fileRef);
-
-                    // Delete from Firestore
-                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                    const certDocRef = doc(db, `artifacts/${appId}/users/${userId}/certificates`, certId);
-                    await deleteDoc(certDocRef);
-                    showNotification("تم حذف الشهادة بنجاح", "success");
-                } catch (error) {
-                    console.error("Error deleting certificate: ", error);
-                    showNotification("خطأ في حذف الشهادة", "error");
-                }
-            });
-        }
-
-        async function addCourse() {
-            const course = {
-                name: document.getElementById('courseNameInput').value,
-                provider: document.getElementById('courseProviderInput').value,
-                date: document.getElementById('courseDateInput').value,
-                hours: document.getElementById('courseHoursInput').value,
-            };
-
-            if (!course.name || !course.provider || !course.date || !course.hours) {
-                showNotification("يرجى ملء جميع حقول الدورة التدريبية", "error");
-                return;
-            }
+        function updateHeaderInfo() {
+            const teacherName = localStorage.getItem('teacherName') || '-';
+            document.getElementById('headerTeacherName').textContent = teacherName;
+            document.getElementById('educationDept').textContent = 'الإدارة التعليمية: ' + (localStorage.getItem('educationDept') || '-');
+            document.getElementById('schoolName').textContent = 'المدرسة: ' + (localStorage.getItem('schoolName') || '-');
+            document.getElementById('academicYear').textContent = 'العام الدراسي: ' + (localStorage.getItem('academicYear') || '-');
             
-            try {
-                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                const coursesColRef = collection(db, `artifacts/${appId}/users/${userId}/courses`);
-                await addDoc(coursesColRef, { ...course, createdAt: new Date() });
-                showNotification("تمت إضافة الدورة بنجاح", "success");
-                // Clear inputs
-                document.getElementById('courseNameInput').value = '';
-                document.getElementById('courseProviderInput').value = '';
-                document.getElementById('courseDateInput').value = '';
-                document.getElementById('courseHoursInput').value = '';
-            } catch (error) {
-                console.error("Error adding course: ", error);
-                showNotification("خطأ في إضافة الدورة", "error");
-            }
+            // Update home tab inputs
+            document.getElementById('teacherNameInput').value = localStorage.getItem('teacherName') || '';
+            document.getElementById('educationDeptInput').value = localStorage.getItem('educationDept') || '';
+            document.getElementById('schoolNameInput').value = localStorage.getItem('schoolName') || '';
+            document.getElementById('academicYearInput').value = localStorage.getItem('academicYear') || '';
         }
         
-        async function deleteCourse(courseId) {
-            showConfirmModal("هل أنت متأكد من حذف هذه الدورة؟", async () => {
-                try {
-                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                    const courseDocRef = doc(db, `artifacts/${appId}/users/${userId}/courses`, courseId);
-                    await deleteDoc(courseDocRef);
-                    showNotification("تم حذف الدورة بنجاح", "success");
-                } catch (error) {
-                    console.error("Error deleting course: ", error);
-                    showNotification("خطأ في حذف الدورة", "error");
-                }
-            });
-        }
-
-        async function addImprovementPlan() {
-            const plan = {
-                area: document.getElementById('improvementArea').value,
-                priority: document.getElementById('improvementPriority').value,
-                goal: document.getElementById('improvementGoal').value,
-                actions: document.getElementById('improvementActions').value,
-                startDate: document.getElementById('improvementStartDate').value,
-                endDate: document.getElementById('improvementEndDate').value,
-            };
-
-            if (!plan.area || !plan.priority || !plan.goal || !plan.actions || !plan.startDate || !plan.endDate) {
-                showNotification("يرجى ملء جميع حقول خطة التحسين", "error");
-                return;
-            }
+        function renderCertificates() {
+            // Clear container
+            const certificatesContainer = document.getElementById('certificatesContainer');
+            certificatesContainer.innerHTML = '';
             
-            try {
-                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                const improvementsColRef = collection(db, `artifacts/${appId}/users/${userId}/improvements`);
-                await addDoc(improvementsColRef, { ...plan, createdAt: new Date() });
-                showNotification("تمت إضافة خطة التحسين بنجاح", "success");
-                 // Clear inputs
-                document.getElementById('improvementArea').value = '';
-                document.getElementById('improvementPriority').value = '';
-                document.getElementById('improvementGoal').value = '';
-                document.getElementById('improvementActions').value = '';
-                document.getElementById('improvementStartDate').value = '';
-                document.getElementById('improvementEndDate').value = '';
-            } catch(error) {
-                console.error("Error adding improvement plan:", error);
-                showNotification("خطأ في إضافة الخطة", "error");
-            }
-        }
-        
-        async function deleteImprovement(improvementId) {
-            showConfirmModal("هل أنت متأكد من حذف هذه الخطة؟", async () => {
-                try {
-                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                    const improvementDocRef = doc(db, `artifacts/${appId}/users/${userId}/improvements`, improvementId);
-                    await deleteDoc(improvementDocRef);
-                    showNotification("تم حذف الخطة بنجاح", "success");
-                } catch (error) {
-                    console.error("Error deleting improvement plan:", error);
-                    showNotification("خطأ في حذف الخطة", "error");
-                }
-            });
-        }
-
-        async function updatePerformanceRating(performanceId, rating) {
-            try {
-                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                const perfDocRef = doc(db, `artifacts/${appId}/users/${userId}/performanceData`, performanceId);
-                await setDoc(perfDocRef, { rating: rating }, { merge: true });
-                // No notification here to avoid spamming on slider move
-            } catch (error) {
-                console.error("Error updating rating:", error);
-                showNotification("خطأ في تحديث التقييم", "error");
-            }
-        }
-
-        async function saveNote() {
-            if (!currentNoteItemId) return;
-            const note = document.getElementById('noteText').value;
-            try {
-                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                const perfDocRef = doc(db, `artifacts/${appId}/users/${userId}/performanceData`, currentNoteItemId);
-                await setDoc(perfDocRef, { note: note }, { merge: true });
-                showNotification("تم حفظ الملاحظة بنجاح", "success");
-                document.getElementById('noteModal').style.display = 'none';
-                currentNoteItemId = null;
-            } catch (error) {
-                console.error("Error saving note:", error);
-                showNotification("خطأ في حفظ الملاحظة", "error");
-            }
-        }
-
-        async function handlePerformanceFileUpload(file, performanceId) {
-            const reader = new FileReader();
-            reader.onload = async function(event) {
-                try {
-                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                    const filePath = `artifacts/${appId}/users/${userId}/performance/${performanceId}/${file.name}_${Date.now()}`;
-                    const { downloadURL, path } = await handleFileUpload(event.target.result, filePath);
-                    
-                    const fileData = { name: file.name, type: file.type, url: downloadURL, path: path };
-
-                    const perfDocRef = doc(db, `artifacts/${appId}/users/${userId}/performanceData`, performanceId);
-                    const docSnap = await getDoc(perfDocRef);
-                    const existingFiles = docSnap.exists() && docSnap.data().files ? docSnap.data().files : [];
-                    if (existingFiles.length >= 4) {
-                        showNotification('لقد وصلت للحد الأقصى من الملفات (4 ملفات)', 'error');
-                        return;
-                    }
-                    existingFiles.push(fileData);
-                    await setDoc(perfDocRef, { files: existingFiles }, { merge: true });
-                    showNotification("تم رفع الشاهد بنجاح", "success");
-                } catch (error) {
-                    console.error("Error uploading performance file:", error);
-                    showNotification("خطأ في رفع الملف", "error");
-                }
-            };
-            reader.readAsDataURL(file);
-        }
-
-        async function deletePerformanceFile(performanceId, filePath) {
-            showConfirmModal("هل أنت متأكد من حذف هذا الشاهد؟", async () => {
-                try {
-                    // Delete from Storage
-                    const fileRef = ref(storage, filePath);
-                    await deleteObject(fileRef);
-
-                    // Remove from Firestore array
-                    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                    const perfDocRef = doc(db, `artifacts/${appId}/users/${userId}/performanceData`, performanceId);
-                    const docSnap = await getDoc(perfDocRef);
-                    if (docSnap.exists()) {
-                        const existingFiles = docSnap.data().files || [];
-                        const updatedFiles = existingFiles.filter(f => f.path !== filePath);
-                        await updateDoc(perfDocRef, { files: updatedFiles });
-                        showNotification("تم حذف الشاهد بنجاح", "success");
-                    }
-                } catch (error) {
-                    console.error("Error deleting performance file:", error);
-                    showNotification("خطأ في حذف الملف", "error");
-                }
-            });
-        }
-
-        // --- UI Rendering Functions (Read from DB, Write to UI) ---
-
-        function updateHeaderInfo(basicInfo = {}) {
-            document.getElementById('teacherName').textContent = 'اسم المعلم: ' + (basicInfo.teacherName || '-');
-            document.getElementById('educationDept').textContent = 'الإدارة التعليمية: ' + (basicInfo.educationDept || '-');
-            document.getElementById('schoolName').textContent = 'المدرسة: ' + (basicInfo.schoolName || '-');
-            document.getElementById('academicYear').textContent = 'العام الدراسي: ' + (basicInfo.academicYear || '-');
-            
-            document.getElementById('teacherNameInput').value = basicInfo.teacherName || '';
-            document.getElementById('educationDeptInput').value = basicInfo.educationDept || '';
-            document.getElementById('schoolNameInput').value = basicInfo.schoolName || '';
-            document.getElementById('academicYearInput').value = basicInfo.academicYear || '';
-        }
-
-        function updateCvInputs(cvInfo = {}) {
-            document.getElementById('fullNameInput').value = cvInfo.fullName || '';
-            document.getElementById('specialtyInput').value = cvInfo.specialty || '';
-            document.getElementById('qualificationInput').value = cvInfo.qualification || '';
-            document.getElementById('yearsOfExperienceInput').value = cvInfo.yearsOfExperience || '';
-        }
-
-        function updateLicensePreview(licenseImage) {
-            const licensePreview = document.getElementById('licensePreview');
-            if (licenseImage && licenseImage.url) {
-                licensePreview.innerHTML = `<img src="${licenseImage.url}" alt="الرخصة المهنية">`;
-            } else {
-                licensePreview.innerHTML = '<div class="certificate-placeholder">+</div>';
-            }
-        }
-        
-        function updateDocumentationInputs(docData = {}) {
-            const firstFollowup = docData.firstFollowup || {};
-            document.getElementById('firstFollowupDate').value = firstFollowup.date || '';
-            document.getElementById('firstFollowupName').value = firstFollowup.name || '';
-            document.getElementById('firstFollowupNotes').value = firstFollowup.notes || '';
-
-            const secondFollowup = docData.secondFollowup || {};
-            document.getElementById('secondFollowupDate').value = secondFollowup.date || '';
-            document.getElementById('secondFollowupName').value = secondFollowup.name || '';
-            document.getElementById('secondFollowupNotes').value = secondFollowup.notes || '';
-            
-            document.getElementById('recommendations').value = docData.recommendations || '';
-        }
-        
-        function renderCertificates(certificates = []) {
-            const container = document.getElementById('certificatesContainer');
-            container.innerHTML = ''; // Clear
-            
+            // Add certificates
             certificates.forEach(cert => {
                 const certItem = document.createElement('div');
                 certItem.className = 'certificate-item';
                 certItem.innerHTML = `<img src="${cert.url}" alt="شهادة">`;
                 certItem.addEventListener('click', () => {
-                    document.getElementById('previewImage').src = cert.url;
-                    document.getElementById('imagePreviewModal').style.display = 'block';
+                    showImagePreview(cert.url);
                 });
                 
+                // Add delete button
                 const deleteBtn = document.createElement('button');
                 deleteBtn.className = 'delete-btn';
                 deleteBtn.style.position = 'absolute';
                 deleteBtn.style.top = '5px';
                 deleteBtn.style.right = '5px';
-                deleteBtn.innerHTML = '&times;';
-                deleteBtn.onclick = (e) => { e.stopPropagation(); deleteCertificate(cert.id, cert.path); };
+                deleteBtn.innerHTML = '×';
+                deleteBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    deleteCertificate(cert.id);
+                });
+                
                 certItem.appendChild(deleteBtn);
-                container.appendChild(certItem);
+                certificatesContainer.appendChild(certItem);
             });
-
+            
+            // Add the "add" button if less than 8 certificates
             if (certificates.length < 8) {
                 const addItem = document.createElement('div');
                 addItem.className = 'certificate-item certificate-add';
                 addItem.innerHTML = '<div class="certificate-placeholder">+</div>';
-                addItem.onclick = () => document.getElementById('certificateUpload').click();
-                container.appendChild(addItem);
+                addItem.addEventListener('click', () => {
+                    document.getElementById('certificateUpload').click();
+                });
+                certificatesContainer.appendChild(addItem);
             }
         }
-
-        function renderCourses(courses = []) {
-            const list = document.getElementById('coursesList');
-            list.innerHTML = '';
+        
+        function saveCertificates() {
+            // Save to localStorage
+            localStorage.setItem('certificates', JSON.stringify(certificates));
+        }
+        
+        function deleteCertificate(certId) {
+            certificates = certificates.filter(cert => cert.id !== certId);
+            renderCertificates();
+            saveCertificates();
+        }
+        
+        function renderCourses() {
+            const coursesList = document.getElementById('coursesList');
+            coursesList.innerHTML = '';
+            
             courses.forEach(course => {
-                const item = document.createElement('div');
-                item.className = 'course-item';
-                item.innerHTML = `
+                const courseItem = document.createElement('div');
+                courseItem.className = 'course-item';
+                courseItem.innerHTML = `
                     <div>
                         <strong>${course.name}</strong>
                         <p>الجهة: ${course.provider} | التاريخ: ${formatDate(course.date)} | عدد الساعات: ${course.hours}</p>
                     </div>
                     <button class="delete-btn" data-id="${course.id}">حذف</button>
                 `;
-                item.querySelector('.delete-btn').onclick = () => deleteCourse(course.id);
-                list.appendChild(item);
+                coursesList.appendChild(courseItem);
+            });
+            
+            // Add event listeners to delete buttons
+            document.querySelectorAll('.course-item .delete-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const courseId = btn.getAttribute('data-id');
+                    deleteCourse(courseId);
+                });
             });
         }
         
-        function renderImprovementPlans(improvements = []) {
-            const list = document.getElementById('improvementList');
-            list.innerHTML = '';
-            improvements.forEach(plan => {
-                const priorityClass = plan.priority === 'عالية' ? 'priority-high' : plan.priority === 'متوسطة' ? 'priority-medium' : 'priority-low';
-                const item = document.createElement('div');
-                item.className = 'improvement-item';
-                item.innerHTML = `
-                    <h4>${plan.area}</h4>
-                    <p><strong>الأولوية:</strong> <span class="${priorityClass}">${plan.priority}</span></p>
-                    <p><strong>الهدف:</strong> ${plan.goal}</p>
-                    <p><strong>الإجراءات المقترحة:</strong> ${plan.actions}</p>
-                    <p><strong>الفترة الزمنية:</strong> ${formatDate(plan.startDate)} إلى ${formatDate(plan.endDate)}</p>
-                    <button class="delete-btn" data-id="${plan.id}">حذف</button>
-                `;
-                item.querySelector('.delete-btn').onclick = () => deleteImprovement(plan.id);
-                list.appendChild(item);
-            });
+        function saveCourses() {
+            // Save to localStorage
+            localStorage.setItem('courses', JSON.stringify(courses));
         }
         
-        // This renders the static structure of performance items
+        function deleteCourse(courseId) {
+            courses = courses.filter(course => course.id !== courseId);
+            renderCourses();
+            saveCourses();
+        }
+        
         function renderPerformanceItems() {
-            const container = document.getElementById('performanceItems');
-            container.innerHTML = '';
+            const performanceItems = document.getElementById('performanceItems');
+            performanceItems.innerHTML = '';
+            
             performanceIndicators.forEach(indicator => {
+                // Find existing data for this indicator
+                const existingData = performanceData.find(item => item.id === indicator.id) || {
+                    id: indicator.id,
+                    rating: 0,
+                    note: '',
+                    files: []
+                };
+                
                 const itemElement = document.createElement('div');
                 itemElement.className = 'performance-item';
                 itemElement.id = indicator.id;
+                
                 itemElement.innerHTML = `
                     <div class="performance-header">
                         <h3 class="performance-title">${indicator.title} (${indicator.weight}%)</h3>
@@ -2313,6 +2075,7 @@
                         </button>
                     </div>
                     <p class="performance-description">${indicator.description}</p>
+                    
                     <div class="performance-uploads">
                         <label>الشواهد (الحد الأقصى 4 ملفات)</label>
                         <div class="upload-container" id="uploads_${indicator.id}">
@@ -2321,183 +2084,426 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="performance-rating">
                         <label>التقييم الذاتي</label>
                         <div class="rating-container">
-                            <span class="rating-value">0</span>
+                            <span class="rating-value">${existingData.rating}</span>
                             <div class="rating-slider-container">
-                                <input type="range" min="0" max="5" step="1" value="0" class="rating-slider" data-id="${indicator.id}">
+                                <input type="range" min="0" max="5" step="1" value="${existingData.rating}" class="rating-slider" data-id="${indicator.id}">
                                 <div class="rating-numbers">
-                                    ${[0,1,2,3,4,5].map(n => `<span class="rating-number ${n === 0 ? 'active' : ''}" data-value="${n}">${n}</span>`).join('')}
+                                    <span class="rating-number ${existingData.rating === 0 ? 'active' : ''}" data-value="0">0</span>
+                                    <span class="rating-number ${existingData.rating === 1 ? 'active' : ''}" data-value="1">1</span>
+                                    <span class="rating-number ${existingData.rating === 2 ? 'active' : ''}" data-value="2">2</span>
+                                    <span class="rating-number ${existingData.rating === 3 ? 'active' : ''}" data-value="3">3</span>
+                                    <span class="rating-number ${existingData.rating === 4 ? 'active' : ''}" data-value="4">4</span>
+                                    <span class="rating-number ${existingData.rating === 5 ? 'active' : ''}" data-value="5">5</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="performance-note">
+                    
+                    <div class="performance-note" style="${existingData.note ? 'display: block;' : ''}">
                         <label>الملاحظات</label>
-                        <textarea readonly placeholder="افتح الملاحظات للتعديل"></textarea>
-                    </div>`;
-                container.appendChild(itemElement);
+                        <textarea placeholder="أدخل ملاحظاتك هنا">${existingData.note || ''}</textarea>
+                    </div>
+                `;
+                
+                performanceItems.appendChild(itemElement);
+                
+                // Add existing files
+                if (existingData.files && existingData.files.length > 0) {
+                    const uploadContainer = itemElement.querySelector(`#uploads_${indicator.id}`);
+                    existingData.files.forEach(file => {
+                        const fileElement = createFileElement(file, indicator.id);
+                        uploadContainer.insertBefore(fileElement, uploadContainer.lastChild);
+                    });
+                }
             });
+            
+            // Add event listeners
             addPerformanceEventListeners();
-        }
-
-        // This updates the dynamic parts of performance items with data
-        function updatePerformanceUI(performanceData = []) {
-            performanceIndicators.forEach(indicator => {
-                const data = performanceData.find(item => item.id === indicator.id) || {};
-                const itemElement = document.getElementById(indicator.id);
-                if (!itemElement) return;
-
-                // Update rating
-                const rating = data.rating || 0;
-                itemElement.querySelector('.rating-value').textContent = rating;
-                itemElement.querySelector('.rating-slider').value = rating;
-                itemElement.querySelectorAll('.rating-number').forEach(num => {
-                    num.classList.toggle('active', parseInt(num.dataset.value) === rating);
-                });
-
-                // Update note
-                const noteTextarea = itemElement.querySelector('.performance-note textarea');
-                noteTextarea.value = data.note || '';
-                itemElement.querySelector('.performance-note').style.display = data.note ? 'block' : 'none';
-
-                // Update files
-                const uploadContainer = itemElement.querySelector('.upload-container');
-                // Clear previous files except the add button
-                uploadContainer.querySelectorAll('.upload-item:not(.upload-add)').forEach(el => el.remove());
-                const files = data.files || [];
-                files.forEach(file => {
-                    const fileElement = createFileElement(file, indicator.id);
-                    uploadContainer.insertBefore(fileElement, uploadContainer.lastChild);
-                });
-            });
-            calculateTotalScore(performanceData);
+            calculateTotalScore();
         }
         
         function createFileElement(file, performanceId) {
             const fileElement = document.createElement('div');
             fileElement.className = 'upload-item';
+            fileElement.setAttribute('data-file-id', file.id);
             
+            // Check if it's an image or PDF
             if (file.type && file.type.startsWith('image/')) {
                 fileElement.innerHTML = `<img src="${file.url}" alt="شاهد">`;
-                fileElement.onclick = () => {
-                    document.getElementById('previewImage').src = file.url;
-                    document.getElementById('imagePreviewModal').style.display = 'block';
-                };
+                fileElement.addEventListener('click', () => {
+                    showImagePreview(file.url);
+                });
             } else {
                 fileElement.innerHTML = `<div class="upload-file-icon"><i class="fas fa-file-pdf"></i></div>`;
-                fileElement.onclick = () => window.open(file.url, '_blank');
+                fileElement.addEventListener('click', () => {
+                    window.open(file.url, '_blank');
+                });
             }
             
+            // Add delete button
             const deleteBtn = document.createElement('button');
             deleteBtn.className = 'delete-btn';
             deleteBtn.style.position = 'absolute';
             deleteBtn.style.top = '5px';
             deleteBtn.style.right = '5px';
-            deleteBtn.innerHTML = '&times;';
-            deleteBtn.onclick = (e) => { e.stopPropagation(); deletePerformanceFile(performanceId, file.path); };
+            deleteBtn.innerHTML = '×';
+            deleteBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                deletePerformanceFile(performanceId, file.id);
+            });
+            
             fileElement.appendChild(deleteBtn);
             return fileElement;
         }
-
+        
         function addPerformanceEventListeners() {
+            // Note buttons
             document.querySelectorAll('.note-btn').forEach(btn => {
-                btn.onclick = () => {
-                    currentNoteItemId = btn.dataset.id;
-                    const itemData = document.getElementById(currentNoteItemId);
-                    const note = itemData.querySelector('.performance-note textarea').value;
-                    document.getElementById('noteText').value = note;
+                btn.addEventListener('click', () => {
+                    const performanceId = btn.getAttribute('data-id');
+                    currentNoteItemId = performanceId;
+                    
+                    // Find existing note
+                    const existingData = performanceData.find(item => item.id === performanceId);
+                    document.getElementById('noteText').value = existingData ? existingData.note || '' : '';
+                    
+                    // Show modal
                     document.getElementById('noteModal').style.display = 'block';
-                };
-            });
-
-            document.querySelectorAll('.rating-slider').forEach(slider => {
-                slider.oninput = () => {
-                    const value = parseInt(slider.value);
-                    const container = slider.closest('.performance-rating');
-                    container.querySelector('.rating-value').textContent = value;
-                    container.querySelectorAll('.rating-number').forEach(num => {
-                        num.classList.toggle('active', parseInt(num.dataset.value) === value);
-                    });
-                    updatePerformanceRating(slider.dataset.id, value);
-                };
+                });
             });
             
-            document.querySelectorAll('.rating-number').forEach(number => {
-                number.onclick = () => {
-                    const value = parseInt(number.dataset.value);
-                    const container = number.closest('.performance-rating');
-                    container.querySelector('.rating-slider').value = value;
-                    container.querySelector('.rating-value').textContent = value;
-                    container.querySelectorAll('.rating-number').forEach(num => num.classList.remove('active'));
-                    number.classList.add('active');
-                    updatePerformanceRating(container.querySelector('.rating-slider').dataset.id, value);
-                };
+            // Rating sliders
+            document.querySelectorAll('.rating-slider').forEach(slider => {
+                const performanceId = slider.getAttribute('data-id');
+                const ratingValue = slider.parentElement.parentElement.querySelector('.rating-value');
+                const ratingNumbers = slider.parentElement.querySelectorAll('.rating-number');
+                
+                slider.addEventListener('input', () => {
+                    const value = parseInt(slider.value);
+                    ratingValue.textContent = value;
+                    
+                    // Update active number
+                    ratingNumbers.forEach(number => {
+                        const numberValue = parseInt(number.getAttribute('data-value'));
+                        if (numberValue === value) {
+                            number.classList.add('active');
+                        } else {
+                            number.classList.remove('active');
+                        }
+                    });
+                    
+                    // Update data
+                    updatePerformanceRating(performanceId, value);
+                });
             });
-
+            
+            // Rating numbers
+            document.querySelectorAll('.rating-number').forEach(number => {
+                number.addEventListener('click', () => {
+                    const value = parseInt(number.getAttribute('data-value'));
+                    const slider = number.parentElement.parentElement.querySelector('.rating-slider');
+                    const performanceId = slider.getAttribute('data-id');
+                    
+                    // Update slider
+                    slider.value = value;
+                    
+                    // Update value display
+                    const ratingValue = slider.parentElement.parentElement.querySelector('.rating-value');
+                    ratingValue.textContent = value;
+                    
+                    // Update active number
+                    const ratingNumbers = number.parentElement.querySelectorAll('.rating-number');
+                    ratingNumbers.forEach(num => {
+                        const numValue = parseInt(num.getAttribute('data-value'));
+                        if (numValue === value) {
+                            num.classList.add('active');
+                        } else {
+                            num.classList.remove('active');
+                        }
+                    });
+                    
+                    // Update data
+                    updatePerformanceRating(performanceId, value);
+                });
+            });
+            
+            // Upload buttons
             document.querySelectorAll('.upload-add').forEach(btn => {
-                btn.onclick = () => {
-                    const performanceId = btn.dataset.id;
-                    const fileInput = document.createElement('input');
-                    fileInput.type = 'file';
-                    fileInput.accept = 'image/*,application/pdf';
-                    fileInput.style.display = 'none';
-                    fileInput.onchange = (e) => {
-                        const file = e.target.files[0];
-                        if (file) handlePerformanceFileUpload(file, performanceId);
-                        document.body.removeChild(fileInput);
-                    };
-                    document.body.appendChild(fileInput);
-                    fileInput.click();
-                };
+                btn.addEventListener('click', () => {
+                    const performanceId = btn.getAttribute('data-id');
+                    const existingData = performanceData.find(item => item.id === performanceId) || { files: [] };
+                    
+                    if (existingData.files.length < 4) {
+                        // Create file input
+                        const fileInput = document.createElement('input');
+                        fileInput.type = 'file';
+                        fileInput.accept = 'image/*,application/pdf';
+                        fileInput.style.display = 'none';
+                        document.body.appendChild(fileInput);
+                        
+                        fileInput.addEventListener('change', (e) => {
+                            const file = e.target.files[0];
+                            if (file) {
+                                handlePerformanceFileUpload(file, performanceId);
+                            }
+                            document.body.removeChild(fileInput);
+                        });
+                        
+                        fileInput.click();
+                    } else {
+                        alert('لقد وصلت للحد الأقصى من الملفات (4 ملفات)');
+                    }
+                });
             });
         }
         
-        // --- Helper & Utility Functions ---
+        function handlePerformanceFileUpload(file, performanceId) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const fileId = 'file_' + Date.now();
+                const fileData = {
+                    id: fileId,
+                    name: file.name,
+                    type: file.type,
+                    url: event.target.result
+                };
+                
+                // Find or create performance data
+                let itemIndex = performanceData.findIndex(item => item.id === performanceId);
+                if (itemIndex === -1) {
+                    performanceData.push({
+                        id: performanceId,
+                        rating: 0,
+                        note: '',
+                        files: [fileData]
+                    });
+                } else {
+                    if (!performanceData[itemIndex].files) {
+                        performanceData[itemIndex].files = [];
+                    }
+                    performanceData[itemIndex].files.push(fileData);
+                }
+                
+                // Save to localStorage
+                savePerformanceData();
+                
+                // Update UI
+                const uploadContainer = document.querySelector(`#uploads_${performanceId}`);
+                const fileElement = createFileElement(fileData, performanceId);
+                uploadContainer.insertBefore(fileElement, uploadContainer.lastChild);
+            };
+            reader.readAsDataURL(file);
+        }
         
-        function calculateTotalScore(performanceData = []) {
+        function updatePerformanceRating(performanceId, rating) {
+            // Find or create performance data
+            let itemIndex = performanceData.findIndex(item => item.id === performanceId);
+            if (itemIndex === -1) {
+                performanceData.push({
+                    id: performanceId,
+                    rating: rating,
+                    note: '',
+                    files: []
+                });
+            } else {
+                performanceData[itemIndex].rating = rating;
+            }
+            
+            // Save to localStorage
+            savePerformanceData();
+            
+            // Update total score
+            calculateTotalScore();
+        }
+        
+        function savePerformanceData() {
+            // Save to localStorage
+            localStorage.setItem('performanceData', JSON.stringify(performanceData));
+        }
+        
+        function deletePerformanceFile(performanceId, fileId) {
+            // Find performance data
+            const itemIndex = performanceData.findIndex(item => item.id === performanceId);
+            if (itemIndex !== -1 && performanceData[itemIndex].files) {
+                // Remove file
+                performanceData[itemIndex].files = performanceData[itemIndex].files.filter(file => file.id !== fileId);
+                
+                // Save to localStorage
+                savePerformanceData();
+                
+                // Update UI
+                const fileElement = document.querySelector(`[data-file-id="${fileId}"]`);
+                if (fileElement) {
+                    fileElement.remove();
+                }
+            }
+        }
+        
+        function calculateTotalScore() {
             let totalWeightedScore = 0;
+            let totalWeight = 0;
             let detailsHTML = '';
             
             performanceIndicators.forEach(indicator => {
                 const data = performanceData.find(item => item.id === indicator.id);
-                const rating = data ? data.rating || 0 : 0;
+                const rating = data ? data.rating : 0;
                 const weightedScore = (rating / 5) * indicator.weight;
+                
                 totalWeightedScore += weightedScore;
+                totalWeight += indicator.weight;
+                
                 detailsHTML += `<p>${indicator.title}: <span>${rating} من 5</span> <span>(${weightedScore.toFixed(1)}%)</span></p>`;
             });
             
-            const finalScore = totalWeightedScore;
+            const finalScore = totalWeight > 0 ? (totalWeightedScore / totalWeight) * 100 : 0;
             
+            // Update UI
             document.getElementById('totalScore').textContent = `${finalScore.toFixed(1)}%`;
             document.getElementById('scoreDetails').innerHTML = detailsHTML;
         }
-
-        function showNotification(message, type = "success") {
-            const notification = document.getElementById('notification');
-            notification.textContent = message;
-            notification.className = `notification ${type} show`;
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3000);
+        
+        function renderImprovementPlans() {
+            const improvementList = document.getElementById('improvementList');
+            improvementList.innerHTML = '';
+            
+            improvements.forEach(improvement => {
+                const priorityClass = 
+                    improvement.priority === 'عالية' ? 'priority-high' : 
+                    improvement.priority === 'متوسطة' ? 'priority-medium' : 
+                    'priority-low';
+                
+                const item = document.createElement('div');
+                item.className = 'improvement-item';
+                item.innerHTML = `
+                    <h4>${improvement.area}</h4>
+                    <p><strong>الأولوية:</strong> <span class="${priorityClass}">${improvement.priority}</span></p>
+                    <p><strong>الهدف:</strong> ${improvement.goal}</p>
+                    <p><strong>الإجراءات المقترحة:</strong> ${improvement.actions}</p>
+                    <p><strong>الفترة الزمنية:</strong> ${formatDate(improvement.startDate)} إلى ${formatDate(improvement.endDate)}</p>
+                    <button class="delete-btn" data-id="${improvement.id}">حذف</button>
+                `;
+                
+                improvementList.appendChild(item);
+            });
+            
+            // Add event listeners to delete buttons
+            document.querySelectorAll('.improvement-item .delete-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const improvementId = btn.getAttribute('data-id');
+                    deleteImprovement(improvementId);
+                });
+            });
         }
-
-        function showConfirmModal(text, callback) {
-            document.getElementById('confirmText').textContent = text;
-            confirmCallback = callback;
-            document.getElementById('confirmModal').style.display = 'block';
+        
+        function saveImprovements() {
+            // Save to localStorage
+            localStorage.setItem('improvements', JSON.stringify(improvements));
         }
-
+        
+        function deleteImprovement(improvementId) {
+            improvements = improvements.filter(improvement => improvement.id !== improvementId);
+            renderImprovementPlans();
+            saveImprovements();
+        }
+        
         function formatDate(dateString) {
             if (!dateString) return '';
             const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            // Add a day to the date to fix potential timezone issues with input[type=date]
-            const date = new Date(dateString);
-            date.setDate(date.getDate() + 1);
-            return date.toLocaleDateString('ar-SA', options);
+            return new Date(dateString).toLocaleDateString('ar-SA', options);
         }
-
+        
+        function loadUserData() {
+            // Load from localStorage
+            updateHeaderInfo();
+            
+            document.getElementById('fullNameInput').value = localStorage.getItem('fullName') || '';
+            document.getElementById('specialtyInput').value = localStorage.getItem('specialty') || '';
+            document.getElementById('qualificationInput').value = localStorage.getItem('qualification') || '';
+            document.getElementById('yearsOfExperienceInput').value = localStorage.getItem('yearsOfExperience') || '';
+            
+            const licenseImage = localStorage.getItem('licenseImage');
+            if (licenseImage) {
+                document.getElementById('licensePreview').innerHTML = `<img src="${licenseImage}" alt="الرخصة المهنية">`;
+                
+                // Add click event to show preview
+                document.getElementById('licensePreview').addEventListener('click', () => {
+                    showImagePreview(licenseImage);
+                });
+            }
+        }
+        
+        function loadCertificates() {
+            // Load from localStorage
+            const storedCertificates = localStorage.getItem('certificates');
+            if (storedCertificates) {
+                certificates = JSON.parse(storedCertificates);
+                renderCertificates();
+            }
+        }
+        
+        function loadCourses() {
+            // Load from localStorage
+            const storedCourses = localStorage.getItem('courses');
+            if (storedCourses) {
+                courses = JSON.parse(storedCourses);
+                renderCourses();
+            }
+        }
+        
+        function loadPerformanceData() {
+            // Load from localStorage
+            const storedPerformanceData = localStorage.getItem('performanceData');
+            if (storedPerformanceData) {
+                performanceData = JSON.parse(storedPerformanceData);
+                renderPerformanceItems();
+            }
+        }
+        
+        function loadDocumentationData() {
+            // Load first followup
+            const firstFollowup = localStorage.getItem('firstFollowup');
+            if (firstFollowup) {
+                const data = JSON.parse(firstFollowup);
+                document.getElementById('firstFollowupDate').value = data.date || '';
+                document.getElementById('firstFollowupName').value = data.name || '';
+                document.getElementById('firstFollowupNotes').value = data.notes || '';
+            }
+            
+            // Load second followup
+            const secondFollowup = localStorage.getItem('secondFollowup');
+            if (secondFollowup) {
+                const data = JSON.parse(secondFollowup);
+                document.getElementById('secondFollowupDate').value = data.date || '';
+                document.getElementById('secondFollowupName').value = data.name || '';
+                document.getElementById('secondFollowupNotes').value = data.notes || '';
+            }
+            
+            // Load recommendations
+            const recommendations = localStorage.getItem('recommendations');
+            if (recommendations) {
+                document.getElementById('recommendations').value = recommendations;
+            }
+        }
+        
+        function loadImprovementPlans() {
+            // Load from localStorage
+            const storedImprovements = localStorage.getItem('improvements');
+            if (storedImprovements) {
+                improvements = JSON.parse(storedImprovements);
+                renderImprovementPlans();
+            }
+        }
+        
+        // Function to show image preview in modal
+        function showImagePreview(imageUrl) {
+            document.getElementById('previewImage').src = imageUrl;
+            document.getElementById('imagePreviewModal').style.display = 'block';
+        }
     </script>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9640c7272279f9a3',t:'MTc1MzMzMjQzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
+
